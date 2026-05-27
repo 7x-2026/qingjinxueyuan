@@ -82,23 +82,34 @@ export function Home({ lang, openContact, setPage }: { lang: Lang; openContact: 
 }
 
 export function PartnerSection({ lang }: { lang: Lang }) {
+  const communities = partners.filter((partner) => partner.group === 'community');
+  const schools = partners.filter((partner) => partner.group === 'school');
+
   return (
     <section className="section partners">
       <SectionTitle title={pageCopy.sections.communities[lang]} subtitle="Collaborative Global Ecological Community" />
-      <div className="partner-grid">
-        {partners.filter((partner) => partner.group === 'community').map((partner) => (
-          <article key={partner.name}>
-            <strong>{partner.name}</strong>
-            <p>{partner.caption[lang]}</p>
+      <div className="partner-logo-grid community-logos">
+        {communities.map((partner) => (
+          <article className="partner-logo-card" key={partner.name}>
+            <a className="partner-logo-link" href={`#/partner/${partner.slug}`}>
+              <div className="partner-logo-box">
+                <img src={partner.logo} alt={partner.name} />
+              </div>
+              <p>{partner.caption[lang]}</p>
+            </a>
           </article>
         ))}
       </div>
       <SectionTitle title={pageCopy.sections.schools[lang]} subtitle="Partnering global universities" />
-      <div className="partner-grid schools">
-        {partners.filter((partner) => partner.group === 'school').map((partner) => (
-          <article key={partner.name}>
-            <strong>{partner.name}</strong>
-            <p>{partner.caption[lang]}</p>
+      <div className="partner-logo-grid school-logos">
+        {schools.map((partner) => (
+          <article className="partner-logo-card" key={partner.name}>
+            <a className="partner-logo-link" href={`#/partner/${partner.slug}`}>
+              <div className="partner-logo-box">
+                <img src={partner.logo} alt={partner.name} />
+              </div>
+              <p>{partner.caption[lang]}</p>
+            </a>
           </article>
         ))}
       </div>

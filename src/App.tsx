@@ -6,12 +6,16 @@ import { Consult } from './pages/Consult';
 import { Courses } from './pages/Courses';
 import { Donate } from './pages/Donate';
 import { Home } from './pages/Home';
+import { PartnerDetail } from './pages/PartnerDetail';
 import { Teachers } from './pages/Teachers';
 
 const validPages = new Set(['home', 'about', 'courses', 'teachers', 'consult', 'donate']);
 
 function readHash() {
   const value = window.location.hash.replace('#/', '') || 'home';
+  if (value.startsWith('partner/')) {
+    return value;
+  }
   return validPages.has(value) ? value : 'home';
 }
 
@@ -32,19 +36,25 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
+
+  useEffect(() => {
     localStorage.setItem('qingjin-lang', lang);
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
   }, [lang]);
 
   const pageProps = { lang };
-  const content = {
-    home: <Home lang={lang} openContact={() => setContactOpen(true)} setPage={setPage} />,
-    about: <About {...pageProps} />,
-    courses: <Courses {...pageProps} />,
-    teachers: <Teachers {...pageProps} />,
-    consult: <Consult {...pageProps} />,
-    donate: <Donate {...pageProps} />,
-  }[page];
+  const content = page.startsWith('partner/')
+    ? <PartnerDetail lang={lang} slug={page.replace('partner/', '')} />
+    : {
+      home: <Home lang={lang} openContact={() => setContactOpen(true)} setPage={setPage} />,
+      about: <About {...pageProps} />,
+      courses: <Courses {...pageProps} />,
+      teachers: <Teachers {...pageProps} />,
+      consult: <Consult {...pageProps} />,
+      donate: <Donate {...pageProps} />,
+    }[page];
 
   return (
     <Layout

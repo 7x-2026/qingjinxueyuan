@@ -1,3 +1,6 @@
+import communityInfoRaw from '../../社区信息.txt?raw';
+import schoolInfoRaw from '../../学校信息.txt?raw';
+
 export type Lang = 'zh' | 'en';
 
 export type LocalizedText = {
@@ -33,6 +36,14 @@ export type Partner = {
   name: string;
   caption: LocalizedText;
   group: 'community' | 'school';
+  logo: string;
+  slug: string;
+  infoTitle: string;
+};
+
+export type PartnerInfo = {
+  title: string;
+  paragraphs: string[];
 };
 
 export type ContactInfo = {
@@ -55,6 +66,30 @@ const asset = (path: string) => {
   }
   return value;
 };
+
+const parseInfoFile = (raw: string) => {
+  const records = new Map<string, PartnerInfo>();
+  const sections = raw
+    .replace(/\r\n/g, '\n')
+    .split(/(?=^\d+\.\s*)/m)
+    .map((section) => section.trim())
+    .filter(Boolean);
+
+  for (const section of sections) {
+    const lines = section.split('\n');
+    const title = lines[0].replace(/^\d+\.\s*/, '').trim();
+    const body = lines.slice(1).join('\n').trim();
+    records.set(title, {
+      title,
+      paragraphs: body.split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean),
+    });
+  }
+
+  return records;
+};
+
+export const communityInfo = parseInfoFile(communityInfoRaw);
+export const schoolInfo = parseInfoFile(schoolInfoRaw);
 
 export const images = {
   homeHero: asset('shouye/shouye.png'),
@@ -214,15 +249,19 @@ export const teachers: Teacher[] = [
 }));
 
 export const partners: Partner[] = [
-  { name: 'Spring Valley Apartments', caption: { zh: '美国纽约春之谷', en: 'Spring Valley, New York' }, group: 'community' },
-  { name: 'Hawthorne Valley', caption: { zh: '美国纽约霍桑山谷社区', en: 'Hawthorne Valley, New York' }, group: 'community' },
-  { name: 'Camphill Village', caption: { zh: '美国科培克康复社区', en: 'Camphill community' }, group: 'community' },
-  { name: 'GOETHEANUM', caption: { zh: '瑞士歌德馆', en: 'Goetheanum, Switzerland' }, group: 'community' },
-  { name: 'IUAV', caption: { zh: '威尼斯建筑大学IUAV', en: 'IUAV University of Venice' }, group: 'school' },
-  { name: 'alanus hochschule', caption: { zh: '德国阿兰努斯大学', en: 'Alanus University, Germany' }, group: 'school' },
-  { name: 'Bauhaus-Universitat Weimar', caption: { zh: '德国国立魏玛大学', en: 'Bauhaus University Weimar' }, group: 'school' },
-  { name: 'Sunbridge Institute', caption: { zh: '美国纽约日桥学院', en: 'Sunbridge Institute' }, group: 'school' },
-  { name: 'Hill College', caption: { zh: '美国狄豪希尔学院', en: 'Hill College, United States' }, group: 'school' },
+  { name: 'Spring Valley Apartments', caption: { zh: '美国纽约春之谷', en: 'Spring Valley, New York' }, group: 'community', logo: asset('hezuo/美国纽约春之谷.png'), slug: 'spring-valley-community', infoTitle: '美国纽约春之谷社区' },
+  { name: 'Hawthorne Valley', caption: { zh: '美国纽约霍桑山谷社区', en: 'Hawthorne Valley, New York' }, group: 'community', logo: asset('hezuo/美国纽约霍桑山谷社区.png'), slug: 'hawthorne-valley', infoTitle: '美国纽约霍桑山谷社区' },
+  { name: 'Camphill Village Copake', caption: { zh: '美国科培克康复社区', en: 'Camphill Village Copake' }, group: 'community', logo: asset('hezuo/美国科培克康复社区.png'), slug: 'camphill-copake', infoTitle: '美国科培克康复社区' },
+  { name: 'GOETHEANUM', caption: { zh: '瑞士歌德馆', en: 'Goetheanum, Switzerland' }, group: 'community', logo: asset('hezuo/瑞士歌德馆.png'), slug: 'goetheanum', infoTitle: '瑞士歌德馆' },
+  { name: 'Ytterjarna', caption: { zh: '瑞典雅纳社区', en: 'Ytterjarna Community, Sweden' }, group: 'community', logo: asset('hezuo/瑞典雅纳社区.png'), slug: 'ytterjarna', infoTitle: '瑞典雅纳社区' },
+  { name: 'IUAV', caption: { zh: '威尼斯建筑大学IUAV', en: 'IUAV University of Venice' }, group: 'school', logo: asset('hezuo/威尼斯建筑大学_百度百科.png'), slug: 'iuav', infoTitle: '威尼斯建筑大学IUAV' },
+  { name: 'alanus hochschule', caption: { zh: '德国阿兰努斯大学', en: 'Alanus University, Germany' }, group: 'school', logo: asset('hezuo/德国阿兰努斯大学.png'), slug: 'alanus', infoTitle: '德国阿兰努斯大学' },
+  { name: 'Bauhaus-Universitat Weimar', caption: { zh: '德国魏玛包豪斯大学', en: 'Bauhaus University Weimar' }, group: 'school', logo: asset('hezuo/德国阿兰努斯大学1.png'), slug: 'bauhaus-weimar', infoTitle: '德国魏玛包豪斯大学' },
+  { name: 'Sunbridge Institute', caption: { zh: '美国纽约日桥学院', en: 'Sunbridge Institute' }, group: 'school', logo: asset('hezuo/美国纽约日桥学院.png'), slug: 'sunbridge', infoTitle: '美国纽约日桥学院' },
+  { name: 'Scuola Rudolf Steiner', caption: { zh: '意大利米兰施泰纳学校艺术学院', en: 'Scuola Rudolf Steiner, Milan' }, group: 'school', logo: asset('hezuo/意大利米兰施泰纳学校艺术学院.png'), slug: 'scuola-rudolf-steiner', infoTitle: '意大利米兰施泰纳学校艺术学院' },
+  { name: 'Spring Valley Eurythmy School', caption: { zh: '美国纽约春之谷音语舞学校', en: 'Spring Valley Eurythmy School' }, group: 'school', logo: asset('hezuo/美国纽约春之谷音语舞学校.png'), slug: 'spring-valley-eurythmy', infoTitle: '春之谷音语舞学校' },
+  { name: 'Heliopolis University', caption: { zh: '埃及赫利奥波利斯可持续发展大学', en: 'Heliopolis University for Sustainable Development' }, group: 'school', logo: asset('hezuo/埃及赫利奥波利斯可持续发展大学.png'), slug: 'heliopolis', infoTitle: '埃及赫利奥波利斯可持续发展大学' },
+  { name: 'Camphill Academy', caption: { zh: '美国坎普希尔学院', en: 'Camphill Academy' }, group: 'school', logo: asset('hezuo/美国坎普希尔学院.png'), slug: 'camphill-academy', infoTitle: '坎普希尔学院' },
 ];
 
 export const pageCopy = {

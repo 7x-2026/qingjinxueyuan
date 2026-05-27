@@ -337,28 +337,196 @@ img {
 
 .partners {
   background: #fff;
-}
-
-.partner-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin-bottom: 80px;
+  padding-bottom: 118px;
+  padding-top: 72px;
   text-align: center;
 }
 
-.partner-grid.schools {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.partners .section-title {
+  margin-bottom: 78px;
+}
+
+.partners .section-title h2 {
+  color: #33383b;
+  font-size: clamp(34px, 4.3vw, 54px);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.partners .section-title p {
+  color: #7b858b;
+  display: inline-block;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.1;
+  position: relative;
+}
+
+.partners .section-title p::after {
+  background: #5f8fd5;
+  bottom: -3px;
+  content: "";
+  height: 3px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.partner-logo-grid {
+  display: grid;
+  gap: 78px 76px;
+  justify-items: center;
+  margin: 0 auto;
+  max-width: 1480px;
+  width: 100%;
+}
+
+.community-logos {
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  margin-bottom: 142px;
+}
+
+.school-logos {
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+}
+
+.partner-logo-card {
+  align-items: center;
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.partner-logo-link {
+  align-items: center;
+  color: inherit;
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+  text-decoration: none;
+  transition: transform .2s ease, opacity .2s ease;
+  width: 100%;
+}
+
+.partner-logo-link:hover {
+  opacity: .86;
+  transform: translateY(-3px);
+}
+
+.partner-logo-box {
+  align-items: center;
+  display: flex;
+  height: 92px;
+  justify-content: center;
+  width: 100%;
+}
+
+.partner-logo-card img {
+  max-height: 84px;
+  max-width: min(100%, 300px);
+  object-fit: contain;
+}
+
+.school-logos .partner-logo-box {
+  height: 118px;
+}
+
+.school-logos .partner-logo-card img {
+  max-height: 104px;
+}
+
+.partner-logo-card p {
+  color: #767d83;
+  font-size: 18px;
+  line-height: 1.55;
+  margin: 0;
+  min-height: 56px;
+  text-align: center;
+}
+
+.partner-detail {
+  background: #fff;
+  min-height: 70vh;
+}
+
+.back-link {
+  align-items: center;
+  color: var(--green-dark);
+  display: inline-flex;
+  font-weight: 700;
+  gap: 8px;
+  margin: 0 auto 34px;
+  max-width: 1040px;
+  text-decoration: none;
+}
+
+.partner-detail-hero {
+  align-items: center;
+  background: #f5f8f7;
+  border: 1px solid #e5eeeb;
+  border-radius: 8px;
+  display: grid;
+  gap: 42px;
+  grid-template-columns: 280px 1fr;
+  margin: 0 auto 56px;
+  max-width: 1040px;
+  padding: 44px;
+}
+
+.partner-detail-logo {
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  min-height: 170px;
+  justify-content: center;
+  padding: 28px;
+}
+
+.partner-detail-logo img {
+  max-height: 120px;
+  object-fit: contain;
+}
+
+.partner-detail-kicker {
+  color: var(--green-dark);
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+
+.partner-detail-hero h1 {
+  color: var(--ink);
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.18;
+  margin: 0 0 12px;
+}
+
+.partner-detail-hero p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
   margin-bottom: 0;
 }
 
-.partner-grid strong {
-  color: var(--ink);
-  display: block;
-  font-size: 22px;
-  min-height: 54px;
+.partner-detail-body {
+  margin: 0 auto;
+  max-width: 920px;
 }
 
-.partner-grid p {
-  color: var(--muted);
+.partner-detail-body h2 {
+  color: var(--ink);
+  font-size: 32px;
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.partner-detail-body p {
+  color: #4e5c62;
+  font-size: 18px;
+  line-height: 2;
+  margin: 0 0 24px;
+  text-align: justify;
 }
 
 .tabs {
@@ -688,10 +856,30 @@ img {
   .teacher-preview,
   .teacher-grid,
   .course-grid,
-  .partner-grid,
-  .partner-grid.schools,
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .community-logos,
+  .school-logos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partners {
+    padding-bottom: 88px;
+    padding-top: 64px;
+  }
+
+  .partners .section-title {
+    margin-bottom: 54px;
+  }
+
+  .community-logos {
+    margin-bottom: 88px;
+  }
+
+  .partner-logo-grid {
+    gap: 46px 34px;
   }
 
   .floating-tools,
@@ -815,8 +1003,6 @@ img {
   .teacher-preview,
   .teacher-grid,
   .course-grid,
-  .partner-grid,
-  .partner-grid.schools,
   .footer-grid,
   .image-row,
   .image-row.two,
@@ -830,13 +1016,85 @@ img {
   .teacher-preview,
   .teacher-grid,
   .course-grid,
-  .partner-grid,
-  .partner-grid.schools,
   .footer-grid,
   .image-row,
   .image-row.two,
   .contact-section {
     grid-template-columns: 1fr;
+  }
+
+  .community-logos,
+  .school-logos {
+    grid-template-columns: 1fr;
+  }
+
+  .partners {
+    padding-bottom: 70px;
+    padding-top: 52px;
+  }
+
+  .partners .section-title {
+    margin-bottom: 42px;
+  }
+
+  .partners .section-title h2 {
+    font-size: 31px;
+  }
+
+  .partners .section-title p {
+    font-size: 17px;
+  }
+
+  .community-logos {
+    margin-bottom: 66px;
+  }
+
+  .partner-logo-grid {
+    gap: 34px;
+  }
+
+  .partner-logo-box,
+  .school-logos .partner-logo-box {
+    height: 84px;
+  }
+
+  .partner-logo-card {
+    gap: 14px;
+  }
+
+  .partner-logo-link {
+    gap: 14px;
+  }
+
+  .partner-logo-card img,
+  .school-logos .partner-logo-card img {
+    max-height: 74px;
+    max-width: min(86vw, 260px);
+  }
+
+  .partner-logo-card p {
+    font-size: 16px;
+    min-height: 0;
+  }
+
+  .partner-detail-hero {
+    gap: 26px;
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .partner-detail-logo {
+    min-height: 130px;
+  }
+
+  .partner-detail-body h2 {
+    font-size: 26px;
+  }
+
+  .partner-detail-body p {
+    font-size: 16px;
+    line-height: 1.9;
+    text-align: left;
   }
 
   .amount-grid {
@@ -968,8 +1226,7 @@ img {
     font-size: 12px;
   }
 
-  .partner-grid strong {
-    font-size: 19px;
-    min-height: 0;
+  .partners .section-title h2 {
+    font-size: 28px;
   }
 }

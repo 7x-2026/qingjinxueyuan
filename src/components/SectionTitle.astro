@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  light?: boolean;
+  align?: 'center' | 'left';
+}
+
+const { title, subtitle, light = false, align = 'center' } = Astro.props;
+---
+
+<header
+  class:list={[
+    'section-title',
+    { 'section-title--light': light, 'section-title--left': align === 'left' },
+  ]}
+>
+  <h2>{title}</h2>
+  {subtitle && <p>{subtitle}</p>}
+</header>

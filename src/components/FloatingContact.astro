@@ -1,0 +1,170 @@
+---
+import { Image } from 'astro:assets';
+import { contact } from '../data';
+import type { Language } from '../data';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Language;
+  labels: {
+    top: string;
+    phone: string;
+    wechat: string;
+    contact: string;
+    scan: string;
+    note: string;
+    close: string;
+    qrAlt: string;
+  };
+}
+
+const { labels } = Astro.props;
+---
+
+<aside
+  class="floating-contact"
+  aria-label={labels.contact}
+  data-floating-contact
+>
+  <div class="floating-tools">
+    <button type="button" aria-label={labels.top} data-back-to-top>
+      <Icon name="up" size={18} />
+      <span>{labels.top}</span>
+    </button>
+    <button
+      type="button"
+      aria-controls="contact-phone-panel"
+      aria-expanded="false"
+      data-contact-trigger="phone"
+    >
+      <Icon name="phone" size={18} />
+      <span>{labels.phone}</span>
+    </button>
+    <button
+      type="button"
+      aria-controls="contact-wechat-panel"
+      aria-expanded="false"
+      data-contact-trigger="wechat"
+    >
+      <Icon name="wechat" size={18} />
+      <span>{labels.wechat}</span>
+    </button>
+  </div>
+
+  <section
+    class="contact-panel"
+    id="contact-phone-panel"
+    aria-labelledby="contact-phone-title"
+    data-contact-panel="phone"
+    hidden
+  >
+    <button
+      class="contact-panel__close"
+      type="button"
+      aria-label={labels.close}
+      data-contact-close
+    >
+      <Icon name="close" />
+    </button>
+    <h2 id="contact-phone-title">{labels.contact}</h2>
+    <ul>
+      {
+        contact.phones.map((phone) => (
+          <li>
+            <a href={phone.href}>{phone.display}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={contact.emailHref}>{contact.email}</a>
+  </section>
+
+  <section
+    class="contact-panel contact-panel--wechat"
+    id="contact-wechat-panel"
+    aria-labelledby="contact-wechat-title"
+    data-contact-panel="wechat"
+    hidden
+  >
+    <button
+      class="contact-panel__close"
+      type="button"
+      aria-label={labels.close}
+      data-contact-close
+    >
+      <Icon name="close" />
+    </button>
+    <h2 id="contact-wechat-title">{labels.scan}</h2>
+    <Image alt={labels.qrAlt} loading="lazy" src={contact.qrCode} width={180} />
+    <p>{labels.note}</p>
+  </section>
+</aside>
+
+<script>
+  function initializeFloatingContact() {
+    const root = document.querySelector<HTMLElement>('[data-floating-contact]');
+    if (!root || root.dataset.enhanced === 'true') return;
+    root.dataset.enhanced = 'true';
+
+    const triggers = Array.from(
+      root.querySelectorAll<HTMLButtonElement>('[data-contact-trigger]'),
+    );
+    const panels = Array.from(
+      root.querySelectorAll<HTMLElement>('[data-contact-panel]'),
+    );
+    const backToTop =
+      root.querySelector<HTMLButtonElement>('[data-back-to-top]');
+    let activeTrigger: HTMLButtonElement | null = null;
+
+    const closePanels = (restoreFocus = false) => {
+      panels.forEach((panel) => (panel.hidden = true));
+      triggers.forEach((trigger) =>
+        trigger.setAttribute('aria-expanded', 'false'),
+      );
+      if (restoreFocus) activeTrigger?.focus();
+      activeTrigger = null;
+    };
+
+    const openPanel = (trigger: HTMLButtonElement) => {
+      const key = trigger.dataset.contactTrigger;
+      const panel = panels.find((item) => item.dataset.contactPanel === key);
+      if (!panel) return;
+      const wasOpen = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(false);
+      if (wasOpen) {
+        trigger.focus();
+        return;
+      }
+      activeTrigger = trigger;
+      panel.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      panel.querySelector<HTMLButtonElement>('[data-contact-close]')?.focus();
+    };
+
+    triggers.forEach((trigger) =>
+      trigger.addEventListener('click', () => openPanel(trigger)),
+    );
+    root
+      .querySelectorAll<HTMLButtonElement>('[data-contact-close]')
+      .forEach((button) => {
+        button.addEventListener('click', () => closePanels(true));
+      });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && activeTrigger) {
+        event.preventDefault();
+        closePanels(true);
+      }
+    });
+
+    backToTop?.addEventListener('click', () => {
+      const reduceMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  initializeFloatingContact();
+  document.addEventListener('astro:page-load', initializeFloatingContact);
+</script>

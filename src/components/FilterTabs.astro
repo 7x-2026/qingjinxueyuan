@@ -1,0 +1,110 @@
+---
+import { localize } from '../i18n';
+import type { Language, LocalizedText } from '../data';
+
+interface Category {
+  readonly id: string;
+  readonly title: LocalizedText;
+}
+
+interface Props {
+  categories: readonly Category[];
+  defaultFilter: string;
+  group: 'courses' | 'teachers';
+  lang: Language;
+  pill?: boolean;
+}
+
+const { categories, defaultFilter, group, lang, pill = false } = Astro.props;
+---
+
+<div
+  class:list={['filter-tabs', { 'filter-tabs--pill': pill }]}
+  role="tablist"
+  aria-label={group === 'courses'
+    ? lang === 'zh'
+      ? '课程分类'
+      : 'Course categories'
+    : lang === 'zh'
+      ? '教师分类'
+      : 'Faculty categories'}
+  data-default-filter={defaultFilter}
+  data-filter-group={group}
+>
+  {
+    categories.map((category) => (
+      <button
+        type="button"
+        role="tab"
+        aria-selected={category.id === defaultFilter ? 'true' : 'false'}
+        data-filter={category.id}
+        tabindex={category.id === defaultFilter ? 0 : -1}
+      >
+        {localize(category.title, lang)}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  function initializeFilters() {
+    document
+      .querySelectorAll<HTMLElement>('[data-filter-group]')
+      .forEach((tabs) => {
+        if (tabs.dataset.enhanced === 'true') return;
+        tabs.dataset.enhanced = 'true';
+
+        const group = tabs.dataset.filterGroup;
+        const defaultFilter = tabs.dataset.defaultFilter ?? 'all';
+        const buttons = Array.from(
+          tabs.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
+        );
+        const selector =
+          group === 'courses' ? '[data-course-card]' : '[data-teacher-card]';
+        const cards = Array.from(
+          document.querySelectorAll<HTMLElement>(selector),
+        );
+
+        const select = (filter: string, focus = false) => {
+          buttons.forEach((button) => {
+            const selected = button.dataset.filter === filter;
+            button.setAttribute('aria-selected', String(selected));
+            button.tabIndex = selected ? 0 : -1;
+            if (selected && focus) button.focus();
+          });
+          cards.forEach((card) => {
+            card.hidden = filter !== 'all' && card.dataset.category !== filter;
+          });
+        };
+
+        tabs.classList.add('is-enhanced');
+        select(defaultFilter);
+
+        buttons.forEach((button, index) => {
+          button.addEventListener('click', () =>
+            select(button.dataset.filter ?? defaultFilter),
+          );
+          button.addEventListener('keydown', (event) => {
+            let nextIndex: number | undefined;
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown')
+              nextIndex = (index + 1) % buttons.length;
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowUp')
+              nextIndex = (index - 1 + buttons.length) % buttons.length;
+            if (event.key === 'Home') nextIndex = 0;
+            if (event.key === 'End') nextIndex = buttons.length - 1;
+            if (nextIndex !== undefined) {
+              event.preventDefault();
+              select(buttons[nextIndex]?.dataset.filter ?? defaultFilter, true);
+            }
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              select(button.dataset.filter ?? defaultFilter, true);
+            }
+          });
+        });
+      });
+  }
+
+  initializeFilters();
+  document.addEventListener('astro:page-load', initializeFilters);
+</script>

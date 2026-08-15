@@ -1,0 +1,23 @@
+---
+import { getPagePath } from '../../data';
+import { getMessages } from '../../i18n';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import AdmissionsView from '../../views/AdmissionsView.astro';
+
+const lang = 'en' as const;
+const copy = getMessages(lang);
+const zhPath = getPagePath('consult', 'zh');
+const enPath = getPagePath('consult', 'en');
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={enPath}
+  currentPage="consult"
+  description={copy.consult.metaDescription}
+  lang={lang}
+  languagePath={zhPath}
+  title={copy.consult.metaTitle}
+>
+  <AdmissionsView lang={lang} />
+</SiteLayout>

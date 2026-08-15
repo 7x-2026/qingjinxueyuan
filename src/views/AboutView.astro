@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+import { siteImages } from '../data';
+import { getMessages } from '../i18n';
+import type { Language } from '../data';
+import Hero from '../components/Hero.astro';
+import PartnerSection from '../components/PartnerSection.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<Hero
+  compact
+  image={siteImages.aboutHero}
+  title={copy.about.title}
+  text={copy.about.subtitle}
+  variant="about"
+/>
+
+<section class="section prose-section">
+  <div class="narrow-shell">
+    <SectionTitle title={copy.about.title} subtitle={copy.about.subtitle} />
+    <p>{copy.about.body}</p>
+    <div class="image-row image-row--three" aria-hidden="true">
+      {
+        siteImages.aboutGallery.map((image) => (
+          <Image
+            alt=""
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, 33vw"
+            src={image}
+            widths={[400, 640, 800]}
+          />
+        ))
+      }
+    </div>
+
+    <SectionTitle
+      title={copy.about.enrollmentTitle}
+      subtitle={copy.about.enrollmentSubtitle}
+    />
+    <p>{copy.about.enrollment}</p>
+    <div class="image-row image-row--three" aria-hidden="true">
+      {
+        siteImages.enrollment.map((image) => (
+          <Image
+            alt=""
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, 33vw"
+            src={image}
+            widths={[400, 640, 800]}
+          />
+        ))
+      }
+    </div>
+
+    <SectionTitle
+      title={copy.about.developmentTitle}
+      subtitle={copy.about.developmentSubtitle}
+    />
+    <p>{copy.about.development}</p>
+    <div class="image-row image-row--two" aria-hidden="true">
+      {
+        siteImages.development.map((image) => (
+          <Image
+            alt=""
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, 50vw"
+            src={image}
+            widths={[480, 720, 960]}
+          />
+        ))
+      }
+    </div>
+
+    <SectionTitle
+      title={copy.about.communityTitle}
+      subtitle={copy.about.communitySubtitle}
+    />
+    <p>{copy.about.community}</p>
+    <Image
+      alt={copy.about.communityImageAlt}
+      class="wide-image"
+      loading="lazy"
+      sizes="(max-width: 1040px) 100vw, 1040px"
+      src={siteImages.aboutCommunity}
+      widths={[640, 960, 1280]}
+    />
+  </div>
+</section>
+
+<PartnerSection
+  communitiesSubtitle={copy.home.communitiesSubtitle}
+  communitiesTitle={copy.home.communitiesTitle}
+  lang={lang}
+  schoolsSubtitle={copy.home.schoolsSubtitle}
+  schoolsTitle={copy.home.schoolsTitle}
+/>

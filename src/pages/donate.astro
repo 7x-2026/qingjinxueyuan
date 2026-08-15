@@ -1,0 +1,23 @@
+---
+import { getPagePath } from '../data';
+import { getMessages } from '../i18n';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import DonateView from '../views/DonateView.astro';
+
+const lang = 'zh' as const;
+const copy = getMessages(lang);
+const zhPath = getPagePath('donate', 'zh');
+const enPath = getPagePath('donate', 'en');
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={zhPath}
+  currentPage="donate"
+  description={copy.donate.metaDescription}
+  lang={lang}
+  languagePath={enPath}
+  title={copy.donate.metaTitle}
+>
+  <DonateView lang={lang} />
+</SiteLayout>

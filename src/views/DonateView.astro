@@ -1,0 +1,42 @@
+---
+import { siteImages } from '../data';
+import { getMessages } from '../i18n';
+import type { Language } from '../data';
+import ContactDetails from '../components/ContactDetails.astro';
+import Hero from '../components/Hero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<Hero
+  compact
+  image={siteImages.donateHero}
+  title={copy.donate.title}
+  text={copy.donate.heroText}
+  variant="donate"
+/>
+
+<section class="section prose-section">
+  <div class="narrow-shell donation-copy">
+    <SectionTitle title={copy.donate.supportTitle} />
+    <p>{copy.donate.support}</p>
+
+    <SectionTitle title={copy.donate.howTitle} />
+    <div class="note-box">
+      <p>{copy.donate.how}</p>
+    </div>
+
+    <SectionTitle title={copy.donate.contactTitle} />
+    <ContactDetails
+      compact
+      qrAlt={copy.floatingContact.qrAlt}
+      scan={copy.floatingContact.scan}
+    />
+  </div>
+</section>

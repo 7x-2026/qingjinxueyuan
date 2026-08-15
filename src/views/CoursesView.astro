@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import { courseCategories, courses, siteImages } from '../data';
+import { getMessages, localize } from '../i18n';
+import type { Language } from '../data';
+import FilterTabs from '../components/FilterTabs.astro';
+import Hero from '../components/Hero.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<Hero
+  compact
+  image={siteImages.coursesHero}
+  title={copy.courses.title}
+  text={copy.courses.heroText}
+  variant="courses"
+/>
+
+<section class="section">
+  <div class="page-shell">
+    <FilterTabs
+      categories={courseCategories}
+      defaultFilter="ewip"
+      group="courses"
+      lang={lang}
+    />
+    <div class="course-grid" aria-live="polite">
+      {
+        courses.map((course) => (
+          <article
+            class="course-card"
+            data-category={course.category}
+            data-course-card
+          >
+            <Image
+              alt={localize(course.title, lang)}
+              loading="lazy"
+              sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 25vw"
+              src={course.image}
+              widths={[320, 480, 640]}
+            />
+            <div>
+              <h2>{localize(course.title, lang)}</h2>
+              <p>{localize(course.description, lang)}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

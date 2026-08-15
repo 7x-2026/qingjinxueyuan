@@ -1,0 +1,47 @@
+---
+import {
+  assertPartnerRouteSlugs,
+  getPartnerPath,
+  partners,
+  publicPartnerSlugs,
+  site,
+} from '../../../data';
+import { localize } from '../../../i18n';
+import type { Partner } from '../../../data';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import PartnerView from '../../../views/PartnerView.astro';
+
+export function getStaticPaths() {
+  assertPartnerRouteSlugs(publicPartnerSlugs);
+  return partners.map((partner) => ({
+    params: { slug: partner.slug },
+    props: { partner },
+  }));
+}
+
+interface Props {
+  partner: Partner;
+}
+
+const { partner } = Astro.props as Props;
+const lang = 'en' as const;
+const title = `${localize(partner.detailTitle, lang)} | ${site.englishName}`;
+const body = localize(
+  partner.paragraphs[0] ?? { zh: localize(partner.caption, lang) },
+  lang,
+);
+const description = body.match(/^.*?[。！？!?](?:[”"']?)/)?.[0] ?? body;
+const zhPath = getPartnerPath(partner.slug, 'zh');
+const enPath = getPartnerPath(partner.slug, 'en');
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={enPath}
+  description={description}
+  lang={lang}
+  languagePath={zhPath}
+  title={title}
+>
+  <PartnerView lang={lang} partner={partner} />
+</SiteLayout>

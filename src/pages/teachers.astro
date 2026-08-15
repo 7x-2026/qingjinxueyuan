@@ -1,0 +1,23 @@
+---
+import { getPagePath } from '../data';
+import { getMessages } from '../i18n';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import TeachersView from '../views/TeachersView.astro';
+
+const lang = 'zh' as const;
+const copy = getMessages(lang);
+const zhPath = getPagePath('teachers', 'zh');
+const enPath = getPagePath('teachers', 'en');
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={zhPath}
+  currentPage="teachers"
+  description={copy.teachers.metaDescription}
+  lang={lang}
+  languagePath={enPath}
+  title={copy.teachers.metaTitle}
+>
+  <TeachersView lang={lang} />
+</SiteLayout>

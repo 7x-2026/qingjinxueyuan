@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import { contact } from '../data';
+
+interface Props {
+  teacher?: string;
+  scan: string;
+  qrAlt: string;
+  compact?: boolean;
+}
+
+const { teacher, scan, qrAlt, compact = false } = Astro.props;
+---
+
+<div class:list={['contact-details', { 'contact-details--compact': compact }]}>
+  <div>
+    {teacher && <h3>{teacher}</h3>}
+    <ul>
+      {
+        contact.phones.map((phone) => (
+          <li>
+            <a href={phone.href}>{phone.display}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p><a href={contact.emailHref}>{contact.email}</a></p>
+  </div>
+  <div class="qr-card">
+    <Image alt={qrAlt} loading="lazy" src={contact.qrCode} width={170} />
+    <p>{scan}</p>
+  </div>
+</div>

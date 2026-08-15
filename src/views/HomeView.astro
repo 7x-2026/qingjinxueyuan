@@ -1,0 +1,193 @@
+---
+import { Image } from 'astro:assets';
+import {
+  courses,
+  getPagePath,
+  homePurposes,
+  legacyHashRoutes,
+  programs,
+  siteImages,
+  teachers,
+} from '../data';
+import { getMessages, localize } from '../i18n';
+import type { Language } from '../data';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import PartnerSection from '../components/PartnerSection.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<Hero
+  image={siteImages.homeHero}
+  title={copy.home.heroTitle}
+  text={copy.home.heroText}
+  variant="home"
+>
+  <a class="button" href={getPagePath('consult', lang)}>
+    {copy.common.admissions}
+    <Icon name="arrow-right" size={18} />
+  </a>
+</Hero>
+
+<section
+  class="quote-band"
+  aria-label={lang === 'zh' ? '学院寄语' : 'Academy message'}
+>
+  <p>“ {copy.home.quote} ”</p>
+</section>
+
+<section class="section">
+  <div class="page-shell">
+    <SectionTitle
+      title={copy.home.purposeTitle}
+      subtitle={copy.home.purposeSubtitle}
+    />
+    <div class="purpose-grid">
+      {
+        homePurposes.map((item) => (
+          <article class="purpose-card">
+            <h3>{localize(item.title, lang)}</h3>
+            <p>{localize(item.text, lang)}</p>
+            <Image
+              alt={localize(item.title, lang)}
+              loading="lazy"
+              sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 25vw"
+              src={item.image}
+              widths={[320, 480, 640]}
+            />
+          </article>
+        ))
+      }
+    </div>
+    <a class="button button--center" href={getPagePath('about', lang)}>
+      {copy.home.aboutAction}
+      <Icon name="arrow-right" size={18} />
+    </a>
+  </div>
+</section>
+
+<section class="section section--green">
+  <div class="page-shell">
+    <SectionTitle
+      light
+      title={copy.home.enrollmentTitle}
+      subtitle={copy.home.enrollmentSubtitle}
+    />
+    <p class="section-lead section-lead--light">{copy.home.enrollmentLead}</p>
+    <div class="program-grid">
+      {
+        programs.map((program) => (
+          <article class="program-card">
+            <Image
+              alt={localize(program.title, lang)}
+              loading="lazy"
+              sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw"
+              src={program.image}
+              widths={[400, 600, 800]}
+            />
+            <div>
+              <h3>{localize(program.title, lang)}</h3>
+              <strong>{localize(program.age, lang)}</strong>
+              <p>{localize(program.text, lang)}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <a class="button button--center" href={getPagePath('consult', lang)}>
+      {copy.home.applyAction}
+      <Icon name="arrow-right" size={18} />
+    </a>
+  </div>
+</section>
+
+<section class="section section--deep">
+  <div class="page-shell">
+    <SectionTitle
+      light
+      title={copy.home.coursesTitle}
+      subtitle={copy.home.coursesSubtitle}
+    />
+    <div class="course-grid course-grid--preview">
+      {
+        courses.slice(0, 6).map((course) => (
+          <article class="course-card">
+            <Image
+              alt={localize(course.title, lang)}
+              loading="lazy"
+              sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 25vw"
+              src={course.image}
+              widths={[320, 480, 640]}
+            />
+            <div>
+              <h3>{localize(course.title, lang)}</h3>
+              <p>{localize(course.description, lang)}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <a class="button button--center" href={getPagePath('courses', lang)}>
+      {copy.common.learnMore}
+      <Icon name="arrow-right" size={18} />
+    </a>
+  </div>
+</section>
+
+<section class="section section--teacher">
+  <div class="page-shell">
+    <SectionTitle
+      light
+      title={copy.home.teachersTitle}
+      subtitle={copy.home.teachersSubtitle}
+    />
+    <p class="section-lead section-lead--light">{copy.home.teachersLead}</p>
+    <div class="teacher-grid teacher-grid--preview">
+      {
+        teachers.slice(0, 6).map((teacher) => (
+          <article class="teacher-card">
+            <Image
+              alt={localize(teacher.name, lang)}
+              loading="lazy"
+              sizes="(max-width: 640px) 50vw, (max-width: 980px) 50vw, 25vw"
+              src={teacher.image}
+              widths={[240, 360, 520]}
+            />
+            <div>
+              <h3>{localize(teacher.name, lang)}</h3>
+              <p>{localize(teacher.role, lang)}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <a class="button button--center" href={getPagePath('teachers', lang)}>
+      {copy.home.teachersAction}
+      <Icon name="arrow-right" size={18} />
+    </a>
+  </div>
+</section>
+
+<PartnerSection
+  communitiesSubtitle={copy.home.communitiesSubtitle}
+  communitiesTitle={copy.home.communitiesTitle}
+  lang={lang}
+  schoolsSubtitle={copy.home.schoolsSubtitle}
+  schoolsTitle={copy.home.schoolsTitle}
+/>
+
+{
+  lang === 'zh' && (
+    <script is:inline define:vars={{ routes: legacyHashRoutes }}>
+      const target = routes[window.location.hash]; if (typeof target ===
+      'string') window.location.replace(target);
+    </script>
+  )
+}

@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import { siteImages, teacherCategories, teachers } from '../data';
+import { getMessages, localize } from '../i18n';
+import type { Language } from '../data';
+import FilterTabs from '../components/FilterTabs.astro';
+import Hero from '../components/Hero.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<Hero
+  compact
+  image={siteImages.teachersHero}
+  title={copy.teachers.title}
+  text={copy.teachers.heroText}
+  variant="teachers"
+/>
+
+<section class="section">
+  <div class="page-shell">
+    <FilterTabs
+      categories={teacherCategories}
+      defaultFilter="all"
+      group="teachers"
+      lang={lang}
+      pill
+    />
+    <div class="teacher-grid" aria-live="polite">
+      {
+        teachers.map((teacher) => (
+          <article
+            class="teacher-card teacher-card--flat"
+            data-category={teacher.category}
+            data-teacher-card
+          >
+            <Image
+              alt={localize(teacher.name, lang)}
+              loading="lazy"
+              sizes="(max-width: 640px) 50vw, (max-width: 980px) 50vw, 25vw"
+              src={teacher.image}
+              widths={[240, 360, 520]}
+            />
+            <div>
+              <h2>{localize(teacher.name, lang)}</h2>
+              <p>{localize(teacher.role, lang)}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

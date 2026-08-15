@@ -1,0 +1,23 @@
+---
+import { getPagePath } from '../../data';
+import { getMessages } from '../../i18n';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import CoursesView from '../../views/CoursesView.astro';
+
+const lang = 'en' as const;
+const copy = getMessages(lang);
+const zhPath = getPagePath('courses', 'zh');
+const enPath = getPagePath('courses', 'en');
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={enPath}
+  currentPage="courses"
+  description={copy.courses.metaDescription}
+  lang={lang}
+  languagePath={zhPath}
+  title={copy.courses.metaTitle}
+>
+  <CoursesView lang={lang} />
+</SiteLayout>

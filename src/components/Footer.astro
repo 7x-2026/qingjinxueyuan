@@ -1,0 +1,55 @@
+---
+import { contact } from '../data';
+import { localize } from '../i18n';
+import type { Language } from '../data';
+
+interface Props {
+  lang: Language;
+  labels: {
+    purpose: string;
+    contact: string;
+    telephone: string;
+    email: string;
+    locations: string;
+    links: string;
+    externalLink: string;
+    copyright: string;
+  };
+}
+
+const { lang, labels } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="footer-grid page-shell">
+    <div class="footer-intro">
+      <strong class="footer-brand">青衿学院</strong>
+      <span class="footer-brand-en">QINGJIN ACADEMY</span>
+      <p>{labels.purpose}</p>
+    </div>
+    <div>
+      <h2>{labels.contact}</h2>
+      <p class="footer-label">{labels.telephone}</p>
+      <ul class="footer-links">
+        {
+          contact.phones.map((phone) => (
+            <li>
+              <a href={phone.href}>{phone.display}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="footer-label">{labels.email}</p>
+      <a href={contact.emailHref}>{contact.email}</a>
+    </div>
+    <div>
+      <h2>{labels.locations}</h2>
+      {contact.locations.map((location) => <p>{localize(location, lang)}</p>)}
+    </div>
+    <div>
+      <h2>{labels.links}</h2>
+      <p>{labels.externalLink}</p>
+    </div>
+  </div>
+  <p class="copyright page-shell">{labels.copyright}</p>
+</footer>

@@ -1,0 +1,63 @@
+---
+import { siteImages } from '../data';
+import { getMessages } from '../i18n';
+import type { Language } from '../data';
+import ContactDetails from '../components/ContactDetails.astro';
+import Hero from '../components/Hero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<Hero
+  compact
+  image={siteImages.admissionsHero}
+  title={copy.consult.title}
+  text={copy.consult.heroText}
+  variant="admissions"
+/>
+
+<section class="section prose-section">
+  <div class="narrow-shell">
+    <SectionTitle title={copy.consult.processTitle} />
+    <ol class="process-list">
+      {
+        copy.consult.process.map((item, index) => (
+          <li>
+            <>
+              <span>{index + 1}</span>
+              <p>{item}</p>
+            </>
+          </li>
+        ))
+      }
+    </ol>
+
+    <SectionTitle title={copy.consult.tuitionTitle} />
+    <div class="note-box">
+      {copy.consult.tuition.map((item) => <p>{item}</p>)}
+    </div>
+
+    <SectionTitle title={copy.consult.scholarshipTitle} />
+    <p>{copy.consult.scholarship}</p>
+
+    <SectionTitle title={copy.consult.paymentTitle} />
+    <div class="note-box note-box--payment">
+      <strong>{copy.consult.paymentRecipient}</strong>
+      <p>{copy.consult.account}</p>
+      <p>{copy.consult.bank}</p>
+    </div>
+
+    <SectionTitle title={copy.consult.contactTitle} />
+    <ContactDetails
+      qrAlt={copy.floatingContact.qrAlt}
+      scan={copy.consult.scan}
+      teacher={copy.consult.teacher}
+    />
+  </div>
+</section>

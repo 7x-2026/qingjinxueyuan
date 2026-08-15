@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import { getPartnerPath, partners } from '../data';
+import { localize } from '../i18n';
+import type { Language } from '../data';
+import SectionTitle from './SectionTitle.astro';
+
+interface Props {
+  lang: Language;
+  communitiesTitle: string;
+  communitiesSubtitle: string;
+  schoolsTitle: string;
+  schoolsSubtitle: string;
+}
+
+const {
+  lang,
+  communitiesTitle,
+  communitiesSubtitle,
+  schoolsTitle,
+  schoolsSubtitle,
+} = Astro.props;
+const communities = partners.filter((partner) => partner.group === 'community');
+const schools = partners.filter((partner) => partner.group === 'school');
+---
+
+<section
+  class="section partner-section"
+  aria-labelledby="partner-community-heading"
+>
+  <div class="page-shell">
+    <div id="partner-community-heading">
+      <SectionTitle title={communitiesTitle} subtitle={communitiesSubtitle} />
+    </div>
+    <div class="partner-logo-grid partner-logo-grid--community">
+      {
+        communities.map((partner) => (
+          <article class="partner-logo-card">
+            <a href={getPartnerPath(partner.slug, lang)}>
+              <span class="partner-logo-box">
+                <Image alt={partner.name} loading="lazy" src={partner.logo} />
+              </span>
+              <span>{localize(partner.caption, lang)}</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <SectionTitle title={schoolsTitle} subtitle={schoolsSubtitle} />
+    <div class="partner-logo-grid partner-logo-grid--school">
+      {
+        schools.map((partner) => (
+          <article class="partner-logo-card">
+            <a href={getPartnerPath(partner.slug, lang)}>
+              <span class="partner-logo-box partner-logo-box--school">
+                <Image alt={partner.name} loading="lazy" src={partner.logo} />
+              </span>
+              <span>{localize(partner.caption, lang)}</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

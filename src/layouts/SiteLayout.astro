@@ -1,0 +1,106 @@
+---
+import { site, siteImages } from '../data';
+import { getMessages } from '../i18n';
+import type { Language, PageKey } from '../data';
+import Footer from '../components/Footer.astro';
+import FloatingContact from '../components/FloatingContact.astro';
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  languagePath: string;
+  currentPage?: PageKey;
+  alternate?: {
+    zh: string;
+    en: string;
+  };
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonicalPath,
+  languagePath,
+  currentPage,
+  alternate,
+} = Astro.props;
+const copy = getMessages(lang);
+const canonical = new URL(canonicalPath, site.url).toString();
+const ogImage = new URL(siteImages.homeHero.src, site.url).toString();
+const alternateLocale = lang === 'zh' ? 'en_US' : 'zh_CN';
+---
+
+<!doctype html>
+<html lang={copy.htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#2f6b5f" />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    {
+      alternate && (
+        <>
+          <link
+            rel="alternate"
+            hreflang="zh-CN"
+            href={new URL(alternate.zh, site.url).toString()}
+          />
+          <link
+            rel="alternate"
+            hreflang="en"
+            href={new URL(alternate.en, site.url).toString()}
+          />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL(alternate.zh, site.url).toString()}
+          />
+        </>
+      )
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta
+      property="og:image:alt"
+      content={lang === 'zh' ? '青衿学院' : 'Qingjin Academy'}
+    />
+    <meta property="og:locale" content={copy.ogLocale} />
+    <meta property="og:locale:alternate" content={alternateLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content"
+      >{lang === 'zh' ? '跳到主要内容' : 'Skip to content'}</a
+    >
+    <Header
+      currentPage={currentPage}
+      labels={copy.navigation}
+      lang={lang}
+      languagePath={languagePath}
+    />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer lang={lang} labels={copy.footer} />
+    <FloatingContact lang={lang} labels={copy.floatingContact} />
+  </body>
+</html>

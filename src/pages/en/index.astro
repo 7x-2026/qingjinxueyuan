@@ -1,0 +1,23 @@
+---
+import { getPagePath } from '../../data';
+import { getMessages } from '../../i18n';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import HomeView from '../../views/HomeView.astro';
+
+const lang = 'en' as const;
+const copy = getMessages(lang);
+const zhPath = getPagePath('home', 'zh');
+const enPath = getPagePath('home', 'en');
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={enPath}
+  currentPage="home"
+  description={copy.home.metaDescription}
+  lang={lang}
+  languagePath={zhPath}
+  title={copy.home.metaTitle}
+>
+  <HomeView lang={lang} />
+</SiteLayout>

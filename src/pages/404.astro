@@ -1,0 +1,19 @@
+---
+import { getMessages } from '../i18n';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import NotFoundView from '../views/NotFoundView.astro';
+
+const lang = 'zh' as const;
+const copy = getMessages(lang);
+Astro.response.status = 404;
+---
+
+<SiteLayout
+  canonicalPath="/404.html"
+  description={copy.notFound.body}
+  lang={lang}
+  languagePath="/en/"
+  title={copy.notFound.metaTitle}
+>
+  <NotFoundView lang={lang} />
+</SiteLayout>

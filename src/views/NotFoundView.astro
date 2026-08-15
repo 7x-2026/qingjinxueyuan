@@ -1,0 +1,31 @@
+---
+import { getPagePath } from '../data';
+import { getMessages } from '../i18n';
+import type { Language } from '../data';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<section class="not-found">
+  <div class="narrow-shell">
+    <p class="not-found__code">404</p>
+    <h1>{copy.notFound.title}</h1>
+    <p>{copy.notFound.body}</p>
+    <div class="not-found__actions">
+      <a class="button" href={getPagePath('home', 'zh')}>
+        {lang === 'zh' ? '返回中文首页' : '中文首页'}
+        <Icon name="arrow-right" size={18} />
+      </a>
+      <a class="button button--secondary" href={getPagePath('home', 'en')}>
+        English home
+        <Icon name="arrow-right" size={18} />
+      </a>
+    </div>
+  </div>
+</section>

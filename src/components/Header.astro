@@ -1,0 +1,153 @@
+---
+import { getPagePath, navigationItems } from '../data';
+import { localize } from '../i18n';
+import type { Language, PageKey } from '../data';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Language;
+  currentPage?: PageKey;
+  languagePath: string;
+  labels: {
+    homeLabel: string;
+    apply: string;
+    language: string;
+    openMenu: string;
+    closeMenu: string;
+  };
+}
+
+const { lang, currentPage, languagePath, labels } = Astro.props;
+---
+
+<header class="site-header" data-site-header>
+  <div class="site-header__inner page-shell">
+    <a
+      class="brand"
+      href={getPagePath('home', lang)}
+      aria-label={labels.homeLabel}
+    >
+      <span class="brand__zh">青衿学院</span>
+      <span class="brand__en">QINGJIN ACADEMY</span>
+    </a>
+
+    <nav
+      class="site-nav"
+      id="site-navigation"
+      aria-label={lang === 'zh' ? '主导航' : 'Main navigation'}
+      data-site-nav
+    >
+      <a
+        class="site-nav__link site-nav__home"
+        href={getPagePath('home', lang)}
+        aria-current={currentPage === 'home' ? 'page' : undefined}
+      >
+        {lang === 'zh' ? '首页' : 'Home'}
+      </a>
+      {
+        navigationItems.map((item) => (
+          <a
+            class="site-nav__link"
+            href={getPagePath(item.page, lang)}
+            aria-current={currentPage === item.page ? 'page' : undefined}
+          >
+            {localize(item.label, lang)}
+          </a>
+        ))
+      }
+      <a
+        class="button button--small site-nav__apply"
+        href={getPagePath('consult', lang)}
+      >
+        {labels.apply}
+      </a>
+      <a
+        class="language-link"
+        href={languagePath}
+        hreflang={lang === 'zh' ? 'en' : 'zh-CN'}
+      >
+        <span aria-hidden="true">◎</span>
+        {labels.language}
+      </a>
+    </nav>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-controls="site-navigation"
+      aria-expanded="false"
+      aria-label={labels.openMenu}
+      data-close-label={labels.closeMenu}
+      data-menu-toggle
+      data-open-label={labels.openMenu}
+    >
+      <span class="menu-toggle__open"><Icon name="menu" /></span>
+      <span class="menu-toggle__close"><Icon name="close" /></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  function initializeHeader() {
+    const nav = document.querySelector<HTMLElement>('[data-site-nav]');
+    const toggle =
+      document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    if (!nav || !toggle || nav.dataset.enhanced === 'true') return;
+
+    nav.dataset.enhanced = 'true';
+    let lastFocused: HTMLElement | null = null;
+
+    const closeMenu = (restoreFocus = false) => {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute(
+        'aria-label',
+        toggle.dataset.openLabel ?? 'Open menu',
+      );
+      document.body.classList.remove('menu-open');
+      if (restoreFocus) (lastFocused ?? toggle).focus();
+    };
+
+    const openMenu = () => {
+      lastFocused =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : toggle;
+      nav.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute(
+        'aria-label',
+        toggle.dataset.closeLabel ?? 'Close menu',
+      );
+      document.body.classList.add('menu-open');
+      nav.querySelector<HTMLElement>('a')?.focus();
+    };
+
+    toggle.addEventListener('click', () => {
+      if (toggle.getAttribute('aria-expanded') === 'true') closeMenu(true);
+      else openMenu();
+    });
+
+    nav.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('a')) closeMenu(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (
+        event.key === 'Escape' &&
+        toggle.getAttribute('aria-expanded') === 'true'
+      ) {
+        event.preventDefault();
+        closeMenu(true);
+      }
+    });
+
+    const desktop = window.matchMedia('(min-width: 1100px)');
+    desktop.addEventListener('change', ({ matches }) => {
+      if (matches) closeMenu(false);
+    });
+  }
+
+  initializeHeader();
+  document.addEventListener('astro:page-load', initializeHeader);
+</script>

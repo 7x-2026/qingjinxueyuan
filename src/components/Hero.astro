@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  image: ImageMetadata;
+  title: string;
+  text: string;
+  variant?: 'home' | 'about' | 'courses' | 'teachers' | 'admissions' | 'donate';
+  compact?: boolean;
+}
+
+const { image, title, text, variant = 'home', compact = false } = Astro.props;
+---
+
+<section
+  class:list={['hero', `hero--${variant}`, { 'hero--compact': compact }]}
+>
+  <Image
+    alt=""
+    aria-hidden="true"
+    class="hero__media"
+    fetchpriority="high"
+    loading="eager"
+    sizes="100vw"
+    src={image}
+    widths={[640, 960, 1280, 1600, 1920]}
+  />
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="hero__inner page-shell">
+    <h1>{title}</h1>
+    <p>{text}</p>
+    <slot />
+  </div>
+</section>

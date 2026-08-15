@@ -1,0 +1,23 @@
+:root {
+  --color-brand: #5eb19e;
+  --color-brand-dark: #2f6b5f;
+  --color-brand-deep: #264f47;
+  --color-ink: #243145;
+  --color-text: #35434a;
+  --color-muted: #6d7b82;
+  --color-line: #d8e2df;
+  --color-canvas: #f7faf8;
+  --color-surface: #ffffff;
+  --color-footer: #2c3a50;
+  --font-sans:
+    Inter, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', Arial,
+    sans-serif;
+  --shadow-card: 0 16px 44px rgb(28 46 54 / 10%);
+  --shadow-float: 0 18px 50px rgb(19 32 38 / 20%);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --header-height: 78px;
+  --page-gutter: clamp(18px, 5vw, 72px);
+  --page-width: 1240px;
+  --narrow-width: 980px;
+}

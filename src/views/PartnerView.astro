@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import { getPagePath } from '../data';
+import { getMessages, localize } from '../i18n';
+import type { Language, Partner } from '../data';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  lang: Language;
+  partner: Partner;
+}
+
+const { lang, partner } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<section class="section partner-detail">
+  <div class="page-shell">
+    <a class="back-link" href={getPagePath('home', lang)}>
+      <Icon name="arrow-left" size={18} />
+      {copy.common.backHome}
+    </a>
+
+    <header class="partner-detail__hero">
+      <div class="partner-detail__logo">
+        <Image alt={partner.name} loading="eager" src={partner.logo} />
+      </div>
+      <div>
+        <p class="partner-detail__kicker">
+          {
+            partner.group === 'community'
+              ? copy.partner.communityKicker
+              : copy.partner.schoolKicker
+          }
+        </p>
+        <h1>{localize(partner.caption, lang)}</h1>
+        <p lang="en">{partner.name}</p>
+      </div>
+    </header>
+
+    <article class="partner-detail__body">
+      <h2>{localize(partner.detailTitle, lang)}</h2>
+      {
+        partner.paragraphs.length > 0 ? (
+          partner.paragraphs.map((paragraph) => (
+            <p>{localize(paragraph, lang)}</p>
+          ))
+        ) : (
+          <p>{copy.partner.unavailable}</p>
+        )
+      }
+    </article>
+  </div>
+</section>

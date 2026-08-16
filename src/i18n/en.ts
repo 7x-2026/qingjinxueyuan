@@ -146,7 +146,7 @@ export const en = {
     support:
       'Every contribution helps the academy develop faculty, research, curriculum, and learning opportunities for more young people.',
     howTitle: 'How to Donate',
-    how: 'This website currently provides a front-end demonstration only. Please contact us to confirm actual donation methods.',
+    how: 'Please contact the academy by WeChat or telephone to confirm donation methods.',
     contactTitle: 'Contact Us',
   },
   partner: {

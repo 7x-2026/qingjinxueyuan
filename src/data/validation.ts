@@ -68,7 +68,7 @@ function assertOrderedSlugs(
     );
     invariant(
       item.order === index + 1,
-      `${label} order must be continuous and match source order`,
+      `${label} order must be continuous and match declared order`,
     );
     slugs.add(item.slug);
     orders.add(item.order);
@@ -128,7 +128,7 @@ export function assertContentIntegrity(): true {
     assertLocalized(`course ${course.slug} description`, course.description);
     invariant(
       !('en' in course.title),
-      `course "${course.slug}" title must use the documented Chinese fallback`,
+      `course "${course.slug}" title must omit English text so the Chinese fallback remains active`,
     );
     assertImage(`course ${course.slug}`, course.image);
   });
@@ -162,7 +162,7 @@ export function assertContentIntegrity(): true {
     assertLocalized(`teacher ${teacher.slug} role`, teacher.role);
     invariant(
       !('en' in teacher.role),
-      `teacher "${teacher.slug}" role must remain untranslated`,
+      `teacher "${teacher.slug}" role must omit English text so the Chinese fallback remains active`,
     );
     assertImage(`teacher ${teacher.slug}`, teacher.image);
   });
@@ -211,7 +211,7 @@ export function assertContentIntegrity(): true {
   );
   invariant(
     publicParagraphCount === 34,
-    'public partner details must contain 34 physical-line paragraphs',
+    'public partner details must contain 34 paragraphs',
   );
   invariant(
     partners.filter(({ group }) => group === 'community').length === 5,
@@ -234,16 +234,13 @@ export function assertContentIntegrity(): true {
     'SEKEM must not appear in public partner data',
   );
   assertLocalized('SEKEM title', sekem.title);
-  invariant(
-    sekem.paragraphs.length === 4,
-    'SEKEM must contain 4 physical-line paragraphs',
-  );
+  invariant(sekem.paragraphs.length === 4, 'SEKEM must contain 4 paragraphs');
   sekem.paragraphs.forEach((paragraph, index) =>
     assertLocalized(`SEKEM paragraph ${index + 1}`, paragraph),
   );
   invariant(
     publicParagraphCount + sekem.paragraphs.length === 38,
-    'all migrated TXT details must total 38 paragraphs',
+    'partner content inventory must contain 38 paragraphs',
   );
 
   programs.forEach((program) => {
@@ -266,27 +263,27 @@ export function assertContentIntegrity(): true {
   );
   invariant(
     contact.phones.length === 2,
-    'contact must retain both phone numbers',
+    'contact must contain two phone numbers',
   );
   invariant(contact.email.trim().length > 0, 'contact email is required');
   assertImage('contact QR code', contact.qrCode);
 
-  const sourceImages = [
+  const siteImageInventory = [
     ...allSiteImages,
     ...courses.map(({ image }) => image),
     ...teachers.map(({ image }) => image),
     ...partners.map(({ logo }) => logo),
   ];
-  sourceImages.forEach((image, index) =>
-    assertImage(`source image ${index + 1}`, image),
+  siteImageInventory.forEach((image, index) =>
+    assertImage(`site image ${index + 1}`, image),
   );
   invariant(
-    sourceImages.length === 67,
-    'source image inventory must contain exactly 67 assets',
+    siteImageInventory.length === 66,
+    'site image inventory must contain exactly 66 assets',
   );
   invariant(
-    new Set(sourceImages.map(({ src }) => src)).size === 67,
-    'source image imports must resolve to 67 unique assets',
+    new Set(siteImageInventory.map(({ src }) => src)).size === 66,
+    'site image imports must resolve to 66 unique assets',
   );
 
   assertPartnerRouteSlugs(publicPartnerSlugs);

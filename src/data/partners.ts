@@ -270,8 +270,8 @@ export const partners = [
   },
 ] as const satisfies readonly Partner[];
 
-// This source record is preserved for content completeness only. It must not be
-// used to create a card, route, language switch target, or sitemap entry.
+// Private partner content must not create a card, route, language switch target,
+// or sitemap entry.
 export const unlinkedPartnerDetails = [
   {
     id: 'sekem',

@@ -34,9 +34,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    // Astro detects coding-agent shells and otherwise daemonizes preview. The
-    // explicit value keeps the production preview attached to Playwright so it
-    // can supervise and stop the server normally.
+    // Keep preview in the foreground so Playwright owns its lifecycle and can
+    // stop the server cleanly after the test run.
     command: `npm run build && ASTRO_PREVIEW_BACKGROUND=0 npm run preview -- --host 127.0.0.1 --port ${previewPort}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,

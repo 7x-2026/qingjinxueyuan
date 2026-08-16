@@ -4,7 +4,6 @@ import {
   courses,
   getPagePath,
   homePurposes,
-  legacyHashRoutes,
   programs,
   siteImages,
   teachers,
@@ -182,12 +181,3 @@ const copy = getMessages(lang);
   schoolsSubtitle={copy.home.schoolsSubtitle}
   schoolsTitle={copy.home.schoolsTitle}
 />
-
-{
-  lang === 'zh' && (
-    <script is:inline define:vars={{ routes: legacyHashRoutes }}>
-      const target = routes[window.location.hash]; if (typeof target ===
-      'string') window.location.replace(target);
-    </script>
-  )
-}

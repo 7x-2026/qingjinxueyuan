@@ -44,18 +44,3 @@ export function pairedLanguagePaths(path: string): { zh: string; en: string } {
     ? { zh: path.slice(3) || '/', en: path }
     : { zh: path, en: path === '/' ? '/en/' : `/en${path}` };
 }
-
-export const legacyHashTargets = {
-  '#/': '/',
-  '#/home': '/',
-  '#/about': '/about/',
-  '#/courses': '/courses/',
-  '#/teachers': '/teachers/',
-  '#/consult': '/admissions/',
-  '#/donate': '/donate/',
-  ...Object.fromEntries(
-    publicPartnerSlugs.map(
-      (slug) => [`#/partner/${slug}`, `/partners/${slug}/`] as const,
-    ),
-  ),
-} as Readonly<Record<string, string>>;

@@ -1,5 +1,4 @@
 import type { Language, NavigationItem, PageKey } from './types';
-import { partners } from './partners';
 
 export const navigationItems = [
   { page: 'about', label: { zh: '关于青衿', en: 'About' } },
@@ -25,27 +24,4 @@ export function getPagePath(page: PageKey, language: Language): string {
 
 export function getPartnerPath(slug: string, language: Language): string {
   return `${language === 'en' ? '/en' : ''}/partners/${slug}/`;
-}
-
-const legacyPageHashRoutes = {
-  '#/': '/',
-  '#/home': '/',
-  '#/about': '/about/',
-  '#/courses': '/courses/',
-  '#/teachers': '/teachers/',
-  '#/consult': '/admissions/',
-  '#/donate': '/donate/',
-} as const;
-
-export const legacyHashRoutes: Readonly<Record<string, string>> = Object.freeze(
-  {
-    ...legacyPageHashRoutes,
-    ...Object.fromEntries(
-      partners.map(({ slug }) => [`#/partner/${slug}`, `/partners/${slug}/`]),
-    ),
-  },
-);
-
-export function getLegacyHashTarget(hash: string): string | undefined {
-  return legacyHashRoutes[hash];
 }

@@ -7,7 +7,6 @@ import aboutEnrollment03 from '../assets/images/about/enrollment-03.png';
 import aboutGallery01 from '../assets/images/about/gallery-01.png';
 import aboutGallery02 from '../assets/images/about/gallery-02.png';
 import aboutGallery03 from '../assets/images/about/gallery-03.png';
-import globalPartnerships from '../assets/images/about/global-partnerships.png';
 import aboutHero from '../assets/images/about/hero.png';
 import admissionsHero from '../assets/images/admissions/hero.png';
 import coursesHero from '../assets/images/courses/hero.png';
@@ -36,8 +35,6 @@ export const siteImages = {
   aboutGallery: [aboutGallery01, aboutGallery02, aboutGallery03],
   enrollment: [aboutEnrollment01, aboutEnrollment02, aboutEnrollment03],
   development: [aboutDevelopment01, aboutDevelopment02],
-  // The legacy source resolved this image through its eager glob but never rendered it.
-  globalPartnershipsUnrendered: globalPartnerships,
 } as const;
 
 export const allSiteImages = [
@@ -52,5 +49,4 @@ export const allSiteImages = [
   ...siteImages.aboutGallery,
   ...siteImages.enrollment,
   ...siteImages.development,
-  siteImages.globalPartnershipsUnrendered,
 ] as const;

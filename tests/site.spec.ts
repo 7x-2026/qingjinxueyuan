@@ -2,7 +2,6 @@ import { expect, test, type Page, type TestInfo } from '@playwright/test';
 import {
   bodyPaths,
   enBodyPaths,
-  legacyHashTargets,
   pairedLanguagePaths,
   primaryPaths,
   productionOrigin,
@@ -206,10 +205,9 @@ test('every internal document link resolves and retains trailing slashes', async
       expect(href, `${path} does not use javascript links`).not.toMatch(
         /^javascript:/i,
       );
-      expect(
-        href,
-        `${path} does not expose legacy hash navigation`,
-      ).not.toMatch(/^#\//);
+      expect(href, `${path} uses document paths for navigation`).not.toMatch(
+        /^#\//,
+      );
       if (!href || href.startsWith('#') || /^(mailto|tel):/i.test(href))
         continue;
       const url = new URL(href, productionOrigin);
@@ -292,7 +290,7 @@ test('unknown pages use the custom 404 and SEKEM stays unlinked', async ({
   expect(await sitemap.text()).not.toMatch(/sekem/i);
 });
 
-test('admissions uses real contact links and donation has no demo payment form', async ({
+test('admissions and donation expose direct contact links without payment controls', async ({
   page,
 }, testInfo) => {
   onlyProject(testInfo, desktopProject);
@@ -449,34 +447,6 @@ test('back-to-top restores the document to the top', async ({
     .toBeLessThanOrEqual(1);
 });
 
-test('every legacy hash maps exactly and unknown hashes are ignored', async ({
-  page,
-}, testInfo) => {
-  onlyProject(testInfo, desktopProject);
-  test.setTimeout(120_000);
-
-  for (const [hash, target] of Object.entries(legacyHashTargets)) {
-    // Begin outside the home document so each legacy URL models a fresh
-    // bookmark/navigation rather than an in-document hash-only mutation.
-    await page.goto('/about/', { waitUntil: 'domcontentloaded' });
-    await page.goto(`/${hash}`, { waitUntil: 'domcontentloaded' });
-    await expect
-      .poll(
-        () => {
-          const url = new URL(page.url());
-          return `${url.pathname}${url.hash}`;
-        },
-        { message: `${hash} maps to ${target}` },
-      )
-      .toBe(target);
-  }
-
-  await page.goto('/#/not-a-real-route');
-  await page.waitForLoadState('networkidle');
-  expect(new URL(page.url()).pathname).toBe('/');
-  expect(new URL(page.url()).hash).toBe('#/not-a-real-route');
-});
-
 test('without JavaScript, all course and teacher content and footer contacts remain readable', async ({
   browser,
 }, testInfo) => {
@@ -536,7 +506,7 @@ test('all documents avoid horizontal overflow at five audit widths', async ({
   }
 });
 
-test('route fixture itself preserves the locked 19 + 19 inventory', () => {
+test('route fixture matches the 19 + 19 public inventory', () => {
   expect(zhBodyPaths).toHaveLength(19);
   expect(enBodyPaths).toHaveLength(19);
   expect(bodyPaths).toHaveLength(38);

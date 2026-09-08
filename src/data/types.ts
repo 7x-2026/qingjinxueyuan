@@ -7,6 +7,11 @@ export type LocalizedText = Readonly<{
   en?: string;
 }>;
 
+export type BilingualText = Readonly<{
+  zh: string;
+  en: string;
+}>;
+
 export type PageKey =
   'home' | 'about' | 'courses' | 'teachers' | 'consult' | 'donate';
 
@@ -56,10 +61,17 @@ export interface TeacherCategory {
 export interface Teacher {
   readonly slug: string;
   readonly order: number;
-  readonly name: LocalizedText;
-  readonly role: LocalizedText;
+  readonly name: BilingualText;
+  readonly role: BilingualText;
   readonly category: TeacherCategoryId;
   readonly image: ImageMetadata;
+  readonly detailImage: ImageMetadata;
+  readonly biography: readonly BilingualText[];
+}
+
+export interface PartnerGalleryItem {
+  readonly image: ImageMetadata;
+  readonly alt: BilingualText;
 }
 
 export interface Partner {
@@ -69,8 +81,10 @@ export interface Partner {
   readonly caption: LocalizedText;
   readonly group: PartnerGroup;
   readonly logo: ImageMetadata;
+  readonly website: `https://${string}`;
   readonly detailTitle: LocalizedText;
   readonly paragraphs: readonly LocalizedText[];
+  readonly gallery: readonly PartnerGalleryItem[];
 }
 
 export interface UnlinkedPartnerDetail {

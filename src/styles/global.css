@@ -379,7 +379,20 @@
   width: 100%;
 }
 
-.teacher-card > div {
+.teacher-card__link {
+  color: inherit;
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+
+.teacher-card__link:hover {
+  color: inherit;
+  transform: translateY(-2px);
+}
+
+.teacher-card__link > div {
   padding: 17px;
 }
 
@@ -392,7 +405,7 @@
   border-radius: var(--radius-sm);
 }
 
-.teacher-card--flat > div {
+.teacher-card--flat .teacher-card__link > div {
   padding-inline: 4px;
 }
 
@@ -689,6 +702,68 @@
   max-width: 860px;
 }
 
+.teacher-detail {
+  background: #fff;
+  min-height: 70vh;
+}
+
+.teacher-detail__hero {
+  align-items: center;
+  background: #f5f8f7;
+  border: 1px solid #e4ece9;
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: 52px;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  margin: 0 auto 58px;
+  max-width: 1060px;
+  padding: 44px;
+}
+
+.teacher-detail__portrait {
+  background: #dfe8e8;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.teacher-detail__portrait img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.teacher-detail__heading > p {
+  color: var(--color-brand-dark);
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+
+.teacher-detail__heading h1 {
+  font-size: clamp(38px, 5vw, 62px);
+  margin: 0 0 18px;
+}
+
+.teacher-detail__heading strong {
+  color: var(--color-muted);
+  display: block;
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.6;
+}
+
+.teacher-detail__body {
+  margin: 0 auto;
+  max-width: 920px;
+}
+
+.teacher-detail__body p {
+  color: #4e5c62;
+  font-size: 18px;
+  line-height: 2;
+  margin: 0 0 24px;
+  text-align: justify;
+}
+
 .partner-detail {
   background: #fff;
   min-height: 70vh;
@@ -751,6 +826,16 @@
   margin: 0;
 }
 
+.partner-detail__website {
+  margin-top: 12px !important;
+}
+
+.partner-detail__website a {
+  color: var(--color-brand-dark);
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
 .partner-detail__body {
   margin: 0 auto;
   max-width: 920px;
@@ -768,6 +853,50 @@
   line-height: 2;
   margin: 0 0 24px;
   text-align: justify;
+}
+
+.partner-gallery {
+  margin: 64px auto 0;
+  max-width: 1060px;
+}
+
+.partner-gallery h2 {
+  font-size: 30px;
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.partner-gallery__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.partner-gallery figure {
+  align-items: center;
+  background: #f5f8f7;
+  border: 1px solid #e4ece9;
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.partner-gallery img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: auto;
+}
+
+.partner-gallery--single {
+  max-width: 760px;
+}
+
+.partner-gallery--single .partner-gallery__grid {
+  grid-template-columns: 1fr;
 }
 
 .not-found {
@@ -1071,6 +1200,11 @@
     gap: 48px 34px;
   }
 
+  .teacher-detail__hero {
+    gap: 34px;
+    grid-template-columns: minmax(230px, 300px) 1fr;
+  }
+
   .floating-tools {
     bottom: calc(12px + env(safe-area-inset-bottom));
     grid-template-columns: repeat(3, 1fr);
@@ -1173,7 +1307,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .teacher-card > div {
+  .teacher-card__link > div {
     padding: 11px 8px 15px;
   }
 
@@ -1225,6 +1359,7 @@
 
   .prose-section .narrow-shell > p,
   .donation-copy > p,
+  .teacher-detail__body p,
   .partner-detail__body p {
     font-size: 16px;
     line-height: 1.88;
@@ -1261,6 +1396,22 @@
     padding: 24px;
   }
 
+  .teacher-detail__hero {
+    gap: 26px;
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .teacher-detail__portrait {
+    margin-inline: auto;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .teacher-detail__body p {
+    text-align: left;
+  }
+
   .partner-detail__logo {
     min-height: 130px;
   }
@@ -1271,6 +1422,10 @@
 
   .partner-detail__body p {
     text-align: left;
+  }
+
+  .partner-gallery__grid {
+    grid-template-columns: 1fr;
   }
 
   .contact-details {

@@ -5,8 +5,12 @@ import {
   pairedLanguagePaths,
   primaryPaths,
   productionOrigin,
+  publicPartnerGalleryCounts,
   publicPartnerSlugs,
+  publicPartnerWebsites,
+  publicTeacherSlugs,
   zhBodyPaths,
+  zhTeacherPaths,
 } from './fixtures/routes';
 
 const desktopProject = 'desktop-chromium';
@@ -50,11 +54,11 @@ async function visibleCount(page: Page, selector: string): Promise<number> {
   );
 }
 
-test('all 38 body URLs render complete, paired, indexable documents', async ({
+test('all 80 body URLs render complete, paired, indexable documents', async ({
   page,
 }, testInfo) => {
   onlyProject(testInfo, desktopProject);
-  test.setTimeout(240_000);
+  test.setTimeout(420_000);
 
   const titles = new Map<'zh' | 'en', Set<string>>([
     ['zh', new Set()],
@@ -140,7 +144,7 @@ test('all 38 body URLs render complete, paired, indexable documents', async ({
     page.off('pageerror', onPageError);
   }
 
-  expect(canonicalURLs.size).toBe(38);
+  expect(canonicalURLs.size).toBe(80);
 });
 
 test('top-level pages render at a mobile browser viewport', async ({
@@ -185,6 +189,93 @@ test('primary navigation marks the current page and language links are real anch
   }
 });
 
+test('teacher cards link to bilingual static profiles', async ({
+  page,
+}, testInfo) => {
+  onlyProject(testInfo, desktopProject);
+
+  for (const [path, prefix] of [
+    ['/', '/teachers/'],
+    ['/en/', '/en/teachers/'],
+  ] as const) {
+    await page.goto(path);
+    const links = page.locator(`.teacher-card a[href^="${prefix}"]`);
+    await expect(links).toHaveCount(6);
+  }
+
+  for (const [path, prefix] of [
+    ['/teachers/', '/teachers/'],
+    ['/en/teachers/', '/en/teachers/'],
+  ] as const) {
+    await page.goto(path);
+    const links = page.locator(`.teacher-card a[href^="${prefix}"]`);
+    await expect(links).toHaveCount(21);
+    expect(
+      await links.evaluateAll((items) =>
+        items.map((item) => item.getAttribute('href')),
+      ),
+    ).toEqual(publicTeacherSlugs.map((slug) => `${prefix}${slug}/`));
+  }
+});
+
+test('all teacher profiles expose complete localized content and pairing', async ({
+  page,
+}, testInfo) => {
+  onlyProject(testInfo, desktopProject);
+  test.setTimeout(240_000);
+
+  for (const zhPath of zhTeacherPaths) {
+    for (const path of [zhPath, `/en${zhPath}`]) {
+      await page.goto(path);
+      await expect(page.locator('.teacher-detail h1')).not.toHaveText('');
+      await expect(
+        page.locator('.teacher-detail__heading strong'),
+      ).not.toHaveText('');
+      expect(
+        await page.locator('.teacher-detail__body p').count(),
+      ).toBeGreaterThan(0);
+      await expect(page.locator('.teacher-detail__portrait img')).toBeVisible();
+      const paired = pairedLanguagePaths(path);
+      const languageLink = page.locator('header a[hreflang]').first();
+      expect(
+        new URL(
+          (await languageLink.getAttribute('href')) ?? '',
+          productionOrigin,
+        ).pathname,
+      ).toBe(path.startsWith('/en/') ? paired.zh : paired.en);
+    }
+  }
+});
+
+test('partner cards, official websites, and galleries match the public inventory', async ({
+  page,
+}, testInfo) => {
+  onlyProject(testInfo, desktopProject);
+  test.setTimeout(180_000);
+
+  for (const [languageRoot, partnerPrefix] of [
+    ['/', '/partners/'],
+    ['/en/', '/en/partners/'],
+  ] as const) {
+    await page.goto(languageRoot);
+    await expect(
+      page.locator(`.partner-logo-card a[href^="${partnerPrefix}"]`),
+    ).toHaveCount(13);
+  }
+
+  for (const [index, slug] of publicPartnerSlugs.entries()) {
+    await page.goto(`/partners/${slug}/`);
+    const website = page.locator(`a[href="${publicPartnerWebsites[index]}"]`);
+    await expect(website).toHaveCount(1);
+    await expect(website).toHaveAttribute('target', '_blank');
+    await expect(website).toHaveAttribute('rel', /noopener/);
+    await expect(website).toHaveAttribute('rel', /noreferrer/);
+    await expect(page.locator('.partner-gallery img')).toHaveCount(
+      publicPartnerGalleryCounts[index],
+    );
+  }
+});
+
 test('every internal document link resolves and retains trailing slashes', async ({
   page,
   request,
@@ -219,7 +310,7 @@ test('every internal document link resolves and retains trailing slashes', async
     }
   }
 
-  expect(internalPaths.size).toBeGreaterThanOrEqual(38);
+  expect(internalPaths.size).toBeGreaterThanOrEqual(80);
   for (const path of internalPaths) {
     const response = await request.get(path);
     expect(response.status(), path).toBeLessThan(400);
@@ -272,6 +363,8 @@ test('unknown pages use the custom 404 and SEKEM stays unlinked', async ({
     '/missing-page/',
     '/partners/sekem/',
     '/en/partners/sekem/',
+    '/teachers/not-a-teacher/',
+    '/en/teachers/not-a-teacher/',
   ]) {
     const response = await page.goto(path);
     expect(response?.status(), path).toBe(404);
@@ -462,6 +555,10 @@ test('without JavaScript, all course and teacher content and footer contacts rem
   await expect(page.locator('[data-teacher-card]')).toHaveCount(21);
   expect(await visibleCount(page, '[data-teacher-card]')).toBe(21);
 
+  await page.goto('/teachers/ted-warren/');
+  await expect(page.locator('.teacher-detail__body p')).not.toHaveCount(0);
+  await expect(page.locator('.teacher-detail__body')).toBeVisible();
+
   for (const path of [
     '/partners/spring-valley-community/',
     '/en/partners/spring-valley-community/',
@@ -489,7 +586,7 @@ test('all documents avoid horizontal overflow at five audit widths', async ({
   page,
 }, testInfo) => {
   onlyProject(testInfo, desktopProject);
-  test.setTimeout(300_000);
+  test.setTimeout(600_000);
 
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
@@ -506,10 +603,11 @@ test('all documents avoid horizontal overflow at five audit widths', async ({
   }
 });
 
-test('route fixture matches the 19 + 19 public inventory', () => {
-  expect(zhBodyPaths).toHaveLength(19);
-  expect(enBodyPaths).toHaveLength(19);
-  expect(bodyPaths).toHaveLength(38);
+test('route fixture matches the 40 + 40 public inventory', () => {
+  expect(zhBodyPaths).toHaveLength(40);
+  expect(enBodyPaths).toHaveLength(40);
+  expect(bodyPaths).toHaveLength(80);
   expect(publicPartnerSlugs).toHaveLength(13);
-  expect(new Set(bodyPaths).size).toBe(38);
+  expect(publicTeacherSlugs).toHaveLength(21);
+  expect(new Set(bodyPaths).size).toBe(80);
 });

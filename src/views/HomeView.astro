@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import {
   courses,
   getPagePath,
+  getTeacherPath,
   homePurposes,
   programs,
   siteImages,
@@ -152,17 +153,22 @@ const copy = getMessages(lang);
       {
         teachers.slice(0, 6).map((teacher) => (
           <article class="teacher-card">
-            <Image
-              alt={localize(teacher.name, lang)}
-              loading="lazy"
-              sizes="(max-width: 640px) 50vw, (max-width: 980px) 50vw, 25vw"
-              src={teacher.image}
-              widths={[240, 360, 520]}
-            />
-            <div>
-              <h3>{localize(teacher.name, lang)}</h3>
-              <p>{localize(teacher.role, lang)}</p>
-            </div>
+            <a
+              class="teacher-card__link"
+              href={getTeacherPath(teacher.slug, lang)}
+            >
+              <Image
+                alt={localize(teacher.name, lang)}
+                loading="lazy"
+                sizes="(max-width: 640px) 50vw, (max-width: 980px) 50vw, 25vw"
+                src={teacher.image}
+                widths={[240, 360, 520]}
+              />
+              <div>
+                <h3>{localize(teacher.name, lang)}</h3>
+                <p>{localize(teacher.role, lang)}</p>
+              </div>
+            </a>
           </article>
         ))
       }

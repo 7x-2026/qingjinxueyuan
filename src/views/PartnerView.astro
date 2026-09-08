@@ -12,6 +12,7 @@ interface Props {
 
 const { lang, partner } = Astro.props;
 const copy = getMessages(lang);
+const websiteHost = new URL(partner.website).hostname.replace(/^www\./, '');
 ---
 
 <section class="section partner-detail">
@@ -35,6 +36,19 @@ const copy = getMessages(lang);
         </p>
         <h1>{localize(partner.caption, lang)}</h1>
         <p lang="en">{partner.name}</p>
+        <p class="partner-detail__website">
+          {copy.partner.website}:{' '}
+          <a
+            href={partner.website}
+            rel="noopener noreferrer external"
+            target="_blank"
+          >
+            {websiteHost}
+            <span class="visually-hidden">
+              ({copy.partner.opensNewWindow})</span
+            >
+          </a>
+        </p>
       </div>
     </header>
 
@@ -50,5 +64,30 @@ const copy = getMessages(lang);
         )
       }
     </article>
+
+    <section
+      class:list={[
+        'partner-gallery',
+        partner.gallery.length === 1 && 'partner-gallery--single',
+      ]}
+      aria-labelledby="partner-gallery-title"
+    >
+      <h2 id="partner-gallery-title">{copy.partner.galleryTitle}</h2>
+      <div class="partner-gallery__grid">
+        {
+          partner.gallery.map((item) => (
+            <figure>
+              <Image
+                alt={localize(item.alt, lang)}
+                loading="lazy"
+                sizes="(max-width: 640px) 92vw, 44vw"
+                src={item.image}
+                widths={[480, 720, 960, 1280]}
+              />
+            </figure>
+          ))
+        }
+      </div>
+    </section>
   </div>
 </section>

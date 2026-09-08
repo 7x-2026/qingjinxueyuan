@@ -1,16 +1,37 @@
 import alanusLogo from '../assets/images/partners/alanus.png';
+import alanusGallery01 from '../assets/images/partners/gallery/alanus-01.jpg';
 import bauhausWeimarLogo from '../assets/images/partners/bauhaus-weimar.png';
+import bauhausWeimarGallery01 from '../assets/images/partners/gallery/bauhaus-weimar-01.jpg';
 import camphillAcademyLogo from '../assets/images/partners/camphill-academy.png';
+import camphillAcademyGallery01 from '../assets/images/partners/gallery/camphill-academy-01.jpg';
+import camphillAcademyGallery02 from '../assets/images/partners/gallery/camphill-academy-02.jpg';
+import camphillAcademyGallery03 from '../assets/images/partners/gallery/camphill-academy-03.jpg';
+import camphillAcademyGallery04 from '../assets/images/partners/gallery/camphill-academy-04.jpg';
 import camphillCopakeLogo from '../assets/images/partners/camphill-copake.png';
+import camphillCopakeGallery01 from '../assets/images/partners/gallery/camphill-copake-01.jpg';
 import goetheanumLogo from '../assets/images/partners/goetheanum.png';
+import goetheanumGallery01 from '../assets/images/partners/gallery/goetheanum-01.jpg';
+import goetheanumGallery02 from '../assets/images/partners/gallery/goetheanum-02.jpg';
 import hawthorneValleyLogo from '../assets/images/partners/hawthorne-valley.png';
+import hawthorneValleyGallery01 from '../assets/images/partners/gallery/hawthorne-valley-01.jpg';
 import heliopolisLogo from '../assets/images/partners/heliopolis.png';
+import heliopolisGallery01 from '../assets/images/partners/gallery/heliopolis-01.jpg';
+import heliopolisGallery02 from '../assets/images/partners/gallery/heliopolis-02.jpg';
 import iuavLogo from '../assets/images/partners/iuav.png';
+import iuavGallery01 from '../assets/images/partners/gallery/iuav-01.jpg';
+import iuavGallery02 from '../assets/images/partners/gallery/iuav-02.jpg';
 import scuolaRudolfSteinerLogo from '../assets/images/partners/scuola-rudolf-steiner.png';
+import scuolaRudolfSteinerGallery01 from '../assets/images/partners/gallery/scuola-rudolf-steiner-01.jpg';
 import springValleyCommunityLogo from '../assets/images/partners/spring-valley-community.png';
+import springValleyCommunityGallery01 from '../assets/images/partners/gallery/spring-valley-community-01.jpg';
 import springValleyEurythmyLogo from '../assets/images/partners/spring-valley-eurythmy.png';
+import springValleyEurythmyGallery01 from '../assets/images/partners/gallery/spring-valley-eurythmy-01.jpg';
+import springValleyEurythmyGallery02 from '../assets/images/partners/gallery/spring-valley-eurythmy-02.jpg';
 import sunbridgeLogo from '../assets/images/partners/sunbridge.png';
+import sunbridgeGallery01 from '../assets/images/partners/gallery/sunbridge-01.jpg';
+import sunbridgeGallery02 from '../assets/images/partners/gallery/sunbridge-02.jpg';
 import ytterjarnaLogo from '../assets/images/partners/ytterjarna.png';
+import ytterjarnaGallery01 from '../assets/images/partners/gallery/ytterjarna-01.jpg';
 import type { Partner, UnlinkedPartnerDetail } from './types';
 
 export const partners = [
@@ -22,6 +43,16 @@ export const partners = [
     slug: 'spring-valley-community',
     order: 1,
     detailTitle: { zh: '美国纽约春之谷社区' },
+    website: 'https://threefold.org/our-community/about-us/',
+    gallery: [
+      {
+        image: springValleyCommunityGallery01,
+        alt: {
+          zh: '美国纽约春之谷社区相关图片',
+          en: 'Spring Valley community in New York',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '美国纽约春之谷(Spring Valley)，距离纽约曼哈顿往北一小时左右的车程。一条小溪环绕着社区，溪畔树叶与野花相映成趣。一座木桥横跨两岸，从桥上走过，见桥下流水潺潺，落英缤纷。清晨, 鸟儿们的歌声将你唤醒，夜晚，蝉儿及蛙鸣伴你入眠。工作结束后，穿过原始树林回到木屋的途中，野鸭、松鼠、梅花鹿和天鹅等野生动物自由自在地穿梭在你周围。地里的玉米漏出微笑，成串的苹果压弯树枝。社区周围近2000多英亩的土地属于施泰纳三元社会基金会。早在1920年，有几位来自纽约曼哈顿的富有的、而又有理想、追求精神生活的年青人凑在一起买下了这一大片土地，以人智学理念为基础，实践自然活力农耕。后来，在这里又相继建立了华德福学校、音语舞学校、华德福教师培养学院、华德福教育研究所和施泰纳老人同胞社区、健康食品用品商店、自然活力农耕农场及表演礼堂等，就这样，逐渐发展成一个人文与自然共生，集精神、文化和健康为一体的三元社会社区。这里，鸡犬相闻，门不闭户，择邻而居，来自世界各地的教师、医生、艺术家、志愿者，在这个社区里生活、工作和学习，大家相敬如宾，犹如一家人，社区恍若陶渊明描述的”世外桃园”。',
@@ -36,6 +67,16 @@ export const partners = [
     slug: 'hawthorne-valley',
     order: 2,
     detailTitle: { zh: '美国纽约霍桑山谷社区' },
+    website: 'https://hawthornevalley.org/',
+    gallery: [
+      {
+        image: hawthorneValleyGallery01,
+        alt: {
+          zh: '美国纽约霍桑山谷社区相关图片',
+          en: 'Hawthorne Valley community in New York',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '霍桑山谷农场的使命愿景是：培育养育我们的土地，建立一个真正的生物动力农场，将儿童和成人与养育他们的土地和食物联系起来，并提供最优质的农产品。通过农产品，我们希望开启一个关于我们的环境、我们的经济和我们自己的教育对话。通过我们的乳品店、农场商店和面包店为我们的农产品增加价值，使我们能够以一种平衡的方式种植我们的农场，减少对土地、植物和动物的压力。这些增值活动的收入加上直接销售的较大利润使农场能够维持合理的人力规模。因此，我们能够避免传统的以单一文化为基础的、工业化规模的、工厂化的耕作方法，这些方法在今天的国家很普遍。我们与农场学习和职业培训项目的关系使许多年轻人来到了农场。我们希望，我们所有人之间正在进行的对话将有助于提高对可持续生活和工作做法的重要性的认识。',
@@ -53,6 +94,16 @@ export const partners = [
     slug: 'camphill-copake',
     order: 3,
     detailTitle: { zh: '美国科培克康复社区' },
+    website: 'https://camphillvillage.org/',
+    gallery: [
+      {
+        image: camphillCopakeGallery01,
+        alt: {
+          zh: '林源老师参访美国纽约科培克康复学院',
+          en: 'Lin Yuan visiting Camphill Village Copake in New York',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '美国科培克康复社区（Copake Camphill）是全美第一个康复社区，成立于1961年， 也是最大的一个针对特殊需求的成年人而建立的康复村。它坐落在纽约州北部农村，占地615英亩，被山丘和成片的树林环绕，风景优美，随处都是徒步路线，有点世外桃源的感觉。社区有一些独特而有意义的工作坊：蜡烛作坊、书本装订作坊、彩花玻璃作坊、编织作坊等。',
@@ -70,6 +121,23 @@ export const partners = [
     slug: 'goetheanum',
     order: 4,
     detailTitle: { zh: '瑞士歌德馆' },
+    website: 'https://goetheanum.ch/en',
+    gallery: [
+      {
+        image: goetheanumGallery01,
+        alt: {
+          zh: '瑞士歌德馆相关图片一',
+          en: 'Goetheanum in Switzerland, image one',
+        },
+      },
+      {
+        image: goetheanumGallery02,
+        alt: {
+          zh: '瑞士歌德馆相关图片二',
+          en: 'Goetheanum in Switzerland, image two',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '瑞士歌德馆位于瑞士多尔纳赫，是人智学世界中心，以约翰·沃尔夫冈·冯·歌德的名字命名，并由奥地利的哲学家、建筑家施泰纳在1913至1922年期间筹划。中心包括两个表演厅、画廊、演讲处、图书馆、书店，以及人智学协会的行政办公地点。附近的建筑物包括人智学研究和教育设施。在这里一年举行几次会议，主要是普遍关心的问题，教师、农民、医生、治疗师和其他职业的专题会议也定期举行。',
@@ -90,6 +158,16 @@ export const partners = [
     slug: 'ytterjarna',
     order: 5,
     detailTitle: { zh: '瑞典雅纳社区' },
+    website: 'https://www.ytterjarna.se/',
+    gallery: [
+      {
+        image: ytterjarnaGallery01,
+        alt: {
+          zh: '瑞典雅纳社区相关图片',
+          en: 'Ytterjärna community in Sweden',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '瑞典雅纳社区是具有60多年历史的人智学社区。1935年第一家人智学的治疗教育之家成立，1949年第一家人智学的华德福学校成立。社区有四家治疗教育学校，分别适于不同年龄需要的特需人群，有1500人从事特殊教育工作。世界各地的华德福学校使用的科乐尔木笛、钟琴、莱尔琴等乐器的乐器厂，就在雅纳镇上，乐器都是特需人群手作制造。',
@@ -107,6 +185,23 @@ export const partners = [
     slug: 'iuav',
     order: 6,
     detailTitle: { zh: '威尼斯建筑大学IUAV' },
+    website: 'https://www.iuav.it/it',
+    gallery: [
+      {
+        image: iuavGallery01,
+        alt: {
+          zh: '威尼斯建筑大学IUAV相关图片一',
+          en: 'IUAV University of Venice, image one',
+        },
+      },
+      {
+        image: iuavGallery02,
+        alt: {
+          zh: '威尼斯建筑大学IUAV相关图片二',
+          en: 'IUAV University of Venice, image two',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '在从米兰前往科内利亚诺的途中，经过著名的水城威尼斯。这座几乎漂浮在海上的历史悠久岛屿城市，不仅是伟大的冒险家和文化交流使者马可·波罗的故乡，更是连接东西方丝绸之路的重要节点。凭借深厚的文化底蕴和对现代艺术发展的推动，自1895年起，威尼斯便开始举办双年展，如今仍是世界最重要的三大艺术展览之一。而与艺术双年展交替举办的建筑双年展，更彰显了建筑艺术在威尼斯历代辉煌历史中的重要地位。',
@@ -124,6 +219,16 @@ export const partners = [
     slug: 'alanus',
     order: 7,
     detailTitle: { zh: '德国阿兰努斯大学' },
+    website: 'https://www.alanus.edu/',
+    gallery: [
+      {
+        image: alanusGallery01,
+        alt: {
+          zh: '德国阿兰努斯大学相关图片',
+          en: 'Alanus University in Germany',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '德国阿兰努斯大学是一个与人智学及华德福教育密切关联的学习和培训基地。跨学科的通识教育:优律思美、音乐治疗、建筑学、华德福教育等阿兰努斯艺术与社会大学是一所获得国家认证的私立艺术大学，位于德国波恩附近的阿尔夫特。自2014年8月起，该校还在曼海姆设有一个学习中心。学校下设多个学科，包括建筑、视觉艺术、戏剧、优律思美、艺术治疗、教育学、哲学和经济学等20多个学位课程。大学的名字来源于12世纪的法国神学家阿兰努斯，这位被称为“万能博士”的学者教授当时的“自由七艺”。阿兰努斯大学的通识教育课程延续了这种全面教育的传统，不仅为专业学习提供坚实基础，更超越了单纯的专业知识范畴。无论是艺术家、教育家、艺术治疗师、建筑师还是企业管理者，来自各个学科的学生都会在通识教育课程中相遇。课程内容涵盖哲学与文化史、社会学、艺术学与美学，以及人类学与伦理学。此外，作为一所以人智学为导向的高校，通识教育课程还提供与人智学相关的讨论和研究机会。通过这些活动，学生们不仅能够激发独立和批判性思维，还能拓宽视野，帮助他们在文化和社会语境中找到自己的立场。目前，学校大约有1600名学生注册学习。阿兰努斯大学为不同需求和不同角色的学生提供多样课程设置，不仅开设全日制和非全日制两种专业设置，在常年招收国际学生的基础上，还开设了英文授课的优律诗美硕士专业，为致力于深造本学的国内外学生提供更广阔的机会。',
@@ -138,6 +243,16 @@ export const partners = [
     slug: 'bauhaus-weimar',
     order: 8,
     detailTitle: { zh: '德国魏玛包豪斯大学' },
+    website: 'https://www.uni-weimar.de/de/universitaet/start/',
+    gallery: [
+      {
+        image: bauhausWeimarGallery01,
+        alt: {
+          zh: '德国魏玛包豪斯大学相关图片',
+          en: 'Bauhaus University Weimar in Germany',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '德国魏玛包豪斯大学的前身为1860年成立的大公美术学院，1919年，著名建筑师瓦尔特·格罗皮乌斯在此基础上创立了包豪斯学派，以其先锋式的教学理念和实践将该校发展为世界现代设计的发源地。1996年学校正式更名为“包豪斯大学”，以纪念这一重要的历史传统，并延续包豪斯学派的创新和实验精神。目前，大学提供约40个学位课程或项目，涵盖范围广泛，从自由艺术、设计、视觉传达、媒体设计、媒体研究、计算机科学，到建筑学、土木工程、建筑材料学、环境科学及管理等领域。由包豪斯引领的现代设计理念：涵盖建筑，戏剧，家具产品设计等方面包豪斯宣言节选:一切创造活动的终极目标就是建筑！为建筑进行装饰一度是美术最高尚的功能，而且美术也是伟大的建筑不可或缺的伙伴。如今，它们自鸣得意地离群索居，而可能从这种局面里拯救它们的唯一出路，就是让一切手工艺人自觉地进行团结合作。旧时代的艺术学校无法实现这种统一——又怎能实现呢？因为艺术无法被教授。它们必须回归工作坊。让我们来创办一个新型的手工艺人行会，取消工匠与艺术家的等级差异，再也不要用它树起妄自尊大的藩篱！让我们一同期待、构思并且创造出未来的新建筑，用它把一切——建筑与雕塑与绘画——都组合在一个单一的形式里，有朝一日，它将会从百万工人的手中冉冉地升上天堂，水晶般清澈地象征着未来的新信念。',
@@ -152,6 +267,23 @@ export const partners = [
     slug: 'sunbridge',
     order: 9,
     detailTitle: { zh: '美国纽约日桥学院' },
+    website: 'https://www.sunbridge.edu/',
+    gallery: [
+      {
+        image: sunbridgeGallery01,
+        alt: {
+          zh: '美国纽约日桥学院相关图片一',
+          en: 'Sunbridge Institute in New York, image one',
+        },
+      },
+      {
+        image: sunbridgeGallery02,
+        alt: {
+          zh: '美国纽约日桥学院相关图片二',
+          en: 'Sunbridge Institute in New York, image two',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '日桥学院于1967年建于密西根，1986年移到纽约春之谷，1991年在纽约州教育部正式注册为日桥学院。2008年改名为日桥研究院。可以在这里完成华德福教师证书培训，并攻读美国政府承认的教育学硕士学位，日桥学院提供人智学的基础课程、华德福幼儿师资课程、小学师资课程、治疗教育、华德福管理和社会发展等，它成立40多年来，为北美和全世界培养了大批的华德福教师和人智学社区工作者，为人智学及华德福教育在美国及世界的发展做出了重要贡献。',
@@ -169,6 +301,16 @@ export const partners = [
     slug: 'scuola-rudolf-steiner',
     order: 10,
     detailTitle: { zh: '意大利米兰施泰纳学校艺术学院' },
+    website: 'https://www.scuolasteinermilano.it/',
+    gallery: [
+      {
+        image: scuolaRudolfSteinerGallery01,
+        alt: {
+          zh: '意大利米兰施泰纳学校艺术学院相关图片',
+          en: 'Scuola Rudolf Steiner in Milan, Italy',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '这所建于二战后的意大利第一所华德福学校，坐落于欧洲中心城市之一，艺术与经济发展并肩齐驱的都市——米兰。学校深入实践了将施泰纳教育理念与班级体系相结合，形成了特色鲜明的教学板块:幼儿园的第一个七年阶段：一个值得模仿的美好世界;小学和初中的第二个七年阶段：一个值得试验的美丽世界；高中的第三个七年阶段：一个值得探索的真实世界。在逐步完善施泰纳学校的教育体系同时，该校于1996年获得了法律上开设实验性质中学和高中的认可，尤其是高中部，得以以艺术理科高中的形式诞生。2000年，学校成立了专门的艺术学院，帮助未来意向从事艺术生产相关活动的学生们。艺术学院也获得了法律认可，因此学生无需参加外部考试，每学年结束时由自己的教师进行审查即可。此外，艺术学院还根据“米开朗基罗计划”开展课程，这个课程以艺术毕业考试作为结课方式，使学生能够进入大学专业。',
@@ -186,6 +328,23 @@ export const partners = [
     slug: 'spring-valley-eurythmy',
     order: 11,
     detailTitle: { zh: '春之谷音语舞学校' },
+    website: 'https://www.eurythmy.org/',
+    gallery: [
+      {
+        image: springValleyEurythmyGallery01,
+        alt: {
+          zh: '春之谷音语舞学校相关图片一',
+          en: 'Eurythmy Spring Valley, image one',
+        },
+      },
+      {
+        image: springValleyEurythmyGallery02,
+        alt: {
+          zh: '春之谷音语舞学校相关图片二',
+          en: 'Eurythmy Spring Valley, image two',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '早在1970年，Lisa Monges，在德国和瑞士多纳学习音语舞后，在春之谷创立了音语舞的培训，1980年，表演艺术家Dorothea Mier成立了音语舞学校，Barbara Schneider-Serio成为目前学校的负责人。音语舞是华德福学校的必修课程，因为它用舞蹈的方式表达对音乐和语言的理解，它的动作和造型又是画画和雕塑的人体演绎,而它对心灵和精神感受的表现力使得它成为一门综合的课程和艺术。',
@@ -209,6 +368,23 @@ export const partners = [
     slug: 'heliopolis',
     order: 12,
     detailTitle: { zh: '埃及赫利奥波利斯可持续发展大学' },
+    website: 'https://hu.edu.eg/',
+    gallery: [
+      {
+        image: heliopolisGallery01,
+        alt: {
+          zh: '埃及赫利奥波利斯大学相关图片一',
+          en: 'Heliopolis University in Egypt, image one',
+        },
+      },
+      {
+        image: heliopolisGallery02,
+        alt: {
+          zh: '埃及赫利奥波利斯大学相关图片二',
+          en: 'Heliopolis University in Egypt, image two',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '埃及赫利奥波利斯可持续发展大学（Heliopolis University）于2012年在SEKEM成立。该校将学习、研究与实践融于一体的多学科整体方法来阐述可持续发展的概念和理论，并致力于提升埃及和世界对可持续发展、经济团结、社会责任和环境平衡的意识与觉知。',
@@ -244,6 +420,37 @@ export const partners = [
     slug: 'camphill-academy',
     order: 13,
     detailTitle: { zh: '坎普希尔学院' },
+    website: 'https://camphill.edu/',
+    gallery: [
+      {
+        image: camphillAcademyGallery01,
+        alt: {
+          zh: '坎普希尔学院相关图片一',
+          en: 'Camphill Academy, image one',
+        },
+      },
+      {
+        image: camphillAcademyGallery02,
+        alt: {
+          zh: '坎普希尔学院相关图片二',
+          en: 'Camphill Academy, image two',
+        },
+      },
+      {
+        image: camphillAcademyGallery03,
+        alt: {
+          zh: '坎普希尔学院相关图片三',
+          en: 'Camphill Academy, image three',
+        },
+      },
+      {
+        image: camphillAcademyGallery04,
+        alt: {
+          zh: '坎普希尔学院相关图片四',
+          en: 'Camphill Academy, image four',
+        },
+      },
+    ],
     paragraphs: [
       {
         zh: '坎普希尔学院是一个植根于北美坎普希尔运动生活和工作的学习社区。它旨在提供变革性的学习路径，使个人能够发挥自己的潜质，为人类、社会和地球的治愈做出贡献。',

@@ -25,3 +25,7 @@ export function getPagePath(page: PageKey, language: Language): string {
 export function getPartnerPath(slug: string, language: Language): string {
   return `${language === 'en' ? '/en' : ''}/partners/${slug}/`;
 }
+
+export function getTeacherPath(slug: string, language: Language): string {
+  return `${language === 'en' ? '/en' : ''}/teachers/${slug}/`;
+}

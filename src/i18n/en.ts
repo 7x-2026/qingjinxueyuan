@@ -34,6 +34,7 @@ export const en = {
     learnMore: 'View courses',
     admissions: 'Admissions',
     backHome: 'Back home',
+    backTeachers: 'Back to faculty',
   },
   home: {
     metaTitle: 'Qingjin Academy',
@@ -152,6 +153,9 @@ export const en = {
   partner: {
     communityKicker: 'Collaborative Global Ecological Community',
     schoolKicker: 'Partnering Global University',
+    website: 'Official website',
+    opensNewWindow: 'opens in a new window',
+    galleryTitle: 'Related images',
     unavailable: 'No detail information is available yet.',
     notFound: 'Partner not found',
   },

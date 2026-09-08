@@ -9,7 +9,7 @@ import {
 } from './partners';
 import { homePurposes, programs } from './programs';
 import { allSiteImages } from './site';
-import { teacherCategories, teachers } from './teachers';
+import { publicTeacherSlugs, teacherCategories, teachers } from './teachers';
 import type { LocalizedText } from './types';
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -98,6 +98,28 @@ export function assertPartnerRouteSlugs(routeSlugs: readonly string[]): void {
   });
 }
 
+export function assertTeacherRouteSlugs(routeSlugs: readonly string[]): void {
+  invariant(
+    routeSlugs.length === teachers.length,
+    'teacher route count must equal teacher count',
+  );
+  invariant(
+    new Set(routeSlugs).size === routeSlugs.length,
+    'teacher route slugs must be unique',
+  );
+
+  const expected = new Set(publicTeacherSlugs);
+  routeSlugs.forEach((slug) => {
+    invariant(expected.has(slug), `unexpected teacher route slug "${slug}"`);
+  });
+  publicTeacherSlugs.forEach((slug) => {
+    invariant(
+      routeSlugs.includes(slug),
+      `teacher "${slug}" is missing a static route`,
+    );
+  });
+}
+
 export function assertContentIntegrity(): true {
   assertOrderedSlugs('course', courses);
   assertOrderedSlugs('teacher', teachers);
@@ -161,10 +183,25 @@ export function assertContentIntegrity(): true {
     assertLocalized(`teacher ${teacher.slug} name`, teacher.name);
     assertLocalized(`teacher ${teacher.slug} role`, teacher.role);
     invariant(
-      !('en' in teacher.role),
-      `teacher "${teacher.slug}" role must omit English text so the Chinese fallback remains active`,
+      teacher.name.en.trim().length > 0 && teacher.role.en.trim().length > 0,
+      `teacher "${teacher.slug}" must have complete English identity text`,
     );
     assertImage(`teacher ${teacher.slug}`, teacher.image);
+    assertImage(`teacher ${teacher.slug} detail`, teacher.detailImage);
+    invariant(
+      teacher.biography.length > 0,
+      `teacher "${teacher.slug}" has no biography`,
+    );
+    teacher.biography.forEach((paragraph, index) => {
+      assertLocalized(
+        `teacher ${teacher.slug} biography ${index + 1}`,
+        paragraph,
+      );
+      invariant(
+        paragraph.en.trim().length > 0,
+        `teacher "${teacher.slug}" biography ${index + 1} has no English text`,
+      );
+    });
   });
   const expectedTeacherCounts = {
     anthro: 3,
@@ -204,7 +241,41 @@ export function assertContentIntegrity(): true {
       ),
     );
     assertImage(`partner ${partner.slug}`, partner.logo);
+    invariant(
+      partner.website.startsWith('https://'),
+      `partner "${partner.slug}" website must use HTTPS`,
+    );
+    invariant(
+      partner.gallery.length > 0,
+      `partner "${partner.slug}" has no gallery images`,
+    );
+    partner.gallery.forEach((item, index) => {
+      assertImage(`partner ${partner.slug} gallery ${index + 1}`, item.image);
+      assertLocalized(
+        `partner ${partner.slug} gallery alt ${index + 1}`,
+        item.alt,
+      );
+      invariant(
+        item.alt.en.trim().length > 0,
+        `partner "${partner.slug}" gallery alt ${index + 1} has no English text`,
+      );
+    });
   });
+  const expectedPartnerGalleryCounts = [1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 2, 4];
+  partners.forEach((partner, index) => {
+    invariant(
+      partner.gallery.length === expectedPartnerGalleryCounts[index],
+      `partner "${partner.slug}" has an unexpected gallery image count`,
+    );
+  });
+  invariant(
+    partners.reduce((sum, partner) => sum + partner.gallery.length, 0) === 21,
+    'public partner galleries must contain 21 images',
+  );
+  invariant(
+    new Set(partners.map(({ website }) => website)).size === partners.length,
+    'public partner websites must be unique',
+  );
   const publicParagraphCount = partners.reduce(
     (sum, partner) => sum + partner.paragraphs.length,
     0,
@@ -272,21 +343,24 @@ export function assertContentIntegrity(): true {
     ...allSiteImages,
     ...courses.map(({ image }) => image),
     ...teachers.map(({ image }) => image),
+    ...teachers.map(({ detailImage }) => detailImage),
     ...partners.map(({ logo }) => logo),
+    ...partners.flatMap(({ gallery }) => gallery.map(({ image }) => image)),
   ];
   siteImageInventory.forEach((image, index) =>
     assertImage(`site image ${index + 1}`, image),
   );
   invariant(
-    siteImageInventory.length === 66,
-    'site image inventory must contain exactly 66 assets',
+    siteImageInventory.length === 108,
+    'site image inventory must contain exactly 108 assets',
   );
   invariant(
-    new Set(siteImageInventory.map(({ src }) => src)).size === 66,
-    'site image imports must resolve to 66 unique assets',
+    new Set(siteImageInventory.map(({ src }) => src)).size === 108,
+    'site image imports must resolve to 108 unique assets',
   );
 
   assertPartnerRouteSlugs(publicPartnerSlugs);
+  assertTeacherRouteSlugs(publicTeacherSlugs);
   return true;
 }
 

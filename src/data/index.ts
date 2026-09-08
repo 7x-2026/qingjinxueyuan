@@ -4,6 +4,7 @@ export * from './navigation';
 export * from './partners';
 export * from './programs';
 export * from './site';
+export * from './teacher-details';
 export * from './teachers';
 export * from './types';
 export * from './validation';

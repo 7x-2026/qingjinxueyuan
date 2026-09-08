@@ -34,6 +34,7 @@ export const zh = {
     learnMore: '了解详情',
     admissions: '咨询与报名',
     backHome: '返回首页',
+    backTeachers: '返回师资列表',
   },
   home: {
     metaTitle: '青衿学院',
@@ -149,6 +150,9 @@ export const zh = {
   partner: {
     communityKicker: '合作的全球生态社区',
     schoolKicker: '合作的全球高等学校',
+    website: '官方网站',
+    opensNewWindow: '在新窗口打开',
+    galleryTitle: '相关图片',
     unavailable: '暂无详情信息。',
     notFound: '未找到合作伙伴',
   },

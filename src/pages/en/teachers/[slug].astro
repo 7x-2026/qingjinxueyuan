@@ -1,0 +1,47 @@
+---
+import {
+  assertTeacherRouteSlugs,
+  getTeacherDescription,
+  getTeacherPath,
+  publicTeacherSlugs,
+  site,
+  teachers,
+} from '../../../data';
+import { localize } from '../../../i18n';
+import type { Teacher } from '../../../data';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import TeacherView from '../../../views/TeacherView.astro';
+
+export function getStaticPaths() {
+  assertTeacherRouteSlugs(publicTeacherSlugs);
+  return teachers.map((teacher) => ({
+    params: { slug: teacher.slug },
+    props: { teacher },
+  }));
+}
+
+interface Props {
+  teacher: Teacher;
+}
+
+const { teacher } = Astro.props as Props;
+const lang = 'en' as const;
+const name = localize(teacher.name, lang);
+const title = `${name} | Faculty | ${site.englishName}`;
+const body = localize(teacher.biography[0], lang);
+const description = getTeacherDescription(body);
+const zhPath = getTeacherPath(teacher.slug, 'zh');
+const enPath = getTeacherPath(teacher.slug, 'en');
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={enPath}
+  currentPage="teachers"
+  description={description}
+  lang={lang}
+  languagePath={zhPath}
+  title={title}
+>
+  <TeacherView lang={lang} teacher={teacher} />
+</SiteLayout>

@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import { getPagePath } from '../data';
+import { getMessages, localize } from '../i18n';
+import type { Language, Teacher } from '../data';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  lang: Language;
+  teacher: Teacher;
+}
+
+const { lang, teacher } = Astro.props;
+const copy = getMessages(lang);
+---
+
+<section class="section teacher-detail">
+  <div class="page-shell">
+    <a class="back-link" href={getPagePath('teachers', lang)}>
+      <Icon name="arrow-left" size={18} />
+      {copy.common.backTeachers}
+    </a>
+
+    <header class="teacher-detail__hero">
+      <div class="teacher-detail__portrait">
+        <Image
+          alt={localize(teacher.name, lang)}
+          loading="eager"
+          sizes="(max-width: 640px) 88vw, 360px"
+          src={teacher.detailImage}
+          widths={[360, 560, 760]}
+        />
+      </div>
+      <div class="teacher-detail__heading">
+        <p>{lang === 'zh' ? '师资介绍' : 'Faculty profile'}</p>
+        <h1>{localize(teacher.name, lang)}</h1>
+        <strong>{localize(teacher.role, lang)}</strong>
+      </div>
+    </header>
+
+    <article class="teacher-detail__body">
+      {teacher.biography.map((paragraph) => <p>{localize(paragraph, lang)}</p>)}
+    </article>
+  </div>
+</section>

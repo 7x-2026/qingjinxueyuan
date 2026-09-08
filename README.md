@@ -137,4 +137,16 @@ npm run build
 ```
 
 Web 服务器发布目录应指向项目的 `dist/`。是否需要重载服务取决于实际服务器配置。
-test
+
+cd /www/wwwroot/qingjinxueyuan_src && \
+git pull && \
+source ~/.nvm/nvm.sh && nvm use && \
+npm ci && \
+npm run build && \
+sudo chattr -R -i /www/wwwroot/qingjinacademy.org/ 2>/dev/null; \
+sudo rm -rf /www/wwwroot/qingjinacademy.org && \
+sudo mv dist /www/wwwroot/qingjinacademy.org && \
+sudo chown -R www-data:www-data /www/wwwroot/qingjinacademy.org && \
+sudo chmod -R 755 /www/wwwroot/qingjinacademy.org && \
+sudo nginx -s reload && \
+curl -s -o /dev/null -w "%{http_code}\n" https://qingjinacademy.org

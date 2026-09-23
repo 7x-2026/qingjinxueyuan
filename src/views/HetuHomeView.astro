@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import { getHetuPath, hetuOverview, hetuPages } from '../data';
+import { localize } from '../i18n';
+import type { Language } from '../data';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const labels =
+  lang === 'zh'
+    ? {
+        eyebrow: '友情链接',
+        explore: '浏览专题内容',
+        readMore: '阅读详情',
+      }
+    : {
+        eyebrow: 'Featured link',
+        explore: 'Explore the topic',
+        readMore: 'Read more',
+      };
+---
+
+<section class="section hetu-overview" data-hetu-overview>
+  <div class="page-shell">
+    <header class="hetu-overview__hero">
+      <div class="hetu-overview__image">
+        <Image
+          alt={localize(hetuOverview.image.alt, lang)}
+          loading="eager"
+          sizes="(max-width: 680px) 76vw, 340px"
+          src={hetuOverview.image.image}
+          widths={[320, 480, 640]}
+        />
+      </div>
+      <div>
+        <p class="hetu-kicker">{labels.eyebrow}</p>
+        <h1>{localize(hetuOverview.title, lang)}</h1>
+        <p class="hetu-overview__lead">
+          {localize(hetuOverview.description, lang)}
+        </p>
+      </div>
+    </header>
+
+    <section aria-labelledby="hetu-sections-title">
+      <div class="hetu-overview__section-heading">
+        <h2 id="hetu-sections-title">{labels.explore}</h2>
+      </div>
+      <div class="hetu-card-grid">
+        {
+          hetuPages.map((page) => (
+            <a class="hetu-card" href={getHetuPath(lang, page.slug)}>
+              <span class="hetu-card__number">
+                {String(page.order).padStart(2, '0')}
+              </span>
+              <h3>{localize(page.title, lang)}</h3>
+              <p>{localize(page.summary, lang)}</p>
+              <span class="hetu-card__action">
+                {labels.readMore} <Icon name="arrow-right" size={17} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</section>

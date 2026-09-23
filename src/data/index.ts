@@ -1,5 +1,6 @@
 export * from './contact';
 export * from './courses';
+export * from './hetu';
 export * from './navigation';
 export * from './partners';
 export * from './programs';

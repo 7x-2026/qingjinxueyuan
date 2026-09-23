@@ -1,5 +1,5 @@
 ---
-import { contact } from '../data';
+import { contact, getHetuPath } from '../data';
 import { localize } from '../i18n';
 import type { Language } from '../data';
 
@@ -48,7 +48,9 @@ const { lang, labels } = Astro.props;
     </div>
     <div>
       <h2>{labels.links}</h2>
-      <p>{labels.externalLink}</p>
+      <p>
+        <a href={getHetuPath(lang)}>{labels.externalLink}</a>
+      </p>
     </div>
   </div>
   <p class="copyright page-shell">{labels.copyright}</p>

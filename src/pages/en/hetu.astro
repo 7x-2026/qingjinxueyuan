@@ -1,0 +1,22 @@
+---
+import { getHetuPath, hetuOverview, site } from '../../data';
+import { localize } from '../../i18n';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import HetuHomeView from '../../views/HetuHomeView.astro';
+
+const lang = 'en' as const;
+const zhPath = getHetuPath('zh');
+const enPath = getHetuPath('en');
+const title = `${localize(hetuOverview.title, lang)} | ${site.name}`;
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={enPath}
+  description={localize(hetuOverview.description, lang)}
+  lang={lang}
+  languagePath={zhPath}
+  title={title}
+>
+  <HetuHomeView lang={lang} />
+</SiteLayout>

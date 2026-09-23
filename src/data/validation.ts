@@ -1,6 +1,13 @@
 import type { ImageMetadata } from 'astro';
 import { contact } from './contact';
 import { courseCategories, courses } from './courses';
+import {
+  allHetuImages,
+  hetuFeedbackVideo,
+  hetuOverview,
+  hetuPages,
+  publicHetuSlugs,
+} from './hetu';
 import { navigationItems } from './navigation';
 import {
   partners,
@@ -10,7 +17,7 @@ import {
 import { homePurposes, programs } from './programs';
 import { allSiteImages } from './site';
 import { publicTeacherSlugs, teacherCategories, teachers } from './teachers';
-import type { LocalizedText } from './types';
+import type { BilingualText, HetuSection, LocalizedText } from './types';
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -29,6 +36,11 @@ function assertLocalized(label: string, value: LocalizedText): void {
     value.en === undefined || value.en.trim().length > 0,
     `${label} has an empty English value`,
   );
+}
+
+function assertBilingual(label: string, value: BilingualText): void {
+  assertLocalized(label, value);
+  invariant(value.en.trim().length > 0, `${label} is missing English text`);
 }
 
 function assertImage(label: string, image: ImageMetadata): void {
@@ -117,6 +129,73 @@ export function assertTeacherRouteSlugs(routeSlugs: readonly string[]): void {
       routeSlugs.includes(slug),
       `teacher "${slug}" is missing a static route`,
     );
+  });
+}
+
+export function assertHetuRouteSlugs(routeSlugs: readonly string[]): void {
+  invariant(
+    routeSlugs.length === hetuPages.length,
+    'World HeTu route count must equal page count',
+  );
+  invariant(
+    new Set(routeSlugs).size === routeSlugs.length,
+    'World HeTu route slugs must be unique',
+  );
+
+  const expected = new Set<string>(publicHetuSlugs);
+  routeSlugs.forEach((slug) => {
+    invariant(slugPattern.test(slug), `World HeTu slug "${slug}" is invalid`);
+    invariant(expected.has(slug), `unexpected World HeTu route slug "${slug}"`);
+  });
+  publicHetuSlugs.forEach((slug) => {
+    invariant(
+      routeSlugs.includes(slug),
+      `World HeTu page "${slug}" is missing a static route`,
+    );
+  });
+}
+
+function assertHetuSection(label: string, section: HetuSection): void {
+  assertBilingual(`${label} heading`, section.heading);
+  invariant(
+    (section.paragraphs?.length ?? 0) > 0 ||
+      (section.bullets?.length ?? 0) > 0 ||
+      section.table !== undefined,
+    `${label} needs readable content`,
+  );
+  section.paragraphs?.forEach((paragraph, index) =>
+    assertBilingual(`${label} paragraph ${index + 1}`, paragraph),
+  );
+  section.bullets?.forEach((bullet, index) =>
+    assertBilingual(`${label} bullet ${index + 1}`, bullet),
+  );
+  if (section.table) {
+    invariant(
+      section.table.headers.length > 0,
+      `${label} table has no headers`,
+    );
+    invariant(section.table.rows.length > 0, `${label} table has no rows`);
+    section.table.headers.forEach((header, index) =>
+      assertBilingual(`${label} table header ${index + 1}`, header),
+    );
+    section.table.rows.forEach((row, rowIndex) => {
+      invariant(
+        row.length === section.table?.headers.length,
+        `${label} table row ${rowIndex + 1} has an unexpected column count`,
+      );
+      row.forEach((cell, cellIndex) =>
+        assertBilingual(
+          `${label} table row ${rowIndex + 1} cell ${cellIndex + 1}`,
+          cell,
+        ),
+      );
+    });
+  }
+  section.images?.forEach((item, index) => {
+    assertImage(`${label} image ${index + 1}`, item.image);
+    assertBilingual(`${label} image ${index + 1} alt`, item.alt);
+    if (item.caption)
+      assertBilingual(`${label} image ${index + 1} caption`, item.caption);
   });
 }
 
@@ -346,21 +425,65 @@ export function assertContentIntegrity(): true {
     ...teachers.map(({ detailImage }) => detailImage),
     ...partners.map(({ logo }) => logo),
     ...partners.flatMap(({ gallery }) => gallery.map(({ image }) => image)),
+    ...allHetuImages,
   ];
   siteImageInventory.forEach((image, index) =>
     assertImage(`site image ${index + 1}`, image),
   );
   invariant(
-    siteImageInventory.length === 116,
-    'site image inventory must contain exactly 116 image references',
+    siteImageInventory.length === 152,
+    'site image inventory must contain exactly 152 image references',
   );
   invariant(
-    new Set(siteImageInventory.map(({ src }) => src)).size === 109,
-    'site image imports must resolve to 109 unique assets',
+    new Set(siteImageInventory.map(({ src }) => src)).size === 145,
+    'site image imports must resolve to 145 unique assets',
+  );
+
+  assertBilingual('World HeTu overview title', hetuOverview.title);
+  assertBilingual('World HeTu overview description', hetuOverview.description);
+  assertImage('World HeTu overview image', hetuOverview.image.image);
+  assertBilingual('World HeTu overview image alt', hetuOverview.image.alt);
+  assertOrderedSlugs('World HeTu page', hetuPages);
+  invariant(
+    hetuPages.length === 6,
+    'there must be six World HeTu detail pages',
+  );
+  hetuPages.forEach((page) => {
+    assertBilingual(`World HeTu ${page.slug} title`, page.title);
+    assertBilingual(`World HeTu ${page.slug} summary`, page.summary);
+    invariant(
+      page.sections.length > 0,
+      `World HeTu ${page.slug} needs at least one section`,
+    );
+    page.sections.forEach((section, index) =>
+      assertHetuSection(
+        `World HeTu ${page.slug} section ${index + 1}`,
+        section,
+      ),
+    );
+  });
+  invariant(
+    allHetuImages.length === 36,
+    'World HeTu must contain 35 article images and one video poster',
+  );
+  invariant(
+    new Set(allHetuImages.map(({ src }) => src)).size === 36,
+    'World HeTu image assets must be unique',
+  );
+  invariant(
+    hetuFeedbackVideo.src === '/media/hetu/world-hetu-feedback.mp4',
+    'World HeTu feedback video path is invalid',
+  );
+  assertImage('World HeTu feedback video poster', hetuFeedbackVideo.poster);
+  assertBilingual('World HeTu feedback video title', hetuFeedbackVideo.title);
+  assertBilingual(
+    'World HeTu feedback video description',
+    hetuFeedbackVideo.description,
   );
 
   assertPartnerRouteSlugs(publicPartnerSlugs);
   assertTeacherRouteSlugs(publicTeacherSlugs);
+  assertHetuRouteSlugs(publicHetuSlugs);
   return true;
 }
 

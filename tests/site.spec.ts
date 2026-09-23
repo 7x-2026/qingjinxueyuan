@@ -5,6 +5,7 @@ import {
   pairedLanguagePaths,
   primaryPaths,
   productionOrigin,
+  publicHetuSlugs,
   publicPartnerGalleryCounts,
   publicPartnerSlugs,
   publicPartnerWebsites,
@@ -54,7 +55,7 @@ async function visibleCount(page: Page, selector: string): Promise<number> {
   );
 }
 
-test('all 86 body URLs render complete, paired, indexable documents', async ({
+test('all 100 body URLs render complete, paired, indexable documents', async ({
   page,
 }, testInfo) => {
   onlyProject(testInfo, desktopProject);
@@ -144,7 +145,7 @@ test('all 86 body URLs render complete, paired, indexable documents', async ({
     page.off('pageerror', onPageError);
   }
 
-  expect(canonicalURLs.size).toBe(86);
+  expect(canonicalURLs.size).toBe(100);
 });
 
 test('top-level pages render at a mobile browser viewport', async ({
@@ -287,6 +288,69 @@ test('partner cards, official websites, and galleries match the public inventory
   }
 });
 
+test('the footer and World HeTu pages expose the complete bilingual topic structure', async ({
+  page,
+}, testInfo) => {
+  onlyProject(testInfo, desktopProject);
+
+  for (const [path, prefix] of [
+    ['/', '/hetu/'],
+    ['/en/', '/en/hetu/'],
+  ] as const) {
+    await page.goto(path);
+    await expect(page.locator(`footer a[href="${prefix}"]`)).toHaveCount(1);
+    await page.goto(prefix);
+    await expect(page.locator('[data-hetu-overview] h1')).not.toHaveText('');
+    const cards = page.locator('.hetu-card');
+    await expect(cards).toHaveCount(6);
+    await expect(cards.first()).toHaveAttribute('href', `${prefix}approach/`);
+    expect(
+      await cards.evaluateAll((items) =>
+        items.map((item) => item.getAttribute('href')),
+      ),
+    ).toEqual(publicHetuSlugs.map((slug) => `${prefix}${slug}/`));
+  }
+
+  for (const slug of publicHetuSlugs) {
+    for (const path of [`/hetu/${slug}/`, `/en/hetu/${slug}/`]) {
+      await page.goto(path);
+      await expect(
+        page.locator(`[data-hetu-detail="${slug}"] h1`),
+      ).not.toHaveText('');
+      await expect(page.locator('.back-link')).toHaveAttribute(
+        'href',
+        path.startsWith('/en/') ? '/en/hetu/' : '/hetu/',
+      );
+    }
+  }
+
+  await page.goto('/hetu/participants/');
+  await expect(page.locator('a[href="/teachers/lin-yuan/"]')).toHaveCount(1);
+  await page.goto('/en/hetu/participants/');
+  await expect(page.locator('a[href="/en/teachers/lin-yuan/"]')).toHaveCount(1);
+
+  await page.goto('/hetu/practice/');
+  await expect(page.locator('video')).toHaveAttribute(
+    'src',
+    '/media/hetu/world-hetu-feedback.mp4',
+  );
+  await expect(page.locator('video')).toHaveAttribute('preload', 'metadata');
+  expect(await page.locator('video[autoplay]').count()).toBe(0);
+  expect(await page.locator('[src*="mmbiz.qpic.cn"]').count()).toBe(0);
+
+  await page.goto('/hetu/admissions/');
+  await expect(page.locator('main')).toContainText('20,000 元人民币');
+  await expect(page.locator('main')).toContainText(
+    '北京春之谷文化艺术有限公司',
+  );
+  await expect(page.locator('main a[href="tel:+8618810816390"]')).toHaveCount(
+    1,
+  );
+  expect(await page.locator('main form, main input, main button').count()).toBe(
+    0,
+  );
+});
+
 test('every internal document link resolves and retains trailing slashes', async ({
   page,
   request,
@@ -376,6 +440,8 @@ test('unknown pages use the custom 404 and SEKEM stays unlinked', async ({
     '/en/partners/sekem/',
     '/teachers/not-a-teacher/',
     '/en/teachers/not-a-teacher/',
+    '/hetu/not-a-topic/',
+    '/en/hetu/not-a-topic/',
   ]) {
     const response = await page.goto(path);
     expect(response?.status(), path).toBe(404);
@@ -551,7 +617,7 @@ test('back-to-top restores the document to the top', async ({
     .toBeLessThanOrEqual(1);
 });
 
-test('without JavaScript, all course and teacher content and footer contacts remain readable', async ({
+test('without JavaScript, primary and World HeTu content and footer contacts remain readable', async ({
   browser,
 }, testInfo) => {
   onlyProject(testInfo, desktopProject);
@@ -569,6 +635,14 @@ test('without JavaScript, all course and teacher content and footer contacts rem
   await page.goto('/teachers/ted-warren/');
   await expect(page.locator('.teacher-detail__body p')).not.toHaveCount(0);
   await expect(page.locator('.teacher-detail__body')).toBeVisible();
+
+  await page.goto('/hetu/');
+  await expect(page.locator('.hetu-card')).toHaveCount(6);
+  await page.goto('/hetu/curriculum/');
+  await expect(page.locator('.hetu-content-section')).not.toHaveCount(0);
+  await expect(page.locator('.hetu-table-wrap')).toHaveCount(1);
+  await page.goto('/en/hetu/admissions/');
+  await expect(page.locator('main')).toContainText('RMB 20,000');
 
   for (const path of [
     '/partners/spring-valley-community/',
@@ -614,11 +688,12 @@ test('all documents avoid horizontal overflow at five audit widths', async ({
   }
 });
 
-test('route fixture matches the 43 + 43 public inventory', () => {
-  expect(zhBodyPaths).toHaveLength(43);
-  expect(enBodyPaths).toHaveLength(43);
-  expect(bodyPaths).toHaveLength(86);
+test('route fixture matches the 50 + 50 public inventory', () => {
+  expect(zhBodyPaths).toHaveLength(50);
+  expect(enBodyPaths).toHaveLength(50);
+  expect(bodyPaths).toHaveLength(100);
   expect(publicPartnerSlugs).toHaveLength(13);
   expect(publicTeacherSlugs).toHaveLength(24);
-  expect(new Set(bodyPaths).size).toBe(86);
+  expect(publicHetuSlugs).toHaveLength(6);
+  expect(new Set(bodyPaths).size).toBe(100);
 });

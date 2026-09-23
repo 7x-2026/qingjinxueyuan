@@ -1,0 +1,42 @@
+---
+import {
+  assertHetuRouteSlugs,
+  getHetuPath,
+  hetuPages,
+  publicHetuSlugs,
+  site,
+} from '../../data';
+import { localize } from '../../i18n';
+import type { HetuPage } from '../../data';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import HetuDetailView from '../../views/HetuDetailView.astro';
+
+export function getStaticPaths() {
+  assertHetuRouteSlugs(publicHetuSlugs);
+  return hetuPages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+interface Props {
+  page: HetuPage;
+}
+
+const { page } = Astro.props as Props;
+const lang = 'zh' as const;
+const zhPath = getHetuPath('zh', page.slug);
+const enPath = getHetuPath('en', page.slug);
+const title = `${localize(page.title, lang)}｜世界和图中文教育学会｜${site.name}`;
+---
+
+<SiteLayout
+  alternate={{ zh: zhPath, en: enPath }}
+  canonicalPath={zhPath}
+  description={localize(page.summary, lang)}
+  lang={lang}
+  languagePath={enPath}
+  title={title}
+>
+  <HetuDetailView lang={lang} page={page} />
+</SiteLayout>

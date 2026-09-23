@@ -29,3 +29,8 @@ export function getPartnerPath(slug: string, language: Language): string {
 export function getTeacherPath(slug: string, language: Language): string {
   return `${language === 'en' ? '/en' : ''}/teachers/${slug}/`;
 }
+
+export function getHetuPath(language: Language, slug?: string): string {
+  const prefix = language === 'en' ? '/en' : '';
+  return slug ? `${prefix}/hetu/${slug}/` : `${prefix}/hetu/`;
+}

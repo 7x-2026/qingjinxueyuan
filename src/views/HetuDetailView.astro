@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import {
+  contact,
+  getHetuPath,
+  getTeacherPath,
+  hetuFeedbackVideo,
+} from '../data';
+import { localize } from '../i18n';
+import type { HetuPage, Language } from '../data';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  lang: Language;
+  page: HetuPage;
+}
+
+const { lang, page } = Astro.props;
+const labels =
+  lang === 'zh'
+    ? {
+        back: '返回世界和图中文教育学会',
+        contents: '本页内容',
+        faculty: '阅读林源老师详情',
+        telephone: '咨询电话',
+        video: '学员反馈视频',
+      }
+    : {
+        back: 'Back to World HeTu Chinese Education Institute',
+        contents: 'On this page',
+        faculty: 'Read Lin Yuan’s faculty profile',
+        telephone: 'Enquiries by phone',
+        video: 'Learner-feedback video',
+      };
+---
+
+<section class="section hetu-detail" data-hetu-detail={page.slug}>
+  <div class="page-shell">
+    <a class="back-link" href={getHetuPath(lang)}>
+      <Icon name="arrow-left" size={18} />
+      {labels.back}
+    </a>
+
+    <header class="hetu-detail__hero">
+      <p class="hetu-kicker">{labels.contents}</p>
+      <h1>{localize(page.title, lang)}</h1>
+      <p>{localize(page.summary, lang)}</p>
+    </header>
+
+    <article class="hetu-detail__body">
+      {
+        page.sections.map((section) => (
+          <section class="hetu-content-section">
+            <h2>{localize(section.heading, lang)}</h2>
+            {section.paragraphs?.map((paragraph) => (
+              <p>{localize(paragraph, lang)}</p>
+            ))}
+            {section.bullets && (
+              <ul>
+                {section.bullets.map((bullet) => (
+                  <li>{localize(bullet, lang)}</li>
+                ))}
+              </ul>
+            )}
+            {section.table && (
+              <div class="hetu-table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      {section.table.headers.map((header) => (
+                        <th scope="col">{localize(header, lang)}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.table.rows.map((row) => (
+                      <tr>
+                        {row.map((cell) => (
+                          <td>{localize(cell, lang)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            {section.images && (
+              <div
+                class:list={[
+                  'hetu-image-grid',
+                  section.images.length === 1 && 'hetu-image-grid--single',
+                ]}
+              >
+                {section.images.map((item) => (
+                  <figure>
+                    <Image
+                      alt={localize(item.alt, lang)}
+                      loading="lazy"
+                      sizes="(max-width: 640px) 92vw, (max-width: 1024px) 44vw, 30vw"
+                      src={item.image}
+                      widths={[360, 560, 760, 1120]}
+                    />
+                    {item.caption && (
+                      <figcaption>{localize(item.caption, lang)}</figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            )}
+          </section>
+        ))
+      }
+
+      {
+        page.slug === 'participants' && (
+          <p class="hetu-detail__faculty-link">
+            <a href={getTeacherPath('lin-yuan', lang)}>{labels.faculty}</a>
+          </p>
+        )
+      }
+
+      {
+        page.slug === 'practice' && (
+          <section class="hetu-video" aria-labelledby="hetu-video-title">
+            <h2 id="hetu-video-title">{labels.video}</h2>
+            <p>{localize(hetuFeedbackVideo.description, lang)}</p>
+            <video
+              aria-describedby="hetu-video-title"
+              controls
+              playsinline
+              poster={hetuFeedbackVideo.poster.src}
+              preload="metadata"
+              src={hetuFeedbackVideo.src}
+            >
+              {localize(hetuFeedbackVideo.title, lang)}
+            </video>
+          </section>
+        )
+      }
+
+      {
+        page.slug === 'admissions' && (
+          <p class="hetu-detail__contact">
+            <strong>{labels.telephone}:</strong>{' '}
+            <a href={contact.phones[0].href}>{contact.phones[0].display}</a>
+          </p>
+        )
+      }
+    </article>
+  </div>
+</section>

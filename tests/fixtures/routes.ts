@@ -43,6 +43,15 @@ export const publicTeacherSlugs = [
   'ofer-sagie',
 ] as const;
 
+export const publicHetuSlugs = [
+  'approach',
+  'curriculum',
+  'distinctives',
+  'participants',
+  'practice',
+  'admissions',
+] as const;
+
 export const publicPartnerWebsites = [
   'https://threefold.org/our-community/about-us/',
   'https://hawthornevalley.org/',
@@ -78,6 +87,10 @@ export const zhPartnerPaths = publicPartnerSlugs.map(
 export const zhTeacherPaths = publicTeacherSlugs.map(
   (slug) => `/teachers/${slug}/` as const,
 );
+export const zhHetuPaths = [
+  '/hetu/',
+  ...publicHetuSlugs.map((slug) => `/hetu/${slug}/` as const),
+] as const;
 export const enPrimaryPaths = primaryPaths.map((path) =>
   path === '/' ? '/en/' : `/en${path}`,
 );
@@ -87,16 +100,22 @@ export const enPartnerPaths = publicPartnerSlugs.map(
 export const enTeacherPaths = publicTeacherSlugs.map(
   (slug) => `/en/teachers/${slug}/` as const,
 );
+export const enHetuPaths = [
+  '/en/hetu/',
+  ...publicHetuSlugs.map((slug) => `/en/hetu/${slug}/` as const),
+] as const;
 
 export const zhBodyPaths = [
   ...primaryPaths,
   ...zhPartnerPaths,
   ...zhTeacherPaths,
+  ...zhHetuPaths,
 ] as const;
 export const enBodyPaths = [
   ...enPrimaryPaths,
   ...enPartnerPaths,
   ...enTeacherPaths,
+  ...enHetuPaths,
 ] as const;
 export const bodyPaths = [...zhBodyPaths, ...enBodyPaths] as const;
 

@@ -109,3 +109,30 @@ export interface HomePurpose {
   readonly text: LocalizedText;
   readonly image: ImageMetadata;
 }
+
+export interface HetuImage {
+  readonly image: ImageMetadata;
+  readonly alt: BilingualText;
+  readonly caption?: BilingualText;
+}
+
+export interface HetuTable {
+  readonly headers: readonly BilingualText[];
+  readonly rows: readonly (readonly BilingualText[])[];
+}
+
+export interface HetuSection {
+  readonly heading: BilingualText;
+  readonly paragraphs?: readonly BilingualText[];
+  readonly bullets?: readonly BilingualText[];
+  readonly images?: readonly HetuImage[];
+  readonly table?: HetuTable;
+}
+
+export interface HetuPage {
+  readonly slug: string;
+  readonly order: number;
+  readonly title: BilingualText;
+  readonly summary: BilingualText;
+  readonly sections: readonly HetuSection[];
+}

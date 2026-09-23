@@ -351,12 +351,12 @@ export function assertContentIntegrity(): true {
     assertImage(`site image ${index + 1}`, image),
   );
   invariant(
-    siteImageInventory.length === 115,
-    'site image inventory must contain exactly 115 image references',
+    siteImageInventory.length === 116,
+    'site image inventory must contain exactly 116 image references',
   );
   invariant(
-    new Set(siteImageInventory.map(({ src }) => src)).size === 108,
-    'site image imports must resolve to 108 unique assets',
+    new Set(siteImageInventory.map(({ src }) => src)).size === 109,
+    'site image imports must resolve to 109 unique assets',
   );
 
   assertPartnerRouteSlugs(publicPartnerSlugs);

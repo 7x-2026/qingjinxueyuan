@@ -1,6 +1,9 @@
 import { siteImages } from './site';
 import type { ContactInfo } from './types';
 
+export const applicationSurveyUrl: `https://${string}` =
+  'https://wj.qq.com/s2/27355873/3a09/';
+
 export const contact = {
   phones: [
     { display: '18810816390（中国地区）', href: 'tel:+8618810816390' },

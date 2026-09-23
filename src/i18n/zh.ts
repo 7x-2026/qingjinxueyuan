@@ -132,6 +132,11 @@ export const zh = {
     contactTitle: '联系我们',
     teacher: '林源 老师',
     scan: '扫码添加微信',
+    surveyTitle: '报名问卷',
+    surveySubtitle: '学生与家长均需填写',
+    surveyQrAlt: '青衿学院报名问卷二维码',
+    surveyHint: '扫描二维码填写报名问卷',
+    surveyLinkLabel: '或在浏览器中打开',
   },
   donate: {
     metaTitle: '捐赠｜青衿学院',

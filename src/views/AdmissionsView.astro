@@ -1,5 +1,6 @@
 ---
-import { siteImages } from '../data';
+import { Image } from 'astro:assets';
+import { applicationSurveyUrl, siteImages } from '../data';
 import { getMessages } from '../i18n';
 import type { Language } from '../data';
 import ContactDetails from '../components/ContactDetails.astro';
@@ -12,6 +13,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const copy = getMessages(lang);
+const surveyLinkText = applicationSurveyUrl.replace('https://', '');
 ---
 
 <Hero
@@ -24,19 +26,52 @@ const copy = getMessages(lang);
 
 <section class="section prose-section">
   <div class="narrow-shell">
-    <SectionTitle title={copy.consult.processTitle} />
-    <ol class="process-list">
-      {
-        copy.consult.process.map((item, index) => (
-          <li>
-            <>
-              <span>{index + 1}</span>
-              <p>{item}</p>
-            </>
-          </li>
-        ))
-      }
-    </ol>
+    <div class="admissions-process-grid">
+      <div>
+        <SectionTitle title={copy.consult.processTitle} />
+        <ol class="process-list">
+          {
+            copy.consult.process.map((item, index) => (
+              <li>
+                <>
+                  <span>{index + 1}</span>
+                  <p>{item}</p>
+                </>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <aside class="survey-card" aria-labelledby="survey-card-title">
+        <h2 class="survey-card__title" id="survey-card-title">
+          {copy.consult.surveyTitle}
+        </h2>
+        <p class="survey-card__subtitle">{copy.consult.surveySubtitle}</p>
+        <Image
+          alt={copy.consult.surveyQrAlt}
+          class="survey-card__qr"
+          loading="lazy"
+          src={siteImages.admissionsSurveyQr}
+          width={200}
+          height={200}
+        />
+        <p class="survey-card__hint">{copy.consult.surveyHint}</p>
+        <p class="survey-card__link">
+          {copy.consult.surveyLinkLabel}{' '}
+          <a
+            href={applicationSurveyUrl}
+            rel="noopener noreferrer external"
+            target="_blank"
+          >
+            {surveyLinkText}
+            <span class="visually-hidden">
+              ({copy.partner.opensNewWindow})</span
+            >
+          </a>
+        </p>
+      </aside>
+    </div>
 
     <SectionTitle title={copy.consult.tuitionTitle} />
     <div class="note-box">

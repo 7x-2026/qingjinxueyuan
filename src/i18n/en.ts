@@ -17,7 +17,7 @@ export const en = {
     email: 'E-mail',
     locations: 'Locations',
     links: 'Links',
-    externalLink: 'World Chinese Education Association',
+    externalLink: 'World HeTu Chinese Education Institute',
     copyright: 'Copyright © 2025 春之谷青衿学院（简称：青衿学院）',
   },
   floatingContact: {
@@ -135,6 +135,11 @@ export const en = {
     contactTitle: 'Contact Us',
     teacher: 'Teacher Lin Yuan',
     scan: 'Scan to add WeChat',
+    surveyTitle: 'Application Form',
+    surveySubtitle: 'Required for both student and guardian',
+    surveyQrAlt: 'Qingjin Academy application form QR code',
+    surveyHint: 'Scan the QR code to complete the application form',
+    surveyLinkLabel: 'Or open in your browser',
   },
   donate: {
     metaTitle: 'Donate | Qingjin Academy',

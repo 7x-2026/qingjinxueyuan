@@ -9,6 +9,7 @@ import aboutGallery02 from '../assets/images/about/gallery-02.png';
 import aboutGallery03 from '../assets/images/about/gallery-03.png';
 import aboutHero from '../assets/images/about/hero.png';
 import admissionsHero from '../assets/images/admissions/hero.png';
+import admissionsSurveyQr from '../assets/images/admissions/survey-qr.png';
 import coursesHero from '../assets/images/courses/hero.png';
 import donateHero from '../assets/images/donate/hero.png';
 import homeHero from '../assets/images/shared/home-hero.png';
@@ -32,6 +33,7 @@ export const siteImages = {
   coursesHero,
   teachersHero,
   admissionsHero,
+  admissionsSurveyQr,
   donateHero,
   aboutCommunity,
   aboutGallery: [aboutGallery01, aboutGallery02, aboutGallery03],
@@ -47,6 +49,7 @@ export const allSiteImages = [
   siteImages.coursesHero,
   siteImages.teachersHero,
   siteImages.admissionsHero,
+  siteImages.admissionsSurveyQr,
   siteImages.donateHero,
   siteImages.aboutCommunity,
   ...siteImages.aboutGallery,

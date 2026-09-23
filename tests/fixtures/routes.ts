@@ -31,13 +31,16 @@ export const publicTeacherSlugs = [
   'chai-jian',
   'zheng-le',
   'zhang-lingzhi',
-  'jin-zhenbao',
   'wu-fan',
   'hu-haiyan',
-  'he-xiaoguo',
-  'zhang-xinxin',
   'wang-shiyi',
-  'alexa',
+  'yang-liang',
+  'yang-zhengrong',
+  'guo-hui',
+  'cheng-mingxu',
+  'yang-zhihuang',
+  'mu-chuanzhen',
+  'ofer-sagie',
 ] as const;
 
 export const publicPartnerWebsites = [

@@ -1,23 +1,26 @@
-import alexaDetailImage from '../assets/images/teachers/details/alexa.jpg';
 import boWernerErikssonDetailImage from '../assets/images/teachers/details/bo-werner-eriksson.jpg';
 import chaiJianDetailImage from '../assets/images/teachers/details/chai-jian.webp';
-import heXiaoguoDetailImage from '../assets/images/teachers/details/he-xiaoguo.jpg';
+import chengMingxuDetailImage from '../assets/images/teachers/details/cheng-mingxu.webp';
+import guoHuiDetailImage from '../assets/images/teachers/details/guo-hui.webp';
 import huHaiyanDetailImage from '../assets/images/teachers/details/hu-haiyan.jpg';
 import jeffMartinDetailImage from '../assets/images/teachers/details/jeff-martin.png';
-import jinZhenbaoDetailImage from '../assets/images/teachers/details/jin-zhenbao.jpg';
 import karlSchurmanDetailImage from '../assets/images/teachers/details/karl-schurman.jpg';
 import linYuanDetailImage from '../assets/images/teachers/details/lin-yuan.jpg';
 import liuYutingDetailImage from '../assets/images/teachers/details/liu-yuting.jpg';
 import michealDAleoDetailImage from '../assets/images/teachers/details/micheal-d-aleo.png';
+import muChuanzhenDetailImage from '../assets/images/teachers/details/mu-chuanzhen.webp';
+import oferSagieDetailImage from '../assets/images/teachers/details/ofer-sagie.webp';
 import panJianfengDetailImage from '../assets/images/teachers/details/pan-jianfeng.jpg';
 import songJinchaoDetailImage from '../assets/images/teachers/details/song-jinchao.jpg';
 import tedWarrenDetailImage from '../assets/images/teachers/details/ted-warren.jpg';
 import wangShiyiDetailImage from '../assets/images/teachers/details/wang-shiyi.jpg';
 import wuFanDetailImage from '../assets/images/teachers/details/wu-fan.jpg';
 import xinchenDaoistDetailImage from '../assets/images/teachers/details/xinchen-daoist.webp';
+import yangLiangDetailImage from '../assets/images/teachers/details/yang-liang.webp';
+import yangZhengrongDetailImage from '../assets/images/teachers/details/yang-zhengrong.png';
+import yangZhihuangDetailImage from '../assets/images/teachers/details/yang-zhihuang.webp';
 import zangYibingDetailImage from '../assets/images/teachers/details/zang-yibing.jpg';
 import zhangLingzhiDetailImage from '../assets/images/teachers/details/zhang-lingzhi.jpg';
-import zhangXinxinDetailImage from '../assets/images/teachers/details/zhang-xinxin.jpg';
 import zhengLeDetailImage from '../assets/images/teachers/details/zheng-le.jpg';
 import type { Teacher } from './types';
 
@@ -41,13 +44,16 @@ type TeacherDetailSlug =
   | 'chai-jian'
   | 'zheng-le'
   | 'zhang-lingzhi'
-  | 'jin-zhenbao'
   | 'wu-fan'
   | 'hu-haiyan'
-  | 'he-xiaoguo'
-  | 'zhang-xinxin'
   | 'wang-shiyi'
-  | 'alexa';
+  | 'yang-liang'
+  | 'yang-zhengrong'
+  | 'guo-hui'
+  | 'cheng-mingxu'
+  | 'yang-zhihuang'
+  | 'mu-chuanzhen'
+  | 'ofer-sagie';
 
 export function getTeacherDescription(body: string): string {
   const sentences = body.match(/[^。！？.!?]+[。！？.!?]+[”"']?/g) ?? [body];
@@ -270,20 +276,6 @@ export const teacherDetails = {
       },
     ],
   },
-  'jin-zhenbao': {
-    name: { zh: '金振豹', en: 'Jin Zhenbao' },
-    role: {
-      zh: '幼子夏狄守护中心负责人',
-      en: 'Director of the Xia Di Youth Care Center',
-    },
-    detailImage: jinZhenbaoDetailImage,
-    biography: [
-      {
-        zh: '博士，精通英语和德语，曾经为南京师范大学法学院教师和北京中伦律师事务所律师。自2013年以来，金振豹博士因为身体健康原因，通过深入研究和实修，形成了整合道家、儒家、佛家以及相关科学和哲学，动静结合的冥想疗愈体系，使自己的淋巴癌和多种慢性病不药而愈，也使冥想成为简便易行易学，科学有趣有效的自我疗愈和生命成长之道。金振豹博士是深圳动子冥想疗愈中心负责人，中山五桂山桂南学校身心健康顾问，以及由腾讯公益基金、广东中山旗迹美术中心、桂南学校等机构联合发起的乡村美术老师千人种子公益培训计划的专家团成员，温州乡村民宿发展协会疗愈经济专委会理事会顾问，曾在美国，英国，德国，瑞士，西班牙，葡萄牙等国家开展过冥想疗愈和中国文化传统的培训。金振豹老师将在青衿学院担任中国传统文化及冥想疗愈的教学。',
-        en: 'Jin Zhenbao holds a doctorate, is fluent in English and German, and formerly taught at the Law School of Nanjing Normal University and practiced law at Zhong Lun Law Firm in Beijing. Since 2013, following health problems, he has developed through study and practice a meditation and healing system that combines Daoist, Confucian, and Buddhist traditions with related scientific and philosophical approaches and integrates stillness with movement. He reports that this practice helped him recover from lymphoma and several chronic illnesses without medication and shaped meditation into an accessible approach to self-healing and personal growth. Jin directs the Shenzhen Dongzi Meditation and Healing Center, advises Guinan School in Wuguishan, Zhongshan, on physical and mental wellbeing, and serves with several nonprofit and professional initiatives. He has led meditation, healing, and Chinese cultural training in the United States, United Kingdom, Germany, Switzerland, Spain, Portugal, and other countries. At Qingjin Academy, he teaches Chinese traditional culture and meditation practices.',
-      },
-    ],
-  },
   'wu-fan': {
     name: { zh: '吴璠', en: 'Wu Fan' },
     role: {
@@ -320,42 +312,6 @@ export const teacherDetails = {
       },
     ],
   },
-  'he-xiaoguo': {
-    name: { zh: '何孝国', en: 'He Xiaoguo' },
-    role: {
-      zh: '儒释道三家传统文化与传统身心行者',
-      en: 'Practitioner and teacher of Confucian, Buddhist, and Daoist traditions',
-    },
-    detailImage: heXiaoguoDetailImage,
-    biography: [
-      {
-        zh: '号明道，儒释道三家传统心性文化传承与传播者。精通书法、禅茶与正念疗愈，可深入讲授《劝学》、《道德经》、《大学》、《中庸》、《心经》、《金刚经》、《六祖坛经》等传统文化经典。曾任中外合资公司副总经理、环境科技公司总经理、西南红色书画研究院副院长、正心书院院长、重庆理工大学硕士生校外产业导师、华盛绿色工业基金会绿色发展专家顾问。从小酷爱书法，在因缘际会自心流露，创立正念慧观全息书法流派，开发正念书法疗愈课程，以期帮助到更多正在迷惑与受苦的有缘人。',
-        en: 'He Xiaoguo, also known as Mingdao, carries and shares traditional approaches to the cultivation of mind and character from Confucianism, Buddhism, and Daoism. He is accomplished in calligraphy, Chan tea practice, and mindfulness-based healing and teaches classical works including Encouragement of Learning, the Dao De Jing, Great Learning, Doctrine of the Mean, Heart Sutra, Diamond Sutra, and Platform Sutra of the Sixth Patriarch. His previous roles include deputy general manager of a Sino-foreign joint venture, general manager of an environmental technology company, deputy director of the Southwest Red Calligraphy and Painting Research Institute, director of Zhengxin Academy, external industry mentor for master’s students at Chongqing University of Technology, and green-development expert adviser to the Huasheng Green Industry Foundation. A lifelong student of calligraphy, he founded a mindfulness-based holistic calligraphy approach and developed mindful calligraphy and healing courses intended to support people experiencing confusion and suffering.',
-      },
-    ],
-  },
-  'zhang-xinxin': {
-    name: { zh: '张馨心', en: 'Zhang Xinxin' },
-    role: {
-      zh: '文艺创作者，集体导演于一身',
-      en: 'Writer, artist, performer, and director',
-    },
-    detailImage: zhangXinxinDetailImage,
-    biography: [
-      {
-        zh: '号乐安。文艺创作者，自幼登台歌舞，集编导演于一身。上海戏剧学院戏剧文学系编剧本科专业，学戏做戏三十余年间原创并制作演出六百余场。创意策展国际艺术节和跨文化交流的信使行者。',
-        en: 'Zhang Xinxin, also known as Le’an, is a literary and performing artist who has sung and danced on stage since childhood and works as a writer, performer, and director. She studied playwriting in the Department of Dramatic Literature at the Shanghai Theatre Academy. Across more than thirty years of studying and making theatre, she has created and produced over six hundred performances. She also curates international arts festivals and works as a facilitator of cross-cultural exchange.',
-      },
-      {
-        zh: '当过记者、电台主持人、广告人，音乐MTV、电视剧和综艺节目的制作发行，为房地产、医药、有机农场等品牌媒体宣传。1999年于原上海东方广播电台创办了国内首个亲子育儿节目，并兼职《为了孩子》编辑；迄今25年陪伴孩子一起成长。',
-        en: 'She has worked as a journalist, radio host, advertising professional, and producer and distributor of music videos, television dramas, and variety programs, as well as in communications for real-estate, pharmaceutical, organic-farm, and other brands. In 1999, at the former Shanghai East Radio, she founded China’s first radio program for parents and children and also worked as an editor for For the Children. Her work has accompanied children and families for twenty-five years.',
-      },
-      {
-        zh: '2012年与华德福教育结缘后，深耕北京南山等新教育学校社区、研习汉字、中医等传统文化，进修优律诗美、十二感官等人智学，探索沉浸自然“心艺合一”的教学实践和乡村美育，辅导全国教师戏剧培训，指导合唱团、歌舞、小丑、木偶、京剧等表演艺术，发起组织《戏剧与内在成长》、《与偶相遇的生命教育》《回到身体的家》《生命之花》共创领导力等课程，发展诗意的身体与创造性多元化表达，以及艺术疗愈等社会应用。编剧执导《逃跑的煎饼》《安魂曲》《仲夏夜之梦》《浮士德》《XIN西游记》等校园版实验作品，带领儿童、青少年和素人身心演练，共创社区剧场。',
-        en: 'After encountering Waldorf education in 2012, Zhang became deeply involved in new-education school communities including Beijing Nanshan. She studied Chinese characters, traditional Chinese medicine, and other cultural traditions, while continuing her education in eurythmy, the twelve senses, and other areas of Anthroposophy. Her work explores nature-immersive teaching, rural aesthetic education, drama training for teachers, and performance forms including choir, song and dance, clowning, puppetry, and Peking opera. She initiated courses on drama and inner growth, life education through puppetry, embodied practice, co-creative leadership, diverse creative expression, and arts-based healing. She has written and directed experimental school productions including The Runaway Pancake, Requiem, A Midsummer Night’s Dream, Faust, and XIN Journey to the West, guiding children, young people, and nonprofessional performers in community theatre-making.',
-      },
-    ],
-  },
   'wang-shiyi': {
     name: { zh: '王诗溢', en: 'Wang Shiyi' },
     role: {
@@ -370,17 +326,100 @@ export const teacherDetails = {
       },
     ],
   },
-  alexa: {
-    name: { zh: 'ALEXA', en: 'ALEXA' },
-    role: {
-      zh: '心理学专业毕业，资深国际德语教师',
-      en: 'Psychology graduate and experienced international German teacher',
-    },
-    detailImage: alexaDetailImage,
+  'yang-liang': {
+    name: { zh: '杨亮', en: 'Yang Liang' },
+    role: { zh: '物理教师', en: 'Physics teacher' },
+    detailImage: yangLiangDetailImage,
     biography: [
       {
-        zh: '德语老师（线上）。毕业于心理学专业，研究方向为社会科学，儿童发展，认知心理学，神经心理学，具备国际德语教师资格证和国际英语教师资格证。Alexa是德国⼈，曾在英国生活工作十余年，先后在伦敦各个中小学进行德语教学，学生心理关怀辅导等工作。目前任职德国法兰克福某私立学校。教授国际学生德语，以及德国本地学生英语。教学优势：具有国际德语教师资格证。专门研究过如何教授德语为非母语的学生学习德语的方法。并在多年和国际学生的交流磨合中将研究方法付诸实践。目前Alexa班级内就有教授的中国学生，她深知中国学生学习语言的弱项，并能够根据中国学生语言学习的普遍问题进行教学方案的侧重和调整。具有英语德语双国际教师资格证书。可以帮助孩子分析学习语言的共性和方法。让孩子能够在语言学习中获得乐趣。而不是枯燥的记忆。儿童心理学研究的专业背景，以及多年辅导个别学习困难学生的经验能够帮助个体学生分析个人不同的学习困难，并陪伴鼓励学生面对困难，专业的教学技巧也能够帮助学生找到克服语言学习困难的障碍。',
-        en: 'Alexa teaches German online. A psychology graduate, she studied social science, child development, cognitive psychology, and neuropsychology and holds international teaching qualifications in both German and English. Originally from Germany, she lived and worked in the United Kingdom for more than ten years, teaching German in primary and secondary schools across London and supporting students’ psychological wellbeing. She now teaches at a private school in Frankfurt, Germany, where she teaches German to international students and English to local students. Her specialist training focuses on teaching German as an additional language, and she has applied this research through years of work with international learners. Because she currently teaches Chinese students, she understands common challenges Chinese learners face and adapts her methods accordingly. Her background in child psychology and experience supporting students with individual learning difficulties help her identify personal barriers, encourage learners, and make language learning enjoyable rather than an exercise in rote memorization.',
+        zh: '物理教师。法律专科毕业，并多年从事法律相关工作；自学通过国家软件水平考试并获得软件工程师资格，曾任西安鼎研智能仪器公司研发部负责人，获得发明专利一项、实用新型专利一项，曾获陕西省科学进步三等奖、西安市科学进步二等奖。2017—2019年完成了春之谷学院等校发起的“天梯计划”华德福高中教师培训，从师美国物理学家、教育家迈可·阿德罗，并深入学习他的“感知性物理教学”。之后任西安子峪小学初期改造工程负责人、豆蔻学堂科学老师、子峪小学高年级兼职物理老师、豆蔻社区负责人，并创办豆蔻感官体验场。',
+        en: 'Yang Liang teaches physics. He graduated from a junior-college law program and worked in law for many years. Through independent study, he passed China’s national computer software proficiency examination and qualified as a software engineer. He previously led the research and development department at Xi’an Dingyan Intelligent Instruments and is credited with one invention patent and one utility-model patent. He received a third prize in the Shaanxi Science and Technology Progress Awards and a second prize in the Xi’an Science and Technology Progress Awards. From 2017 to 2019, he completed the Ladder Program for Waldorf high-school teacher training initiated by Spring Valley Academy and other schools, studying with the American physicist and educator Micheal D’Aleo and learning his perception-based approach to physics teaching. He later led the initial renovation project at Xi’an Ziyu Primary School, taught science at Doukou Learning Center, taught physics part-time in Ziyu Primary School’s upper grades, led the Doukou community, and founded the Doukou Sensory Experience Center.',
+      },
+    ],
+  },
+  'yang-zhengrong': {
+    name: { zh: '杨峥嵘', en: 'Yang Zhengrong' },
+    role: { zh: '生命科学教师', en: 'Life science teacher' },
+    detailImage: yangZhengrongDetailImage,
+    biography: [
+      {
+        zh: '生命科学教师。博士，东南大学计算机专业和生物医药学专业。2004—2018年作为研究员在外国专家局研究图形处理和情感神经学。青少年时读到薛定谔的《生命是什么》，手不释卷，感觉世界之门由此敞开；后来进入大学和科研领域，生命的奥秘始终萦绕心头。在南京艺术学院舞蹈学院王佳维老师的编导课中，他又展开了交叉学科教学，并从中发展出“思考从相互作用中升起”的边缘性思考，希望将这些经验与华德福中学阶段培养的直觉思维结合起来，并带入身体的过程。2018年参加春之谷学院全日制研修班培训，毕业后一直担任EWIP生命科学主课教学。',
+        en: 'Yang Zhengrong teaches life science. He holds a doctorate and studied computer science and biomedicine at Southeast University. From 2004 to 2018, he worked as a researcher at the State Administration of Foreign Experts Affairs, studying graphics processing and affective neuroscience. As a young person, he was captivated by Erwin Schrödinger’s What Is Life?, which opened a door onto the world for him; the mysteries of life remained central as he entered university and scientific research. Through a choreography course taught by Wang Jiawei at the School of Dance of Nanjing University of the Arts, he also developed interdisciplinary teaching and an approach in which thinking arises through interaction. He hopes to connect this experience with the intuitive thinking cultivated in Waldorf secondary education and bring it into bodily processes. He attended Spring Valley Academy’s full-time training program in 2018 and has taught the EWIP life-science main lesson since graduating.',
+      },
+    ],
+  },
+  'guo-hui': {
+    name: { zh: '郭徽', en: 'Guo Hui' },
+    role: {
+      zh: '艺术教师、艺术治疗践行者，光舞艺术工作室主理人',
+      en: 'Art teacher, art therapy practitioner, and director of Light Dance Art Studio',
+    },
+    detailImage: guoHuiDetailImage,
+    biography: [
+      {
+        zh: '艺术老师，艺术治疗践行者，光舞艺术工作室主理人。毕业于西安美术学院设计系，2012年因孩子与华德福教育相遇，开启了一场自我成长的探索、蜕变之旅。2016年参加银川Van老师三年制艺术深化学习；2020年参加春之谷第九届一年制全日制学习；2022年参加中国·瑞士国际艺术治疗教育协会（iARTe）授予的四年制专业艺术治疗师培训课程，学习至今。自2021年起在公立学校、华德福学校等机构从事艺术教学工作，在实践中深刻体会到艺术工作带给孩子、成人和自己的改变，也因此坚定而热爱地走在这条五彩斑斓的艺术之路上。',
+        en: 'Guo Hui is an art teacher, an art therapy practitioner, and the director of Light Dance Art Studio. She graduated from the Department of Design at Xi’an Academy of Fine Arts. Her child introduced her to Waldorf education in 2012, beginning a journey of exploration, transformation, and personal growth. In 2016, she began a three-year program of advanced art study with teacher Van in Yinchuan. In 2020, she joined the ninth one-year full-time program at Spring Valley Academy. Since 2022, she has studied in the four-year professional art therapist training program offered by the International Association for Art Therapy Education between China and Switzerland (iARTe). She has taught art in public schools, Waldorf schools, and other institutions since 2021. Through this work, she has experienced the changes art can bring to children, adults, and herself, strengthening her commitment to this colorful path in art.',
+      },
+    ],
+  },
+  'cheng-mingxu': {
+    name: { zh: '程铭旭', en: 'Cheng Mingxu' },
+    role: { zh: '数学教师', en: 'Mathematics teacher' },
+    detailImage: chengMingxuDetailImage,
+    biography: [
+      {
+        zh: '拥有20年高中数学教学经验和8年华德福数学教学经验，完成华德福数学1—12年级培训。让学习成为一种习惯，让成长伴随一生；人生的每个阶段都藏着独特的风景与宝藏，等待人们去发现和珍藏。',
+        en: 'Cheng Mingxu has twenty years of experience teaching high-school mathematics and eight years of experience teaching mathematics in Waldorf education. He has completed Waldorf mathematics training for grades 1–12. He encourages students to make learning a habit and growth a lifelong companion, discovering and treasuring the distinctive landscapes and gifts held within every stage of life.',
+      },
+    ],
+  },
+  'yang-zhihuang': {
+    name: { zh: '杨志凰', en: 'Yang Zhihuang' },
+    role: {
+      zh: '生机互动农业教育者',
+      en: 'Biodynamic agriculture educator',
+    },
+    detailImage: yangZhihuangDetailImage,
+    biography: [
+      {
+        zh: '中国台湾省国立成功大学电机工程学系学士。2006年师承Hans Mulder老师开始学习生机互动农业；2008年起推动台湾省宜兰县八宝有机示范聚落（慈心华德福社群有机聚落社区），并赴德国Weleda药厂所属生机互动农场观摩学习；2009年赴菲律宾Don Bosco永续发展基金会所属生机互动农场交流学习。2010年至今担任台湾省八宝有机教育推广农园负责人。2013年参与台湾省宜兰县政府食农减碳—低碳生活营造计划，担任项目经理；2016年赴新西兰Hohepa人智学疗愈社区生机互动农场学习；2018年在青海西宁赛维有机农场分享生机互动农业，并担任北京房山书院亲子农耕体验课程导师。',
+        en: 'Yang Zhihuang earned a bachelor’s degree from the Department of Electrical Engineering at National Cheng Kung University in Taiwan, China. He began studying biodynamic agriculture with Hans Mulder in 2006. In 2008, he began promoting the Babao Organic Demonstration Community in Yilan County, Taiwan, an organic settlement associated with the Ci-Xin Waldorf community, and undertook observational study at the biodynamic farm affiliated with Weleda in Germany. In 2009, he joined an exchange at a biodynamic farm run by the Don Bosco Sustainable Development Foundation in the Philippines. Since 2010, he has led the Babao Organic Education and Promotion Farm. In 2013, he served as project manager for a food, agriculture, carbon-reduction, and low-carbon living initiative of the Yilan County government. He studied at the biodynamic farm of the Hohepa Anthroposophical therapeutic community in New Zealand in 2016. In 2018, he shared biodynamic agriculture at Saiwei Organic Farm in Xining, Qinghai, and taught parent-child farming courses at Fangshan Academy in Beijing.',
+      },
+      {
+        zh: '培训认证包括：美国IOIA有机加工品验证稽核员培训（2005），顺势疗法研习（2006年3月），台湾有机农产品验证辅导及稽核人员训练（2009），古典顺势医学研习（2010—2011），台湾生物动力农业三年六期培训（2009—2012），日本大仁农场MOA自然农法研修（2012），慈心有机农业发展基金会有机农产品验证稽核员（2010—2016），环球国际有机验证公司外聘有机农产品验证稽核员（2016—2017），台湾省有机农业生产协会有机农产品验证稽核员（2017—2020），以及朴门农业设计、泰国米之神（KKF）在地有益菌培养和台湾地区人智学医疗（IPMT 2015、2016、2018）研习。他还曾从事玉山国家公园自然生态保育义务解说志愿服务32年，并参与合著《有机农场在台湾》（台湾有机食农游艺教育推广协会，2006）。',
+        en: 'His training and certifications include the United States International Organic Inspectors Association course for organic processing inspectors in 2005; homeopathy study in March 2006; training for organic agricultural product certification and inspection in Taiwan in 2009; classical homeopathic medicine study in 2010–2011; a three-year, six-session biodynamic agriculture program in Taiwan from 2009 to 2012; MOA natural farming study at Japan’s Ohito Farm in 2012; organic product inspection work with the Tse-Xin Organic Agriculture Foundation from 2010 to 2016; external inspection work with Universal International Organic Certification from 2016 to 2017; and inspection work with the Taiwan Organic Agricultural Production Association from 2017 to 2020. He has also studied permaculture design, local beneficial-microorganism cultivation with Thailand’s Khao Kwan Foundation, and Anthroposophic medicine through IPMT programs in Taiwan in 2015, 2016, and 2018. He volunteered for thirty-two years as an ecological conservation interpreter at Yushan National Park and co-authored Organic Farms in Taiwan, published in 2006 by the Taiwan Organic Food and Farming Education Promotion Association.',
+      },
+    ],
+  },
+  'mu-chuanzhen': {
+    name: { zh: '穆傳蓁', en: 'Mu Chuanzhen' },
+    role: {
+      zh: '生命科学、健康与农业教育者',
+      en: 'Life science, health, and agriculture educator',
+    },
+    detailImage: muChuanzhenDetailImage,
+    biography: [
+      {
+        zh: '國立中興大學昆蟲研究所碩士，體制內中學部學校教師服務十年，榮獲台灣地區第一屆Super教師獎，服務慈心華德福教育十八年，在慈心擔任7～12年級的健康專業課程、環境教育、化學、農耕等。2024年從慈心華德福退休，擔任督導工作與支援師培課程。',
+        en: 'Mu Chuanzhen holds a master’s degree from the Graduate Institute of Entomology at National Chung Hsing University. She taught for ten years in the conventional secondary-school system, received Taiwan’s first Super Teacher Award, and served in Ci-Xin Waldorf education for eighteen years. At Ci-Xin, she taught health studies, environmental education, chemistry, and farming for grades 7–12. She retired from Ci-Xin Waldorf School in 2024 and continues to provide mentoring and support for teacher-training courses.',
+      },
+      {
+        zh: '曾擔任各年級課程：7年級生理學、化學、園藝；8年級解剖學、食品營養學；9年級生命科學（感官）、有機化學；10年級胚胎學、人類生物學；11年級植物學、細胞與遺傳；12年級生態學。特別强项是人智學的健康飲食觀，尤其針對嬰幼兒及小學時期的營養健康維護，以及1—12年級園藝農耕版塊、有機農業、青少年教育等。曾接受台灣地區人智醫學課程8年、初高中師資培訓6年。',
+        en: 'Her grade-level teaching has included physiology, chemistry, and horticulture in grade 7; anatomy, food, and nutrition in grade 8; life science focused on the senses and organic chemistry in grade 9; embryology and human biology in grade 10; botany, cells, and genetics in grade 11; and ecology in grade 12. Her particular strengths include Anthroposophical perspectives on healthy eating, nutritional health for infants and primary-school children, gardening and farming modules for grades 1–12, organic agriculture, and adolescent education. She has completed eight years of Anthroposophic medicine courses in Taiwan and six years of secondary-school teacher training.',
+      },
+    ],
+  },
+  'ofer-sagie': {
+    name: { zh: 'Ofer Sagie', en: 'Ofer Sagie' },
+    role: {
+      zh: '戏剧导演、制片、演员及全人教育教师',
+      en: 'Theatre director, producer, actor, and holistic education teacher',
+    },
+    detailImage: oferSagieDetailImage,
+    biography: [
+      {
+        zh: '奥弗·萨吉老师的人生经历丰富。上世纪六十年代，他出生在一个“桃花源”般的社区，经历过不同文化的洗礼，通晓希伯来语、英语和德语。早年在纽约、伦敦、特拉维夫等地专修戏剧，在日本学习Butoh舞（舞踏），在德国、英格兰、法国、瑞士、挪威和以色列等多个国家参与过超过45部戏剧项目，担任导演、制片、演员，并积累了丰富的灯光和舞台设计经验。在法国工作和生活期间，他还成立了自己的剧团。丰富而特殊的成长经历让他由戏剧走向探寻自我的修习之路。从事戏剧工作多年后，他在瑞士歌德大殿接受四年全人教育培训，在以色列接受四年语言、戏剧和Bothmer（空间体育）体操培训。2003年完成学业后，他继续从事戏剧导演和制片工作，并为成人、青少年及特殊儿童开设课程与讲座，教授演讲、戏剧和Bothmer体操等。他对戏剧的解读源于全人教育的精神内核，工作坊从身、心、灵等层面展开。',
+        en: 'Ofer Sagie was born in the 1960s in an idyllic community and grew up amid different cultures. He speaks Hebrew, English, and German. Early in his career, he studied theatre in New York, London, and Tel Aviv and studied Butoh dance in Japan. He has worked on more than forty-five theatre projects in Germany, England, France, Switzerland, Norway, Israel, and other countries as a director, producer, and actor, and he also has extensive experience in lighting and stage design. While living and working in France, he founded his own theatre company. His rich and unusual experiences led him from theatre toward a path of self-exploration. After many years in theatre, he completed four years of holistic education training at the Goetheanum in Switzerland and four years of language, drama, and Bothmer gymnastics training in Israel. After completing his studies in 2003, he continued directing and producing theatre and began offering courses and lectures for adults, young people, and children with special needs in speech, drama, and Bothmer gymnastics. His approach to theatre grows from the spiritual foundations of holistic education, and his workshops engage body, soul, and spirit.',
       },
     ],
   },

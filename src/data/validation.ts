@@ -204,11 +204,11 @@ export function assertContentIntegrity(): true {
     });
   });
   const expectedTeacherCounts = {
-    anthro: 3,
-    culture: 4,
-    arts: 4,
-    language: 2,
-    life: 5,
+    anthro: 5,
+    culture: 3,
+    arts: 5,
+    language: 1,
+    life: 7,
     management: 3,
   } as const;
   Object.entries(expectedTeacherCounts).forEach(([category, expected]) => {
@@ -351,12 +351,12 @@ export function assertContentIntegrity(): true {
     assertImage(`site image ${index + 1}`, image),
   );
   invariant(
-    siteImageInventory.length === 108,
-    'site image inventory must contain exactly 108 assets',
+    siteImageInventory.length === 114,
+    'site image inventory must contain exactly 114 image references',
   );
   invariant(
-    new Set(siteImageInventory.map(({ src }) => src)).size === 108,
-    'site image imports must resolve to 108 unique assets',
+    new Set(siteImageInventory.map(({ src }) => src)).size === 107,
+    'site image imports must resolve to 107 unique assets',
   );
 
   assertPartnerRouteSlugs(publicPartnerSlugs);

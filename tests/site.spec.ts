@@ -54,7 +54,7 @@ async function visibleCount(page: Page, selector: string): Promise<number> {
   );
 }
 
-test('all 80 body URLs render complete, paired, indexable documents', async ({
+test('all 86 body URLs render complete, paired, indexable documents', async ({
   page,
 }, testInfo) => {
   onlyProject(testInfo, desktopProject);
@@ -144,7 +144,7 @@ test('all 80 body URLs render complete, paired, indexable documents', async ({
     page.off('pageerror', onPageError);
   }
 
-  expect(canonicalURLs.size).toBe(80);
+  expect(canonicalURLs.size).toBe(86);
 });
 
 test('top-level pages render at a mobile browser viewport', async ({
@@ -209,7 +209,18 @@ test('teacher cards link to bilingual static profiles', async ({
   ] as const) {
     await page.goto(path);
     const links = page.locator(`.teacher-card a[href^="${prefix}"]`);
-    await expect(links).toHaveCount(21);
+    await expect(links).toHaveCount(24);
+    const imageFrames = page.locator('.teacher-card__image');
+    await expect(imageFrames).toHaveCount(24);
+    expect(
+      await imageFrames.evaluateAll(
+        (items) =>
+          items.filter((item) => {
+            const { width, height } = item.getBoundingClientRect();
+            return Math.abs(width - height) > 1;
+          }).length,
+      ),
+    ).toBe(0);
     expect(
       await links.evaluateAll((items) =>
         items.map((item) => item.getAttribute('href')),
@@ -452,24 +463,24 @@ test.describe('course filters', () => {
 
 test.describe('teacher filters', () => {
   for (const path of ['/teachers/', '/en/teachers/']) {
-    test(`${path} progressively filters 21 cards as 3/4/4/2/5/3`, async ({
+    test(`${path} progressively filters 24 cards as 5/3/5/1/7/3`, async ({
       page,
     }) => {
       await page.goto(path);
-      await expect(page.locator('[data-teacher-card]')).toHaveCount(21);
+      await expect(page.locator('[data-teacher-card]')).toHaveCount(24);
       await expect(
         page.locator('[data-filter-group="teachers"] [data-filter="all"]'),
       ).toHaveAttribute('aria-selected', 'true');
-      expect(await visibleCount(page, '[data-teacher-card]')).toBe(21);
+      expect(await visibleCount(page, '[data-teacher-card]')).toBe(24);
 
       for (const [filter, expected] of [
-        ['anthro', 3],
-        ['culture', 4],
-        ['arts', 4],
-        ['language', 2],
-        ['life', 5],
+        ['anthro', 5],
+        ['culture', 3],
+        ['arts', 5],
+        ['language', 1],
+        ['life', 7],
         ['management', 3],
-        ['all', 21],
+        ['all', 24],
       ] as const) {
         const tab = page.locator(
           `[data-filter-group="teachers"] [data-filter="${filter}"]`,
@@ -552,8 +563,8 @@ test('without JavaScript, all course and teacher content and footer contacts rem
   expect(await visibleCount(page, '[data-course-card]')).toBe(16);
 
   await page.goto('/teachers/');
-  await expect(page.locator('[data-teacher-card]')).toHaveCount(21);
-  expect(await visibleCount(page, '[data-teacher-card]')).toBe(21);
+  await expect(page.locator('[data-teacher-card]')).toHaveCount(24);
+  expect(await visibleCount(page, '[data-teacher-card]')).toBe(24);
 
   await page.goto('/teachers/ted-warren/');
   await expect(page.locator('.teacher-detail__body p')).not.toHaveCount(0);
@@ -603,11 +614,11 @@ test('all documents avoid horizontal overflow at five audit widths', async ({
   }
 });
 
-test('route fixture matches the 40 + 40 public inventory', () => {
-  expect(zhBodyPaths).toHaveLength(40);
-  expect(enBodyPaths).toHaveLength(40);
-  expect(bodyPaths).toHaveLength(80);
+test('route fixture matches the 43 + 43 public inventory', () => {
+  expect(zhBodyPaths).toHaveLength(43);
+  expect(enBodyPaths).toHaveLength(43);
+  expect(bodyPaths).toHaveLength(86);
   expect(publicPartnerSlugs).toHaveLength(13);
-  expect(publicTeacherSlugs).toHaveLength(21);
-  expect(new Set(bodyPaths).size).toBe(80);
+  expect(publicTeacherSlugs).toHaveLength(24);
+  expect(new Set(bodyPaths).size).toBe(86);
 });

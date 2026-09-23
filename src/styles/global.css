@@ -371,9 +371,17 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.teacher-card img {
+.teacher-card__image {
   aspect-ratio: 1;
   background: #dfe8e8;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+
+.teacher-card__image img {
+  display: block;
+  height: 100%;
   object-fit: cover;
   object-position: top center;
   width: 100%;
@@ -401,7 +409,7 @@
   border: 0;
 }
 
-.teacher-card--flat img {
+.teacher-card--flat .teacher-card__image {
   border-radius: var(--radius-sm);
 }
 

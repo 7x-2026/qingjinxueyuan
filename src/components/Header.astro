@@ -1,5 +1,6 @@
 ---
-import { getPagePath, navigationItems } from '../data';
+import { Image } from 'astro:assets';
+import { getPagePath, navigationItems, siteImages } from '../data';
 import { localize } from '../i18n';
 import type { Language, PageKey } from '../data';
 import Icon from './Icon.astro';
@@ -27,8 +28,19 @@ const { lang, currentPage, languagePath, labels } = Astro.props;
       href={getPagePath('home', lang)}
       aria-label={labels.homeLabel}
     >
-      <span class="brand__zh">青衿学院</span>
-      <span class="brand__en">QINGJIN ACADEMY</span>
+      <span class="brand__mark" aria-hidden="true">
+        <Image
+          class="brand__logo"
+          src={siteImages.qingjinAcademyLogo}
+          alt=""
+          loading="eager"
+          width={160}
+        />
+      </span>
+      <span class="brand__wordmark">
+        <span class="brand__zh">青衿学院</span>
+        <span class="brand__en">QINGJIN ACADEMY</span>
+      </span>
     </a>
 
     <nav

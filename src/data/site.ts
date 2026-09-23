@@ -12,6 +12,7 @@ import admissionsHero from '../assets/images/admissions/hero.png';
 import coursesHero from '../assets/images/courses/hero.png';
 import donateHero from '../assets/images/donate/hero.png';
 import homeHero from '../assets/images/shared/home-hero.png';
+import qingjinAcademyLogo from '../assets/images/shared/qingjin-academy-logo.png';
 import wechatQr from '../assets/images/shared/wechat-qr.png';
 import teachersHero from '../assets/images/teachers/hero.png';
 
@@ -24,6 +25,7 @@ export const site = {
 } as const;
 
 export const siteImages = {
+  qingjinAcademyLogo,
   homeHero,
   wechatQr,
   aboutHero,
@@ -38,6 +40,7 @@ export const siteImages = {
 } as const;
 
 export const allSiteImages = [
+  siteImages.qingjinAcademyLogo,
   siteImages.homeHero,
   siteImages.wechatQr,
   siteImages.aboutHero,

@@ -114,15 +114,14 @@ npm run test:e2e
 
 ## Git 工作流
 
-开始开发前同步主分支并创建短期工作分支：
+本站当前维护工作量较小，开始开发前同步主分支后，直接在 `main` 完成修改：
 
 ```bash
 git switch main
 git pull --ff-only origin main
-git switch -c feature/<name>
 ```
 
-修复使用 `fix/<name>`，普通功能使用 `feature/<name>`。完成质量检查后提交并推送工作分支，再通过审查合并回 `main`。`archive/legacy-site` 仅用于查看历史版本，不在该分支开发，也不合并回 `main`。
+完成质量检查后，在 `main` 提交并推送。
 
 ## 静态服务器更新
 

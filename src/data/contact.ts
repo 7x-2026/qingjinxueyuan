@@ -9,8 +9,8 @@ export const contact = {
     { display: '18810816390（中国地区）', href: 'tel:+8618810816390' },
     { display: '+1-3476016788（美国地区）', href: 'tel:+13476016788' },
   ],
-  email: 'ningyuanyu@yahoo.com',
-  emailHref: 'mailto:ningyuanyu@yahoo.com',
+  email: 'ningyuanyu@126.com',
+  emailHref: 'mailto:ningyuanyu@126.com',
   locations: [
     { zh: '中国 · 湖北武当山', en: 'Wudang Mountain, Hubei, China' },
     { zh: '美国 · 波士顿', en: 'Boston, United States' },

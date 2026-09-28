@@ -1,11 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import {
-  contact,
-  getHetuPath,
-  getTeacherPath,
-  hetuFeedbackVideo,
-} from '../data';
+import { getHetuPath, getTeacherPath, hetuFeedbackVideo } from '../data';
 import { localize } from '../i18n';
 import type { HetuPage, Language } from '../data';
 import Icon from '../components/Icon.astro';
@@ -20,16 +15,14 @@ const labels =
   lang === 'zh'
     ? {
         back: '返回世界和图中文教育学会',
-        contents: '本页内容',
+        contact: '联系方式',
         faculty: '阅读林源老师详情',
-        telephone: '咨询电话',
         video: '学员反馈视频',
       }
     : {
         back: 'Back to World HeTu Chinese Education Institute',
-        contents: 'On this page',
+        contact: 'Contact',
         faculty: 'Read Lin Yuan’s faculty profile',
-        telephone: 'Enquiries by phone',
         video: 'Learner-feedback video',
       };
 ---
@@ -42,7 +35,6 @@ const labels =
     </a>
 
     <header class="hetu-detail__hero">
-      <p class="hetu-kicker">{labels.contents}</p>
       <h1>{localize(page.title, lang)}</h1>
       <p>{localize(page.summary, lang)}</p>
     </header>
@@ -141,8 +133,9 @@ const labels =
       {
         page.slug === 'admissions' && (
           <p class="hetu-detail__contact">
-            <strong>{labels.telephone}:</strong>{' '}
-            <a href={contact.phones[0].href}>{contact.phones[0].display}</a>
+            <strong>{labels.contact}:</strong>{' '}
+            {lang === 'zh' ? '林源老师' : 'Lin Yuan'}{' '}
+            <a href="tel:+8618810816390">18810816390</a>
           </p>
         )
       }

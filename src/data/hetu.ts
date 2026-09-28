@@ -1,5 +1,5 @@
 import type { ImageMetadata } from 'astro';
-import hetuWheel from '../assets/images/hetu/hetu-wheel.jpg';
+import hetuLogo from '../assets/images/hetu/hetu-logo.png';
 import approach01 from '../assets/images/hetu/approach/approach-01.jpg';
 import approach02 from '../assets/images/hetu/approach/approach-02.jpg';
 import approach03 from '../assets/images/hetu/approach/approach-03.jpg';
@@ -197,11 +197,7 @@ export const hetuOverview = {
     '世界和图中文围绕中文语言、文化与儿童发展，提供面向不同教学情境的课程、教学方法与教师学习内容。',
     'World HeTu Chinese brings together Chinese language, culture, child development, curriculum, and teacher learning for a range of teaching settings.',
   ),
-  image: image(
-    hetuWheel,
-    '世界和图中文课程图示',
-    'World HeTu Chinese curriculum illustration',
-  ),
+  image: image(hetuLogo, '世界和图中文标识', 'World HeTu Chinese logo'),
 } as const;
 
 export const hetuPages = [
@@ -218,8 +214,12 @@ export const hetuPages = [
     ),
     sections: [
       {
-        heading: text('世界和图中文', 'World HeTu Chinese'),
+        heading: text('世界和图中文介绍', 'Introduction to World HeTu Chinese'),
         paragraphs: [
+          text(
+            '世界和图中文的精神理念启发于“洛图洛书”的故事：河图者，伏羲氏天下王，龙马浮出黄河，伏羲观其背文以画八卦。洛书者，大禹治水时，神龟负文而列于背，有数至九，禹于是第之以成九类。先圣从龙手易、连山易演绎出河图洛书，再从四象演绎出八卦，从而发明了周易，创造最早的汉字，开启了中华民族的文明。龙手、连山、归藏易图；太极、河图洛书、卦图；内景图、修真图及福寿图等九图合称为世界和图。它三三组合，对应斗极星，在天成象（龙手、连山、归藏），在地成形（河洛、太极、卦图），在人成命（内景、修真、福寿），形成天地人贯通一气的象数气理系统。世界和图是宇宙人文和谐同构的数理符号及象数模型，它具备中正、平衡、变易特点。世界和图不仅展现了中华古老文明的象数理气原型，也可演绎人类世界的和谐蓝图，故称为世界和图。世界和图中文揭示东方古老文字承载的宇宙真相与文明之道，并提供一张与字同构的词句章的语言河流发现启明星座下的思维的航海地图。世界和图中文将引领你泛舟于自我的语言之海，最终汇入地球和星际漩流的生态文明。',
+            'The spiritual vision of World HeTu Chinese is inspired by the story of “Luotu Luoshu.” As for the River Diagram, when Fuxi ruled all under heaven, a dragon horse surfaced from the Yellow River; Fuxi observed the markings on its back and drew the eight trigrams. As for the Luo Writing, while Yu the Great was controlling the floods, a divine turtle bore markings arranged on its back, with numbers up to nine; Yu set them in order to form nine categories. The ancient sages derived the River Diagram and Luo Writing from Longshou Yi and Lianshan Yi, then derived the eight trigrams from the four symbols, thereby creating the Book of Changes, the earliest Chinese characters, and the beginning of Chinese civilisation. The nine diagrams of Longshou, Lianshan, and Guicang Yi; Taiji, the River Diagram and Luo Writing, and the trigrams; and the Inner Landscape, Cultivation, and Fortune-and-Longevity diagrams are collectively called World HeTu. Their three-by-three arrangement corresponds to the polar stars: as images in heaven (Longshou, Lianshan, and Guicang), as forms on earth (the River and Luo, Taiji, and trigrams), and as destiny in human beings (Inner Landscape, Cultivation, and Fortune and Longevity), forming a system of image, number, qi, and principle that unites heaven, earth, and humanity. World HeTu is a mathematical-symbolic and image-number model of harmonious correspondence between the cosmos and human culture; it embodies centredness, balance, and change. It not only presents an archetype of image, number, principle, and qi from ancient Chinese civilisation, but can also unfold a blueprint for harmony in the human world; hence the name World HeTu. World HeTu Chinese reveals the cosmic truth and civilisational way carried by ancient Eastern writing, and offers a navigational map of thought beneath the Morning Star constellation: a river of language made from characters, words, sentences, and chapters sharing the same structure. World HeTu Chinese will guide you to sail upon the sea of your own language and, ultimately, join the ecological civilisation of Earth and the interstellar vortex.',
+          ),
           text(
             '世界和图中文是一套面向中文学习与教学的课程体系。资料将它描述为从“百字和图”出发，延伸至口语、读写、会话、文化、语法、写作、戏剧及主课教学的有机课程。',
             'World HeTu Chinese is a curriculum for learning and teaching Chinese. The source describes an organic course beginning with the “Hundred-Character HeTu” and extending to speaking, literacy, conversation, culture, grammar, writing, drama, and main lessons.',
@@ -230,6 +230,30 @@ export const hetuPages = [
           ),
         ],
         images: approachImages,
+      },
+      {
+        heading: text(
+          '世界和图中文教学理念',
+          'World HeTu Chinese Teaching Philosophy',
+        ),
+        paragraphs: [
+          text(
+            '1. 中国语言文字是中国人通过“天启”而获得的承载天道、地道、人道的精神原型，象数思维方式及心理情境的反映，中文的字、词、句、章具有相当同的中国人象数理气的深层心理模式和精神结构，这个结构的图式就是：龙手、连山、归藏三易；太极、河图洛书、卦图三图；内景、修真、福寿三图，这九图叫九章和图，它不仅是中华语言文化的根本，也必将成为缔造人类和平的精神源泉，所以被称为世界和图中文。',
+            '1. Chinese language and writing are a spiritual archetype, received by Chinese people through “heavenly revelation,” that carries the way of heaven, earth, and humanity; they reflect image-number modes of thought and psychological situations. Chinese characters, words, sentences, and chapters possess corresponding deep psychological patterns and spiritual structures of Chinese image, number, principle, and qi. The diagram of this structure is: the three Changes of Longshou, Lianshan, and Guicang; the three diagrams of Taiji, the River Diagram and Luo Writing, and the trigrams; and the three diagrams of Inner Landscape, Cultivation, and Fortune and Longevity. These nine diagrams are called the Nine-Chapter HeTu. They are not only the root of Chinese language and culture, but will also become a spiritual source for creating human peace; hence the name World HeTu Chinese.',
+          ),
+          text(
+            '2. 汉字形藏易理、音通情境、义达精神。只有从汉字的象数气理（或音形义）的起源、创造及历史演进的整体把握中，才能了解字里乾坤，整体把握汉语精神内涵与智慧。汉语的词句章与汉字同具同构、对应关系，只有在九章和图基础上找到中国人的思维导图，才能正确地理解字词句章的遣词、造句、作文语法规律；汉语之道上通宇宙自然、下达万类物器，中解人事义理，只有在汉语学习过程中，渗透数理科学、人文及道德伦理教育，才能对汉语有整体把握，从而内化到思维与人格中。',
+            '2. The forms of Chinese characters contain the principles of the Changes, their sounds connect situations, and their meanings reach the spirit. Only through an overall grasp of the origins, creation, and historical evolution of the image, number, qi, and principle of Chinese characters—or their sound, form, and meaning—can one understand the universe within characters and gain an integrated grasp of the spiritual connotations and wisdom of Chinese. Chinese words, sentences, and chapters share structural and corresponding relations with Chinese characters. Only by finding a Chinese cognitive map on the basis of the Nine-Chapter HeTu can one correctly understand the principles of word choice, sentence construction, composition, and grammar. The way of Chinese reaches upward to the universe and nature, downward to the myriad things and implements, and inwardly explains human affairs and principles. Only when mathematical science, the humanities, and moral and ethical education are woven into Chinese learning can Chinese be grasped as a whole and internalised in thought and character.',
+          ),
+          text(
+            '3. 汉语的口述语与书面语的起源、功能及发展过程有不同轨迹。汉语的方言有多种，在历史中彼此之间有传承演化关系，但却享有一套共同的书写系统，它至少有三千年历史。书写系统从古至今也有至少七体演变，但目前被使用的有简体字、繁体字以及与假名混用的日本文字。世界和图中文教学提倡将口述语与书面文字分开和合并教学方式，才能达到殊连同归有效的掌握。口述语注重音旁，书面语注重形旁，鼓励在口述语阶段延用方言并普通话，书面语认繁写简。',
+            '3. The origins, functions, and development of spoken and written Chinese follow different paths. Chinese has many dialects; they have inherited and evolved in relation to one another through history, while sharing a common writing system with at least three thousand years of history. From antiquity to the present, this writing system has also undergone at least seven script transformations; the forms now in use include simplified characters, traditional characters, and Japanese writing mixed with kana. World HeTu Chinese teaching advocates both separate and integrated approaches to spoken language and written text, so that their distinctive paths can converge in effective mastery. Spoken language emphasises the phonetic component, while written language emphasises the form component; at the spoken-language stage, the use of dialects alongside Mandarin is encouraged, while written language recognises traditional forms and writes in simplified forms.',
+          ),
+          text(
+            '4. 学生的身心灵发展过程，与宇宙演化、人类意识发展有同构、对应关系，针对不同年龄段儿童心理发展特点，选择在汉语文化中与之相对应的内容、方法，才能帮助学生健康成长、自然而快乐地习得语言。',
+            '4. The development of students’ body, soul, and spirit has structural and corresponding relationships with cosmic evolution and the development of human consciousness. Only by selecting content and methods within Chinese culture that correspond to the psychological-developmental characteristics of children at different ages can we help students grow healthily and acquire language naturally and joyfully.',
+          ),
+        ],
       },
       {
         heading: text('教程内容', 'Curriculum content'),
@@ -378,6 +402,10 @@ export const hetuPages = [
         ),
         paragraphs: [
           text(
+            '林源老师在过去二十年人智学研究与华德福中国化教学实践中形成华德福中国本土化的理论，也是中国文史地文教学的方法论。这是在深入研究施泰纳关于东方文化和中国文明的洞见和论述基础上，经过多年的历史文化现场考察研究和在春之谷学院十年教学实践的总结和深化。其中包括“道与罗格斯”，“天启之道与人智学之光”、“民族魂的使命”三大主题。是中国华德福教师和中文教师的必备知识，也是春之谷学院的深化和进阶课程之一。',
+            'Over the past twenty years of research into Anthroposophy and China-adapted Waldorf teaching practice, Lin Yuan has developed a theory of the local adaptation of Waldorf education in China, as well as a methodology for teaching Chinese literature, history, geography, and culture. It is based on an in-depth study of Steiner’s insights and discussions concerning Eastern culture and Chinese civilisation, and has been summarised and deepened through years of field research in historical and cultural settings and ten years of teaching practice at Spring Valley Academy. It includes three major themes: “Dao and Logos,” “The Way of Heavenly Revelation and the Light of Anthroposophy,” and “The Mission of the National Soul.” It is essential knowledge for Chinese Waldorf and Chinese-language teachers, and is one of Spring Valley Academy’s advanced courses.',
+          ),
+          text(
             '资料所列课程从概论、“道与 Logos”、元道、两仪等主题展开，并延伸至数象、八卦、天干、经典文本、儿童发展与感官等讨论。',
             'The listed study begins with an overview, “Dao and Logos,” original Dao, and the two polarities, then extends to symbolic number, the eight trigrams, heavenly stems, classic texts, child development, and the senses.',
           ),
@@ -483,7 +511,10 @@ export const hetuPages = [
   {
     slug: 'distinctives',
     order: 3,
-    title: text('课程特色', 'What distinguishes the curriculum'),
+    title: text(
+      '课程特色与为什么参加学习',
+      'Course Distinctives and Why Participate',
+    ),
     summary: text(
       '阅读资料所提出的文化根源、课程覆盖、教学实践与儿童发展之间的联系。',
       'Read the source’s account of cultural roots, curriculum scope, teaching practice, and child development.',
@@ -643,27 +674,17 @@ export const hetuPages = [
     ),
     sections: [
       {
-        heading: text(
-          '课程方式与学习支持',
-          'Course format and learning support',
-        ),
+        heading: text('收费标准', 'Fee schedule'),
         paragraphs: [
           text(
-            '课程采用现场面授、线上直播和录播相结合的方式。资料列出的授课地点包括武当、香港和美国。',
-            'The course combines in-person teaching, online live sessions, and recordings. The source lists Wudang, Hong Kong, and the United States as teaching locations.',
+            '1）中文作为母语的主课教学、长线课教学、对外汉语教学、中文作为双语之一的证书课程学费 20,000 元人民币，包括面授课程和线上课程学费，面授课 4 周，现场游学 2 周。面授课程及游学课程的交通及食宿费另付。',
+            '1) Tuition for Chinese mother-tongue main lessons, long-term courses, Chinese-as-a-foreign-language teaching, and the Chinese-as-one-bilingual-language certificate course is RMB 20,000. This includes in-person and online course tuition, with four weeks of in-person study and two weeks of on-site study travel. Transportation, accommodation, and meals for in-person and study-travel courses are charged separately.',
           ),
           text(
-            '全科课程包括四周面授与两周现场游学；面授与游学的交通及食宿费用另付。',
-            'The full programme includes four weeks of in-person study and two weeks of on-site study travel; transportation, accommodation, and meals for these components are separate expenses.',
-          ),
-          text(
-            '资料说明学习者可获得教材及参考资料，受邀加入讨论群进行咨询与答疑，参加读书会；全科学生毕业后颁发春之谷学院专业证书，并推荐工作机会。',
-            'The source states that learners receive teaching materials and reference resources, may be invited to a discussion group for consultation and questions, and may join reading groups; full-programme graduates receive a Spring Valley Academy professional certificate and job referrals.',
+            '2）报名单个主题线上课程，单科结业算学分，修满学分可颁发春之谷学院专业证书。课程可持续回放两个月。',
+            '2) Learners may enrol in individual themed online courses. Completion of a single course earns credits, and a Spring Valley Academy professional certificate may be awarded once the required credits are completed. Course recordings remain available for two months.',
           ),
         ],
-      },
-      {
-        heading: text('费用', 'Fees'),
         table: {
           headers: [text('学习内容', 'Study option'), text('费用', 'Fee')],
           rows: [
@@ -695,19 +716,49 @@ export const hetuPages = [
               ),
               text('1,200 元人民币', 'RMB 1,200'),
             ],
+            [
+              text(
+                '《春之谷课程体系——好大一棵树》：十二讲',
+                'Spring Valley Curriculum System—A Great Big Tree: 12 sessions',
+              ),
+              text('1,200 元人民币', 'RMB 1,200'),
+            ],
+            [
+              text('国内现场面授课程', 'In-person courses in mainland China'),
+              text('3,000 元人民币／周', 'RMB 3,000 per week'),
+            ],
+            [
+              text(
+                '香港、美国现场面授课程',
+                'In-person courses in Hong Kong and the United States',
+              ),
+              text('500 美元／周', 'USD 500 per week'),
+            ],
           ],
         },
       },
       {
-        heading: text('退费与报名咨询', 'Refunds and enrolment enquiries'),
+        heading: text('学习支持与证书', 'Learning support and certification'),
         paragraphs: [
           text(
-            '原文说明：如因不可抗力因素不能坚持学习，学习者可提交个人申请；获批准后可退费，已上课程费用及总学费的 20% 手续费将被扣除。',
-            'The source states that learners unable to continue because of force majeure may submit an individual request. If approved, fees may be refunded after deducting the cost of classes already taken and a 20% handling fee on the total tuition.',
+            '3）提供教材及参考资料，被邀请到和图中文讨论群入群咨询讨论并答疑，免费参加读书会，全科学生毕业后颁发春之谷学院专业证书并推荐工作机会。',
+            '3) Teaching materials and reference resources are provided. Learners may be invited to the World HeTu Chinese discussion group for consultation, discussion, and questions, and may attend reading groups free of charge. Full-programme graduates receive a Spring Valley Academy professional certificate and job referrals.',
+          ),
+        ],
+      },
+      {
+        heading: text(
+          '退费、缴费与报名咨询',
+          'Refunds, payment, and enrolment enquiries',
+        ),
+        paragraphs: [
+          text(
+            '4）凡交费后由于不可抗力因素不能坚持学习者，由个人申请，得到批准后可退费。退费要扣除已上课学费及总学费的 20% 手续费。',
+            '4) Learners who cannot continue after payment because of force majeure may submit an individual request. If approved, fees may be refunded after deducting the tuition for classes already taken and a handling fee equal to 20% of the total tuition.',
           ),
           text(
-            '收款户名：北京春之谷文化艺术有限公司；开户行：中国工商银行股份有限公司北京东铁匠营支行。下载资料未提供银行卡号，请先电话确认完整汇款信息。',
-            'Payee: Beijing Spring Valley Culture and Art Co., Ltd.; bank: Industrial and Commercial Bank of China, Beijing Dongtiejiangying Sub-branch. The downloaded material does not provide an account number; please confirm complete remittance details by phone first.',
+            '5）缴费账号：户名：北京春之谷文化艺术有限公司；开户银行：中国工商银行股份有限公司北京东铁匠营支行；账户号码：02000004092002684952。',
+            '5) Payment account: Payee: Beijing Spring Valley Culture and Art Co., Ltd.; bank: Industrial and Commercial Bank of China, Beijing Dongtiejiangying Sub-branch; account number: 02000004092002684952.',
           ),
         ],
       },

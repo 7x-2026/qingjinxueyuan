@@ -1030,20 +1030,10 @@
 }
 
 .hetu-overview__image img {
-  border-radius: 50%;
   display: block;
   height: auto;
   max-width: 100%;
   width: 100%;
-}
-
-.hetu-kicker {
-  color: var(--color-brand-dark);
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  margin: 0 0 14px;
-  text-transform: uppercase;
 }
 
 .hetu-overview h1,
@@ -1070,6 +1060,17 @@
 
 .hetu-overview__section-heading h2 {
   font-size: clamp(26px, 3vw, 34px);
+  margin: 0;
+}
+
+.hetu-overview__introduction {
+  margin-bottom: clamp(52px, 7vw, 86px);
+}
+
+.hetu-overview__introduction > p {
+  color: #526168;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.8;
   margin: 0;
 }
 
@@ -1876,7 +1877,7 @@
 
   .hetu-overview__image {
     margin: 0 auto;
-    max-width: 260px;
+    max-width: 340px;
   }
 
   .hetu-card-grid,

@@ -343,6 +343,8 @@ test('the footer and World HeTu pages expose the complete bilingual topic struct
   await expect(page.locator('main')).toContainText(
     '北京春之谷文化艺术有限公司',
   );
+  await expect(page.locator('main')).toContainText('02000004092002684952');
+  await expect(page.locator('main')).toContainText('500 美元／周');
   await expect(page.locator('main a[href="tel:+8618810816390"]')).toHaveCount(
     1,
   );

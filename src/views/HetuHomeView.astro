@@ -13,13 +13,15 @@ const { lang } = Astro.props;
 const labels =
   lang === 'zh'
     ? {
-        eyebrow: '友情链接',
-        explore: '浏览专题内容',
+        introduction: '一. 世界和图中文教育学会介绍',
+        introductionPlaceholder: '内容待补充。',
+        explore: '二. 世界和图中文课程介绍',
         readMore: '阅读详情',
       }
     : {
-        eyebrow: 'Featured link',
-        explore: 'Explore the topic',
+        introduction: 'I. About the World HeTu Chinese Education Institute',
+        introductionPlaceholder: 'Content coming soon.',
+        explore: 'II. World HeTu Chinese Courses',
         readMore: 'Read more',
       };
 ---
@@ -37,13 +39,22 @@ const labels =
         />
       </div>
       <div>
-        <p class="hetu-kicker">{labels.eyebrow}</p>
         <h1>{localize(hetuOverview.title, lang)}</h1>
         <p class="hetu-overview__lead">
           {localize(hetuOverview.description, lang)}
         </p>
       </div>
     </header>
+
+    <section
+      class="hetu-overview__introduction"
+      aria-labelledby="hetu-introduction-title"
+    >
+      <div class="hetu-overview__section-heading">
+        <h2 id="hetu-introduction-title">{labels.introduction}</h2>
+      </div>
+      <p>{labels.introductionPlaceholder}</p>
+    </section>
 
     <section aria-labelledby="hetu-sections-title">
       <div class="hetu-overview__section-heading">

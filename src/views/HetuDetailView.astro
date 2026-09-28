@@ -1,6 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import { getHetuPath, getTeacherPath, hetuFeedbackVideo } from '../data';
+import {
+  contact,
+  getHetuPath,
+  getTeacherPath,
+  hetuFeedbackVideo,
+} from '../data';
 import { localize } from '../i18n';
 import type { HetuPage, Language } from '../data';
 import Icon from '../components/Icon.astro';
@@ -17,12 +22,14 @@ const labels =
         back: '返回世界和图中文教育学会',
         contact: '联系方式',
         faculty: '阅读林源老师详情',
+        qrAlt: '林源老师咨询微信二维码',
         video: '学员反馈视频',
       }
     : {
         back: 'Back to World HeTu Chinese Education Institute',
         contact: 'Contact',
         faculty: 'Read Lin Yuan’s faculty profile',
+        qrAlt: 'Lin Yuan’s WeChat consultation QR code',
         video: 'Learner-feedback video',
       };
 ---
@@ -132,11 +139,19 @@ const labels =
 
       {
         page.slug === 'admissions' && (
-          <p class="hetu-detail__contact">
-            <strong>{labels.contact}:</strong>{' '}
-            {lang === 'zh' ? '林源老师' : 'Lin Yuan'}{' '}
-            <a href="tel:+8618810816390">18810816390</a>
-          </p>
+          <section class="hetu-detail__contact">
+            <p>
+              <strong>{labels.contact}:</strong>{' '}
+              {lang === 'zh' ? '林源老师' : 'Lin Yuan'}{' '}
+              <a href="tel:+8618810816390">18810816390</a>
+            </p>
+            <Image
+              alt={labels.qrAlt}
+              loading="lazy"
+              src={contact.qrCode}
+              width={180}
+            />
+          </section>
         )
       }
     </article>

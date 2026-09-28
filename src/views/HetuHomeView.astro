@@ -1,6 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import { getHetuPath, hetuOverview, hetuPages } from '../data';
+import {
+  getHetuPath,
+  hetuInstituteIntroduction,
+  hetuOverview,
+  hetuPages,
+} from '../data';
 import { localize } from '../i18n';
 import type { Language } from '../data';
 import Icon from '../components/Icon.astro';
@@ -14,13 +19,11 @@ const labels =
   lang === 'zh'
     ? {
         introduction: '一. 世界和图中文教育学会介绍',
-        introductionPlaceholder: '内容待补充。',
         explore: '二. 世界和图中文课程介绍',
         readMore: '阅读详情',
       }
     : {
         introduction: 'I. About the World HeTu Chinese Education Institute',
-        introductionPlaceholder: 'Content coming soon.',
         explore: 'II. World HeTu Chinese Courses',
         readMore: 'Read more',
       };
@@ -53,7 +56,25 @@ const labels =
       <div class="hetu-overview__section-heading">
         <h2 id="hetu-introduction-title">{labels.introduction}</h2>
       </div>
-      <p>{labels.introductionPlaceholder}</p>
+      <div class="hetu-overview__introduction-content">
+        {
+          hetuInstituteIntroduction.map((section) => (
+            <section class="hetu-overview__introduction-section">
+              <h3>{localize(section.heading, lang)}</h3>
+              {section.paragraphs?.map((paragraph) => (
+                <p>{localize(paragraph, lang)}</p>
+              ))}
+              {section.bullets && (
+                <ul>
+                  {section.bullets.map((bullet) => (
+                    <li>{localize(bullet, lang)}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))
+        }
+      </div>
     </section>
 
     <section aria-labelledby="hetu-sections-title">

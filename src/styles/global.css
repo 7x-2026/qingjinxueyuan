@@ -1067,11 +1067,39 @@
   margin-bottom: clamp(52px, 7vw, 86px);
 }
 
-.hetu-overview__introduction > p {
+.hetu-overview__introduction-content {
+  display: grid;
+  gap: clamp(30px, 4vw, 52px);
+}
+
+.hetu-overview__introduction-section h3 {
+  color: var(--color-brand-dark);
+  font-size: clamp(22px, 2.5vw, 30px);
+  line-height: 1.35;
+  margin: 0 0 16px;
+}
+
+.hetu-overview__introduction-section p,
+.hetu-overview__introduction-section li {
   color: #526168;
   font-size: clamp(17px, 2vw, 21px);
   line-height: 1.8;
   margin: 0;
+}
+
+.hetu-overview__introduction-section p + p {
+  margin-top: 18px;
+}
+
+.hetu-overview__introduction-section ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding-left: 1.45em;
+}
+
+.hetu-overview__introduction-section li::marker {
+  color: var(--color-brand);
 }
 
 .hetu-card-grid {
@@ -1271,10 +1299,14 @@
 }
 
 .hetu-detail__contact {
+  align-items: center;
   background: #eff6f3;
   border-left: 4px solid var(--color-brand);
   color: #4e5c62;
+  display: flex;
   font-size: 18px;
+  gap: 24px;
+  justify-content: space-between;
   line-height: 1.8;
   margin: 0;
   padding: 20px 24px;
@@ -1284,6 +1316,18 @@
   color: var(--color-brand-dark);
   font-weight: 750;
   text-underline-offset: 4px;
+}
+
+.hetu-detail__contact > p {
+  flex: 1;
+  margin: 0;
+}
+
+.hetu-detail__contact img {
+  background: #fff;
+  display: block;
+  height: auto;
+  width: 180px;
 }
 
 .hetu-video {
@@ -1896,6 +1940,11 @@
     font-size: 16px;
     line-height: 1.88;
     text-align: left;
+  }
+
+  .hetu-detail__contact {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .hetu-content-section ul {

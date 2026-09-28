@@ -301,6 +301,11 @@ test('the footer and World HeTu pages expose the complete bilingual topic struct
     await expect(page.locator(`footer a[href="${prefix}"]`)).toHaveCount(1);
     await page.goto(prefix);
     await expect(page.locator('[data-hetu-overview] h1')).not.toHaveText('');
+    await expect(page.locator('[data-hetu-overview]')).toContainText(
+      path === '/'
+        ? '世界和图中文教育学会是一个基于世界和图中文教程而成立的'
+        : 'The World HeTu Chinese Education Institute is a non-profit organisation',
+    );
     const cards = page.locator('.hetu-card');
     await expect(cards).toHaveCount(6);
     await expect(cards.first()).toHaveAttribute('href', `${prefix}approach/`);
@@ -348,6 +353,7 @@ test('the footer and World HeTu pages expose the complete bilingual topic struct
   await expect(page.locator('main a[href="tel:+8618810816390"]')).toHaveCount(
     1,
   );
+  await expect(page.getByAltText('林源老师咨询微信二维码')).toHaveCount(1);
   expect(await page.locator('main form, main input, main button').count()).toBe(
     0,
   );

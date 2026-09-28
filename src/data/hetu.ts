@@ -35,7 +35,7 @@ import linYuan05 from '../assets/images/hetu/participants/lin-yuan-05.jpg';
 import feedbackPoster from '../assets/images/hetu/practice/feedback-video-poster.jpg';
 import feedback01 from '../assets/images/hetu/practice/practice-01.jpg';
 import feedback02 from '../assets/images/hetu/practice/practice-02.jpg';
-import type { BilingualText, HetuImage, HetuPage } from './types';
+import type { BilingualText, HetuImage, HetuPage, HetuSection } from './types';
 
 function text(zh: string, en: string): BilingualText {
   return { zh, en };
@@ -199,6 +199,129 @@ export const hetuOverview = {
   ),
   image: image(hetuLogo, '世界和图中文标识', 'World HeTu Chinese logo'),
 } as const;
+
+export const hetuInstituteIntroduction: readonly HetuSection[] = [
+  {
+    heading: text('宗旨和使命', 'Purpose and mission'),
+    paragraphs: [
+      text(
+        '世界和图中文教育学会是一个基于世界和图中文教程而成立的，以全面提升中文教学品质、推动中文教育在世界各地融合发展的非盈利机构。无论是在中国还是在世界，中文教育都不只是汉语技能的学习，更是智慧文明、文化精神、思维模式的体认过程。只有真正根植于东方文明、文化和思维，同时又能支持儿童身心健康发展的中文教育，才能帮助学生在获得汉语技能的同时开阔眼界、启迪智慧。当中文教育走向世界，它更成为了一座文化交流与互通的桥梁，让世界能共享中华天启文明的智慧果实，以惠及全人类。世界和图中文教程不仅演绎了中华古老文明的原象，更展示了人类未来命运共同体的和平蓝图，帮助学生获得一把打开中文世界的钥匙，同时获得一颗睿智的心灵。',
+        'The World HeTu Chinese Education Institute is a non-profit organisation founded on the World HeTu Chinese curriculum. It works to improve the quality of Chinese teaching in all respects and to foster the integrated development of Chinese education around the world. In China and internationally, Chinese education is not only the learning of language skills; it is also a process of encountering a civilisation of wisdom, cultural spirit, and ways of thinking. Chinese education that is truly rooted in Eastern civilisation, culture, and thought, while supporting children’s healthy physical and inner development, can help students gain Chinese-language skills while broadening their horizons and awakening wisdom. As Chinese education reaches the world, it becomes a bridge for cultural exchange and mutual understanding, allowing the world to share the fruits of the wisdom of Chinese revelation-based civilisation for the benefit of all humanity. The World HeTu Chinese curriculum not only unfolds the archetypal images of ancient Chinese civilisation, but also presents a peaceful blueprint for a future community with a shared human destiny. It helps students find a key to the Chinese world and cultivate a discerning mind.',
+      ),
+    ],
+  },
+  {
+    heading: text('学会使命', 'Institute mission'),
+    paragraphs: [
+      text(
+        '世界和图中文教育发展与促进学会的成立，其使命正是致力于将世界和图中文的教学理念、教学方法、教学创意在世界范围内进行广泛传播，立志培养出更多在母语环境、第二外语环境、双语环境中具备心魂、充满精神力的优秀中文教师。学会鼓励和支持教师创建更多鲜活的、富有生命力和创造力的中文课堂与中文学校，以期让越来越多的中外孩子有缘走进最古老而又从未间断的东方文明，由不同走向共同，从而成为真正的世界公民。此外，学会还倡导和促进中文教育的过程及教学成果走出课堂、走向社会，为整个社区带去精神之力、文化之光、和谐之道。',
+        'The World HeTu Chinese Education Development and Promotion Institute is dedicated to widely sharing the teaching philosophy, methods, and creative practices of World HeTu Chinese around the world. It aims to cultivate more outstanding Chinese teachers with inner purpose and spiritual vitality in mother-tongue, second-language, and bilingual settings. The Institute encourages and supports teachers in creating vivid, life-filled, and creative Chinese classrooms and Chinese schools, so that more children in China and elsewhere may enter the oldest continuously living Eastern civilisation, move from difference toward common ground, and become true citizens of the world. It also advocates and promotes the movement of Chinese educational processes and achievements beyond the classroom and into society, bringing spiritual strength, cultural light, and a way of harmony to the wider community.',
+      ),
+    ],
+  },
+  {
+    heading: text(
+      '二十年回眸与教程简介',
+      'Twenty-year reflection and curriculum introduction',
+    ),
+    paragraphs: [
+      text(
+        '世界和图中文教程是林源老师在中国传统文化和华德福教育的双重启迪下，从2003年至2023年在美国和中国两地从事中文教学过程中形成的一套融合中文课程。通过二十年的教学及研究，他发展了汉语作为外语的教学大纲、汉语作为母语的1-12年级教学大纲以及双语教学大纲，是适合世界各地全日制学校、周末学校、课后班、家庭学校、社区学校等进行汉语教学的一套完备课程。该教程建立在河图洛书、太极八卦、易经图、内景图、修真图基础上，与中国人思维中象数理气四元素同构，形成一个完整、有序而有机的体系，且所有内容与方法均与学生不同年龄的生理心理特征相匹配，达到天-语-人合一的和谐境界。',
+        'The World HeTu Chinese curriculum is an integrated Chinese curriculum formed by teacher Lin Yuan through Chinese teaching in the United States and China from 2003 to 2023, under the dual inspiration of traditional Chinese culture and Waldorf education. Over twenty years of teaching and research, he developed curricula for Chinese as a foreign language, Chinese as a mother tongue for Grades 1–12, and bilingual teaching. It is a complete curriculum for Chinese teaching in full-time schools, weekend schools, after-school programmes, home schools, community schools, and other settings worldwide. Built on the River Diagram and Luo Writing, Taiji and the eight trigrams, diagrams of the Book of Changes, the Inner Landscape diagram, and the Cultivation diagram, it shares the four elements of image, number, principle, and qi in Chinese thought. It forms a complete, ordered, and organic system whose content and methods match the physical and psychological characteristics of learners at different ages, seeking harmony among heaven, language, and humanity.',
+      ),
+    ],
+  },
+  {
+    heading: text('教程体系', 'Curriculum system'),
+    paragraphs: [
+      text(
+        '教程包含多个系列：以民间童谣为主的口语启蒙教程系列；上下五千年地理历史人文的百字中文、千字中文识字系列；以古今优秀诗文为主的精读系列；以游戏互动、现场游学及戏剧表演为特色的日常会话系列；以色和图、音和图、字和图、句和图及章和图建立起的语法系列；以节日、节气庆祝体验活动为主的中国文化系列；以及实用文体范文阅读及写作系列。',
+        'The curriculum includes several series: oral-language initiation centred on folk rhymes; Hundred-Character Chinese and Thousand-Character Chinese literacy series spanning five thousand years of geography, history, and humanities; close-reading series focused on outstanding classical and modern poetry and prose; everyday-conversation series featuring interactive games, field study travel, and drama; grammar series built through colour and HeTu, sound and HeTu, character and HeTu, sentence and HeTu, and chapter and HeTu; Chinese-culture series centred on festivals and seasonal celebrations; and practical reading and writing series based on model texts.',
+      ),
+    ],
+  },
+  {
+    heading: text('发展历程', 'Development timeline'),
+    bullets: [
+      text(
+        '2003-2006年：林源老师应邀在美国普林斯顿学校担任1-8年级中文教师，构建了第一个中文作为外语的教学大纲，帮助学生将英语言说器官转变成中文言说器官，将外语思维转变成中文思维，形成了世界和图中文教程的雏形。',
+        '2003–2006: At the invitation of Princeton School in the United States, Lin Yuan taught Chinese to Grades 1–8 and built the first curriculum for Chinese as a foreign language. It helped students shift English-language speech organs toward Chinese speech and move from foreign-language thought toward Chinese thought, forming the early shape of the World HeTu Chinese curriculum.',
+      ),
+      text(
+        '2005-2006年：教程连续两年获得美国纽约州政府创造性课程艺术基金。',
+        '2005–2006: The curriculum received the New York State Government Creative Curriculum Arts Fund for two consecutive years.',
+      ),
+      text(
+        '2006-2010年：林源老师在美国宾州乔治学校教授中文，构建了9-12年级高中中文课程，创立了和图中文语法教学体系，使汉语非母语学生在拼读、组词、造句和写作上的正确率提高80%。该教学法获得了宾夕法尼亚大学及纽约州政府的创造性课程基金奖。',
+        '2006–2010: Lin Yuan taught Chinese at George School in Pennsylvania, United States, developed a Grade 9–12 high-school Chinese curriculum, and established the HeTu Chinese grammar system. It raised the accuracy of non-native Chinese learners in reading aloud, word formation, sentence making, and writing by 80%. The method received a Creative Curriculum Fund award from the University of Pennsylvania and the New York State Government.',
+      ),
+      text(
+        '2007-2008年：教程获得美国纽约政府颁发的合作性艺术教育基金奖。',
+        '2007–2008: The curriculum received a collaborative arts-education fund award from the New York government.',
+      ),
+      text(
+        '2008-2010年：教程参加美国中文大会，作为第二外语的教程大纲基本成型，并在普林斯顿专利局申请了知识产权保护。',
+        '2008–2010: The curriculum took part in the Chinese Language Conference in the United States. Its outline for Chinese as a second language was substantially formed, and intellectual-property protection was applied for through the Princeton Patent Office.',
+      ),
+      text(
+        '2011-2017年：林源老师回北京创办春之谷学院和春之谷学园，亲自担任1-6年级主班老师和本土化教师培训导师，亲临历史文化现场带班教学，开发了十多个原创中文主课板块。',
+        '2011–2017: Lin Yuan returned to Beijing to establish Spring Valley Academy and Spring Valley School. He served as a Grades 1–6 main-class teacher and a mentor for localised teacher training, led teaching at historical and cultural sites, and developed more than ten original Chinese main-lesson modules.',
+      ),
+      text(
+        '2018-2022年：东西方国际中学文凭项目（EWIP）在美国海默茵学校和春之谷学院之间建立，林老师担任7-12年级文史地主课老师，实践了中文作为母语的主课板块初高中教学，并与地理、历史结合开发了8至12年级大语文跨学科板块，使教程成为华语地区主课教学和长线课教学的通用教程。',
+        '2018–2022: The East-West International High School Diploma Programme (EWIP) was established between Heimarin School in the United States and Spring Valley Academy. Lin taught literature, history, and geography main lessons for Grades 7–12, put mother-tongue Chinese main lessons into practice at middle- and high-school level, and developed interdisciplinary Chinese-language modules for Grades 8–12 together with geography and history. This made the curriculum broadly applicable to main-lesson and long-term teaching in Chinese-speaking regions.',
+      ),
+      text(
+        '2002年及后续拓展：春之谷武当国际研学中心成立，将武当武术、道医、道乐融入教程，让学生深层体验道家文化。',
+        '2002 and subsequent expansion: The Spring Valley Wudang International Study Centre was established, integrating Wudang martial arts, Taoist medicine, and Taoist music into the curriculum so students could experience Taoist culture more deeply.',
+      ),
+      text(
+        '2011-2023年：教程在春之谷学院十年教学中培养了大批老师，并已在中国大陆、香港、台湾、日本、韩国、泰国、新加坡、美国等地的学校中被采用。',
+        '2011–2023: Over a decade of teaching at Spring Valley Academy, the curriculum trained many teachers and was adopted by schools in mainland China, Hong Kong, Taiwan, Japan, South Korea, Thailand, Singapore, and the United States.',
+      ),
+      text(
+        '2023年：世界和图中文教育学会于美国正式成立。',
+        '2023: The World HeTu Chinese Education Institute was formally established in the United States.',
+      ),
+    ],
+  },
+  {
+    heading: text('原创板块与教学法', 'Original modules and teaching methods'),
+    paragraphs: [
+      text(
+        '教程拥有丰富的原创板块，包括童谣晨圈（数字、游戏、生肖、自然童谣）、太阳石的传说、山海经·大禹游历奇异国、诗经·七月、封神演义·十绝阵、黑暗传、游浩浩长江铸中华诗魂、陆上与海上丝绸之路、南京近代史和艺术板块、听大头天话解良渚文明、生命的言说诗歌板块、十走武当山等。原创教学法涵盖声韵汉字树、声韵太极律动、中文形线画、和图中文语法以及对外汉语教学大纲及教材。',
+        'The curriculum has a rich range of original modules, including rhyme morning circles (numbers, games, zodiac, and nature rhymes), The Legend of the Sunstone, Classic of Mountains and Seas: Yu the Great’s Journey through Extraordinary Lands, Book of Songs: Seventh Month, Investiture of the Gods: Ten Formations, Dark Legend, Journeying the Mighty Yangtze to Forge the Chinese Poetic Soul, the Overland and Maritime Silk Roads, modern Nanjing history and arts, Listening to Datoutian Speak to Understand Liangzhu Civilisation, the poetry module The Speech of Life, and Ten Walks through Wudang Mountain. Original teaching methods include the sound-rhyme Chinese-character tree, sound-rhyme Taiji movement, Chinese form-line drawing, HeTu Chinese grammar, and Chinese-as-a-foreign-language curricula and teaching materials.',
+      ),
+    ],
+  },
+  {
+    heading: text('工作和目标', 'Work and goals'),
+    paragraphs: [
+      text(
+        '学会的工作包括开展面向世界各地区的和图中文教师培训，推进中文教育与社区的融合服务，促进各类型学习机构的创办，以及组织“面向未来”的中文教育内容研讨和研发。学会的目标是将世界和图中文教育的方法、理念、框架推广至更多国家和地区；促进各地区教师及机构间的交流合作；开展跨区域跨领域研讨，不断提升教程大纲与内容；开办全日制世界和图双语学校，支持中文教育和中国文化与世界各地区教育文化的融合发展。',
+        'The Institute’s work includes World HeTu Chinese teacher training for regions around the world, advancing integrated service between Chinese education and communities, supporting the establishment of different types of learning institutions, and organising future-oriented discussion and development of Chinese educational content. Its goals are to extend the methods, ideas, and framework of World HeTu Chinese education to more countries and regions; foster exchange and collaboration among teachers and institutions in different areas; conduct cross-regional and cross-disciplinary study to continually improve the curriculum outline and content; establish full-time World HeTu bilingual schools; and support the integrated development of Chinese education and Chinese culture with the educational cultures of regions around the world.',
+      ),
+    ],
+  },
+  {
+    heading: text('邀约与合作', 'Invitation and collaboration'),
+    paragraphs: [
+      text(
+        '当世界变得越来越浮游于文化表层，我们越需要扎根一方水土，让民族精神源泉注入血液；当国与国相互制裁让世界分离，我们越需要以合作的智慧超越血缘与民族，融聚人类的终极关怀。教育是改变社会的力量，师者是黑暗中的火炬手与时代迷雾的灯塔。学会诚挚邀请热爱教育和孩子、热爱自然与艺术、热衷于探索宇宙和生命真相的家长、教师、文化传播者及艺术家加入，共同实现价值与服务社会。同时，学会也热情欢迎理念相同的教学机构、文化组织、社会团体开展合作，共同提升中文教育品质、促进中华文化交流创新、开展有益社区和谐发展的公益活动，为孩子创造支持身心健康发展的环境，带领他们走向未来。',
+        'As the world increasingly drifts across the surface of culture, we need more than ever to root ourselves in a place and let the source of a people’s spirit enter our lifeblood. When mutual sanctions divide countries, we need the wisdom of cooperation to move beyond bloodline and nation and gather humanity’s deepest care. Education is a force for changing society; teachers are torchbearers in darkness and lighthouses in the mist of their time. The Institute sincerely invites parents, teachers, cultural communicators, and artists who love education and children, nature and art, and exploring the truth of the cosmos and life to join in creating value and serving society. It also warmly welcomes educational institutions, cultural organisations, and social groups with shared ideals to collaborate: improving the quality of Chinese education, promoting innovative exchange in Chinese culture, undertaking public-benefit activities that support community harmony, creating environments that support children’s healthy development, and guiding them toward the future.',
+      ),
+    ],
+  },
+  {
+    heading: text('联系我们', 'Contact us'),
+    paragraphs: [
+      text(
+        '欢迎访问官方网站及微信公众号了解更多学会及教师培训信息，或进行咨询与合作洽谈。',
+        'Please visit the official website and WeChat public account for more information about the Institute and teacher training, or to discuss enquiries and collaboration.',
+      ),
+    ],
+  },
+];
 
 export const hetuPages = [
   {
